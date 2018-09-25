@@ -1,0 +1,57 @@
+﻿<div #locationView class="col-lg-12" style="text-align:left !important; color:black !important;" id="locationView">
+    <form #f1="ngForm" (ngSubmit)="f1.form.valid && addLocation()" novalidate name="form">
+        <div class="form-group">
+            <div>
+                <label>LocationId - optional</label>
+                <input type="number" name="locationId" value="-1" [(ngModel)]="hotel.location.locationId" #locationId="ngModel" />
+                <input type="button" value="Get Hotel Location" (click)="getHotelLocation()" />
+            </div>
+            <div>
+                <label>Or Select Location</label>
+                <select name="locationId" [(ngModel)]="hotel.location.locationId" id="locationId" (change)="selectLocationChanged()"></select>
+            </div>
+            <div class="form-group">
+                <label>Location Name</label>
+                <input type="text" name="locationName" [(ngModel)]="hotel.location.locationName" required #locationName="ngModel" />
+                <div *ngIf="f1.submitted && locationName.invalid" class="text-danger">
+                    Location name required
+                </div>
+            </div>
+        </div>
+        <div #Address>
+            <div class="form-group">
+                <label>Address Line 1</label>
+                <input type="text" name="addressLine1" [(ngModel)]="hotel.location.address.addressLine1" required #addressLine1="ngModel"  />
+                <div *ngIf="f1.submitted && addressLine1.invalid" class="text-danger">
+                    AddressLine1 required
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Address Line 2</label>
+                <input type="text" name="addressLine2" [(ngModel)]="hotel.location.address.addressLine2"  required #addressLine2="ngModel"  />                
+                <div *ngIf="f1.submitted && addressLine2.invalid" class="text-danger">
+                    AddressLine2 required
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Town</label>
+                <input type="text" name="town" [(ngModel)]="hotel.location.address.town" required #town="ngModel"/>
+                <div *ngIf="f1.submitted && town.invalid" class="text-danger">
+                    Town required
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Post Code</label>
+                <input type="text" name="postCode" [(ngModel)]="hotel.location.address.postCode" #postCode="ngModel" />
+            </div>
+            <div class="form-group">
+                <label>Country</label>
+                <input type="text" name="country" [(ngModel)]="hotel.location.address.country" required #country="ngModel" />
+                <div *ngIf="f1.submitted && country.invalid" class="text-danger">
+                    country required
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Add Location" class="but-primary" (click)="addLocation()" id="addLocation" />
+    </form>
+</div>

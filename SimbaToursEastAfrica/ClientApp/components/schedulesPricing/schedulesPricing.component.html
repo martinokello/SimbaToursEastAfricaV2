@@ -1,0 +1,49 @@
+﻿
+<form #f3="ngForm" (ngSubmit)="f3.form.valid && createOrUpdateSchedules()">
+    <div #schedulesPricingItem>
+        <div class="col-lg-12" style="text-align:left !important; color:black !important;">
+            <h4>Join Schedule Pricing</h4>
+            <div class="form-group">
+                <label>Schedules Pricing Id - optional</label>
+                <input type="number" name="schedulesPricingId" value="-1" [(ngModel)]="schedules.schedulesPricingId" />
+            </div>
+            <div>
+                <div class="form-group" id="divDealName">
+                    <label>Schedules Pricing Name</label>
+                    <select name="schedulesPricingName" [ngModel]="schedules.schedulesPricingId" id="schedulesPricingName" #schedulesPricingName="ngModel" required></select>
+                    <div *ngIf="f3.submitted && schedulesPricingName.invalid" class="text-danger">
+                        Pricing name required
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Schedules Pricing Description</label>
+                </div>
+                <div *ngIf="model.editable">
+                    <textarea name="schedulesDescription" [(ngModel)]="schedules.schedulesDescription" #schedulesDescription="ngModel" required></textarea>
+                    <div *ngIf="f3.submitted && schedulesDescription.invalid" class="text-danger">
+                        Price required
+                    </div>
+                    <div>
+                        <label>Schedules Price</label>
+                        <input type="number" name="price" value="0.00" [(ngModel)]="schedules.price" #price="ngModel" required />
+                        <div *ngIf="f3.submitted && price.invalid" class="text-danger">
+                            Price required
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="model.viewable">
+                    <div class="text-info">
+                        {{schedules.schedulesDescription}}
+                    </div>
+                    <div>
+                        <label>Schedules Price</label>
+                        <div>£{{schedules.price}}</div>
+                    </div>
+                </div>
+            </div>
+            <input type="button" class="btn-primary" value="Select" (click)="selectSchedulesPricing()" />
+            <input type="submit" class="btn-primary" value="Create" (click)="createOrUpdateSchedules()" />
+            <input type="submit" class="btn-primary" value="Update" (click)="updateSchedules()" />
+        </div>
+    </div>
+</form>

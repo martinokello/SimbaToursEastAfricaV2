@@ -1,0 +1,36 @@
+﻿<div class="col-lg-12" style="text-align:left !important; color:black !important;" id="bookHotelView">
+    <form #f2="ngForm" (ngSubmit)="f2.form.valid && captureHotelBooking()">
+        <div #hotelbookingView>
+            <div class="form-group">
+                <label>HotelId - optional</label>
+                <select name="hotelId" id="hotelId" #hotelId="ngModel" [ngModel]="hotel.hotelId" required (change)="hotelBookingHasChanged()"></select>
+                <div *ngIf="f2.submitted && hotelId.invalid" class="text-danger">
+                    HotelId name required
+                </div>
+            </div>
+            <div #hotelDetails>
+                <div class="form-group">
+                    <label>HotelName</label>
+                    <input type="text" name="hotelName" value="" [(ngModel)]="hotel.hotelName" #hotelName="ngModel" required />
+                    <div *ngIf="f2.submitted && hotelName.invalid" class="text-danger">
+                        Hotel name required
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <label class="col-lg-2" style="display:inline !important;">Has Meals Included</label><br />
+                        <input type="checkbox" class="col-lg-1" name="hasMealsIncluded" style="display:inline !important;" [(ngModel)]="hotel.hasMealsIncluded" #hasMealsIncluded="ngModel" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Net Cost</label>
+                    <input type="number" name="grossCost" value="0.00" [(ngModel)]="hotel.hotelPricing.price" #price="ngModel" required />
+                    <div *ngIf="f2.submitted && price.invalid" class="text-danger">
+                        Price required
+                    </div>
+                </div>
+            </div>
+            <input type="button" value="Add Item" class="but-primary" (click)="captureHotelBooking()" />
+        </div>
+    </form>
+</div>

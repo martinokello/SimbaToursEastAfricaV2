@@ -1,0 +1,95 @@
+<!-- Nav -->
+<nav class="main-nav">
+    <div>
+        <ul class="links">
+            <li class="active"><a class='navbar-brand' [routerLink]="['/home']">Simba Tours East Africa</a></li>
+        </ul>
+    </div>
+    <ul id="menubarlist" class="links">
+
+        <li [routerLinkActive]="['link-active']">
+            <a [routerLink]="['/home']">
+                Home
+            </a>
+        </li>
+        <li [routerLinkActive]="['link-active']">
+            <a [routerLink]="['/fetch-data']">
+                Fetch data
+            </a>
+        </li>
+        <span *ngIf="actUserStatus.isUserLoggedIn" ngModel="actUserStatus.isUserLoggedIn" ngDefaultControl>
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/book-tour']">
+                    Book tour
+                </a>
+            </li>
+        </span>
+        <span *ngIf="actUserStatus.isUserLoggedIn && actUserStatus.isUserAdministrator" ngDefaultControl ngModel="actUserStatus">
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/add-hotel']">
+                    Add Hotel
+                </a>
+            </li>
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/deal-pricing']">
+                    Deals Pricing
+                </a>
+            </li>
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/hotel-pricing']">
+                    Hotel Pricing
+                </a>
+            </li>
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/laguage-pricing']">
+                    Laguage Pricing
+                </a>
+            </li>
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/meal-pricing']">
+                    Meal Pricing
+                </a>
+            </li>
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/schedules-pricing']">
+                    Schedules &amp; Pricing
+                </a>
+            </li>
+        </span>
+        <span *ngIf="!actUserStatus.isUserLoggedIn" ngModel="actUserStatus.isUserLoggedIn" ngDefaultControl>
+            <li [routerLinkActive]="['link-active']">
+                <a (click)="setIsLogInPage()" [routerLink]="['/login']">
+                    login
+                </a>
+            </li>
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/register']">
+                    Register
+                </a>
+            </li>
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/forgot-password']">
+                    Forgot password
+                </a>
+            </li>
+        </span>
+        <span *ngIf="actUserStatus.isUserLoggedIn" ngModel="actUserStatus.isUserLoggedIn" ngDefaultControl>
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/make-Payments']">
+                    Pay Installments
+                </a>
+            </li>
+            <li [routerLinkActive]="['link-active']" (click)="logOut()">
+                <a [routerLink]="['/logout']">
+                    Log out
+                </a>
+            </li>
+        </span>
+    </ul>
+    <ul class="icons">
+        <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+        <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+        <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+        <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+    </ul>
+</nav>

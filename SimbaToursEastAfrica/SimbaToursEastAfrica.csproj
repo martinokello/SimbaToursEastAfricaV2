@@ -1,0 +1,168 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+	<PropertyGroup>
+	  <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+	</PropertyGroup>
+	 <PropertyGroup>
+   <RuntimeFrameworkVersion>2.1.3</RuntimeFrameworkVersion>
+   <PlatformTarget>AnyCPU</PlatformTarget>
+   <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+ </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="EntityFramework.Toolkit.Core" Version="1.0.7-pre1" />
+    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNet.Identity.Owin" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0-preview1-35029" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" />
+    <PackageReference Include="Microsoft.NETCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="Webpack" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
+    <Content Remove="ClientApp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20180824204704_HotelTourclientAssociation2.cs" />
+    <Compile Remove="Migrations\20180824204704_HotelTourclientAssociation2.Designer.cs" />
+    <Compile Remove="Migrations\20180824204828_HotelTourclientAssociation3.cs" />
+    <Compile Remove="Migrations\20180824204828_HotelTourclientAssociation3.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\app.browser.module.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\css\font-awesome.min.css" />
+    <None Include="wwwroot\assets\css\main.css" />
+    <None Include="wwwroot\assets\css\noscript.css" />
+    <None Include="wwwroot\assets\fonts\fontawesome-webfont.eot" />
+    <None Include="wwwroot\assets\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\assets\fonts\fontawesome-webfont.ttf" />
+    <None Include="wwwroot\assets\fonts\fontawesome-webfont.woff" />
+    <None Include="wwwroot\assets\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\assets\fonts\FontAwesome.otf" />
+    <None Include="wwwroot\assets\js\breakpoints.min.js" />
+    <None Include="wwwroot\assets\js\browser.min.js" />
+    <None Include="wwwroot\assets\js\jquery.min.js" />
+    <None Include="wwwroot\assets\js\jquery.scrollex.min.js" />
+    <None Include="wwwroot\assets\js\jquery.scrolly.min.js" />
+    <None Include="wwwroot\assets\js\util.js" />
+    <None Include="wwwroot\assets\sass\base\_page.scss" />
+    <None Include="wwwroot\assets\sass\base\_reset.scss" />
+    <None Include="wwwroot\assets\sass\base\_typography.scss" />
+    <None Include="wwwroot\assets\sass\components\_actions.scss" />
+    <None Include="wwwroot\assets\sass\components\_box.scss" />
+    <None Include="wwwroot\assets\sass\components\_button.scss" />
+    <None Include="wwwroot\assets\sass\components\_form.scss" />
+    <None Include="wwwroot\assets\sass\components\_icon.scss" />
+    <None Include="wwwroot\assets\sass\components\_icons.scss" />
+    <None Include="wwwroot\assets\sass\components\_image.scss" />
+    <None Include="wwwroot\assets\sass\components\_list.scss" />
+    <None Include="wwwroot\assets\sass\components\_pagination.scss" />
+    <None Include="wwwroot\assets\sass\components\_row.scss" />
+    <None Include="wwwroot\assets\sass\components\_section.scss" />
+    <None Include="wwwroot\assets\sass\components\_table.scss" />
+    <None Include="wwwroot\assets\sass\layout\_footer.scss" />
+    <None Include="wwwroot\assets\sass\layout\_header.scss" />
+    <None Include="wwwroot\assets\sass\layout\_intro.scss" />
+    <None Include="wwwroot\assets\sass\layout\_main.scss" />
+    <None Include="wwwroot\assets\sass\layout\_nav.scss" />
+    <None Include="wwwroot\assets\sass\layout\_navPanel.scss" />
+    <None Include="wwwroot\assets\sass\layout\_wrapper.scss" />
+    <None Include="wwwroot\assets\sass\libs\_breakpoints.scss" />
+    <None Include="wwwroot\assets\sass\libs\_fixed-grid.scss" />
+    <None Include="wwwroot\assets\sass\libs\_functions.scss" />
+    <None Include="wwwroot\assets\sass\libs\_html-grid.scss" />
+    <None Include="wwwroot\assets\sass\libs\_mixins.scss" />
+    <None Include="wwwroot\assets\sass\libs\_vars.scss" />
+    <None Include="wwwroot\assets\sass\libs\_vendor.scss" />
+    <None Include="wwwroot\assets\sass\main.scss" />
+    <None Include="wwwroot\assets\sass\noscript.scss" />
+    <None Include="wwwroot\images\bg.jpg" />
+    <None Include="wwwroot\images\overlay.png" />
+    <None Include="wwwroot\images\pic01.jpg" />
+    <None Include="wwwroot\images\pic02.jpg" />
+    <None Include="wwwroot\images\pic03.jpg" />
+    <None Include="wwwroot\images\pic04.jpg" />
+    <None Include="wwwroot\images\pic05.jpg" />
+    <None Include="wwwroot\images\pic06.jpg" />
+    <None Include="wwwroot\images\pic07.jpg" />
+    <None Include="wwwroot\images\pic08.jpg" />
+    <None Include="wwwroot\images\pic09.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationConstants\ApplicationConstants.csproj" />
+    <ProjectReference Include="..\SimbaToursEastAfrica.DataAccess\SimbaToursEastAfrica.DataAccess.csproj" />
+    <ProjectReference Include="..\SimbaToursEastAfrica.PaymentGateWay\SimbaToursEastAfrica.PaymentGateWay.csproj" />
+    <ProjectReference Include="..\SimbaToursEastAfrica.ServicesEndPoint\SimbaToursEastAfrica.ServicesEndPoint.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\app.browser.module.ts" />
+    <TypeScriptCompile Include="ClientApp\boot.browser.ts" />
+    <TypeScriptCompile Include="ClientApp\boot.server.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Account\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Web">
+      <HintPath>..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+
+    <!-- In development, the dist files won't exist on the first run or when cloning to
+         a different machine, so rebuild them if not already present. -->
+    <Message Importance="high" Text="Performing first-run Webpack build..." />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec Command="npm install" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js --env.dev" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --env.dev" />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="wwwroot\dist\**; ClientApp\dist\**" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+</Project>

@@ -1,0 +1,65 @@
+﻿<div #clientDetails class="col-lg-12" style="text-align:left !important; color:black !important;">
+    <div>
+        <h4>Person details</h4>
+        <tourclient></tourclient>
+    </div>
+    <div style="text-align:center;margin-top:2%;">
+        <hr style="width:100%;" />
+    </div>
+    <div id="hotelDetails" style="display:none">
+        <h4>Hotel details</h4>
+        <hotelBooking [(ngModel)]="hotel" name="hotel" (valueChangeHotelBooking)="updateHotelBooking($event)"  (valueChangeHotel)="updateHotel($event)" ngDefaultControl></hotelBooking>
+    </div>
+    <div style="text-align:center !important;margin-top:2%;">
+        <hr style="width:100%;" />
+    </div>
+    <div id="locationDetails" style="display:none">
+        <h4>Location details</h4>
+        <tempLocation [(hotel)]="hotel" name="hotel" (valueChangeLocation)="updateHotel($event)" ngDefaultControl></tempLocation>
+    </div>
+    <div style="text-align:center !important;margin-top:2%;">
+        <hr style="width:100%;" />
+    </div>
+    <div id="vehicleDetails" style="display:none">
+        <h4>Driver/Vehicle details</h4>
+        <vehicle name="vehicle" (valueChangeVehicle)="updateVehicle($event)" ngDefaultControl></vehicle>
+    </div>
+    <div style="text-align:center;margin-top:2%;">
+        <hr style="width:100%;" />
+    </div>
+    <div id="mealDetails" style="display:none">
+        <h4>Meals details</h4>
+        <meal name="meal" (valueChangeMeal)="updateMeal($event)" ngDefaultControl></meal>
+    </div>
+    <div style="text-align:center;margin-top:2%;">
+        <hr style="width:100%;" />
+    </div>
+    <div id="laguageDetails" style="display:none">
+        <h4>Laguage details</h4>
+        <laguage name="laguage" (valueChangeLaguage)="updateLaguage($event)" ngDefaultControl></laguage>
+    </div>
+    <div style="text-align:center;margin-top:2%;">
+        <hr style="width:100%;" />
+    </div>
+    <form #f4="ngForm" (ngSubmit)="f4.form.valid && bookTour()">
+        <div>
+            <div class="info">You can enter an amount to pay, and pay up every time you login to the amount in installments till the amount is reached.<br /><b>All payments are in US Dollars</b></div>
+            text-align:left !important; color:black !important;">
+            <form>
+                <div #payments>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <img src="/images/paypal_logo.gif" alt="paypal logo" />
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Amount you are paying:</label>
+                            <input type="number" name="currentPayment" [(ngModel)]="currentPayment" required #currentPaymentq="ngModel" />
+                            <div *ngIf="f4.submitted && currentPaymentq.invalid" class="text-danger">
+                                At least some payment is expected
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn-primary disabled" value="Book Tour" (click)="bookTour()" id="submitTourBooking" />
+                </div>
+            </form>
+        </div>

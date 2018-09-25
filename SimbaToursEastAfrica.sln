@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimbaToursEastAfrica", "SimbaToursEastAfrica\SimbaToursEastAfrica.csproj", "{98279311-0524-42EB-8F71-F226FECFB9BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimbaToursEastAfrica.Domain", "SimbaToursEastAfrica.Domain\SimbaToursEastAfrica.Domain.csproj", "{C091F8EF-1FD3-4EBA-98E2-11393B0F969E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimbaToursEastAfrica.DataAccess", "SimbaToursEastAfrica.DataAccess\SimbaToursEastAfrica.DataAccess.csproj", "{173B7CB0-236C-41F0-AF50-E7B7ED2FB3C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimbaToursEastAfrica.Services", "SimbaToursEastAfrica.Services\SimbaToursEastAfrica.Services.csproj", "{1ED6835B-EFDC-4DD4-B4BD-424934EEDA53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimbaToursEastAfrica.PaymentGateWay", "SimbaToursEastAfrica.PaymentGateWay\SimbaToursEastAfrica.PaymentGateWay.csproj", "{59FE6210-0EF9-4EB9-8467-C9CC0D9FDEB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimbaToursEastAfrica.SocialMedia", "SimbaToursEastAfrica.SocialMedia\SimbaToursEastAfrica.SocialMedia.csproj", "{84210981-8225-4509-B22A-E1D73682C8BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimbaToursEastAfrica.Caching", "SimbaToursEastAfrica.Caching\SimbaToursEastAfrica.Caching.csproj", "{342093C4-BF86-4695-9660-95EA0EC5B870}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimbaToursEastAfrica.UnitOfWork", "SimbaToursEastAfrica.UnitOfWork\SimbaToursEastAfrica.UnitOfWork.csproj", "{81CD5CDE-4208-479F-B0D5-CC7D38D0ED1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimbaToursEastAfrica.ServicesEndPoint", "SimbaToursEastAfrica.ServicesEndPoint\SimbaToursEastAfrica.ServicesEndPoint.csproj", "{56C48E97-D315-4BFE-8329-0214BAC2C3DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UPAEventsPayPal", "UPAEventsPayPal\UPAEventsPayPal.csproj", "{59003D84-8F5C-447E-AE3E-A04848FBF28D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationConstants", "ApplicationConstants\ApplicationConstants.csproj", "{279BA6E6-C5D0-4C87-AC2E-4A25058E2038}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98279311-0524-42EB-8F71-F226FECFB9BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98279311-0524-42EB-8F71-F226FECFB9BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98279311-0524-42EB-8F71-F226FECFB9BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98279311-0524-42EB-8F71-F226FECFB9BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C091F8EF-1FD3-4EBA-98E2-11393B0F969E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C091F8EF-1FD3-4EBA-98E2-11393B0F969E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C091F8EF-1FD3-4EBA-98E2-11393B0F969E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C091F8EF-1FD3-4EBA-98E2-11393B0F969E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{173B7CB0-236C-41F0-AF50-E7B7ED2FB3C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{173B7CB0-236C-41F0-AF50-E7B7ED2FB3C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{173B7CB0-236C-41F0-AF50-E7B7ED2FB3C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{173B7CB0-236C-41F0-AF50-E7B7ED2FB3C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ED6835B-EFDC-4DD4-B4BD-424934EEDA53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ED6835B-EFDC-4DD4-B4BD-424934EEDA53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ED6835B-EFDC-4DD4-B4BD-424934EEDA53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ED6835B-EFDC-4DD4-B4BD-424934EEDA53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59FE6210-0EF9-4EB9-8467-C9CC0D9FDEB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59FE6210-0EF9-4EB9-8467-C9CC0D9FDEB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59FE6210-0EF9-4EB9-8467-C9CC0D9FDEB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59FE6210-0EF9-4EB9-8467-C9CC0D9FDEB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84210981-8225-4509-B22A-E1D73682C8BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84210981-8225-4509-B22A-E1D73682C8BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84210981-8225-4509-B22A-E1D73682C8BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84210981-8225-4509-B22A-E1D73682C8BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{342093C4-BF86-4695-9660-95EA0EC5B870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{342093C4-BF86-4695-9660-95EA0EC5B870}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{342093C4-BF86-4695-9660-95EA0EC5B870}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{342093C4-BF86-4695-9660-95EA0EC5B870}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81CD5CDE-4208-479F-B0D5-CC7D38D0ED1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81CD5CDE-4208-479F-B0D5-CC7D38D0ED1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81CD5CDE-4208-479F-B0D5-CC7D38D0ED1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81CD5CDE-4208-479F-B0D5-CC7D38D0ED1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56C48E97-D315-4BFE-8329-0214BAC2C3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56C48E97-D315-4BFE-8329-0214BAC2C3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56C48E97-D315-4BFE-8329-0214BAC2C3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56C48E97-D315-4BFE-8329-0214BAC2C3DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59003D84-8F5C-447E-AE3E-A04848FBF28D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59003D84-8F5C-447E-AE3E-A04848FBF28D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59003D84-8F5C-447E-AE3E-A04848FBF28D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59003D84-8F5C-447E-AE3E-A04848FBF28D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{279BA6E6-C5D0-4C87-AC2E-4A25058E2038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{279BA6E6-C5D0-4C87-AC2E-4A25058E2038}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{279BA6E6-C5D0-4C87-AC2E-4A25058E2038}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{279BA6E6-C5D0-4C87-AC2E-4A25058E2038}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0E37FDF6-C999-4E5D-B9D5-DB0F9E2677D5}
+	EndGlobalSection
+EndGlobal

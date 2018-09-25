@@ -1,0 +1,40 @@
+li .glyphicon {
+    margin-right: 10px;
+}
+
+/* Highlighting rules for nav menu items */
+li.link-active a,
+li.link-active a:hover,
+li.link-active a:focus {
+    background-color: #4189C7;
+    color: white;
+}
+
+/* Keep the nav menu independent of scrolling and on top of other items */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+    .main-nav a {
+        color: white !important;
+    }
+@media (min-width: 768px) {
+    /* On small screens, convert the nav menu to a vertical sidebar */
+    nav ul.links, nav ul.links li {
+        display: inline-block;
+        color: white !important;
+    }
+    nav.main-nav {
+        background-color: saddlebrown;
+        height: 20vh;
+        color: white !important;
+        z-index:1000;
+        text-align:center !important;
+    }
+    div#intro{background-color:brown !important;
+              text-align:center;
+    }
+}

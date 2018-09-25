@@ -1,0 +1,43 @@
+﻿<div #hotelbookingView class="col-lg-12" style="text-align:left !important; color:black !important;">
+    <form #f2="ngForm" (ngSubmit)="f2.form.valid">
+        <h4>Add Hotel</h4>
+        <div #hotelItems>
+            <div class="form-group">
+                <label>Enter Hotel Name</label>
+                <input type="text" name="hotelName" value="" [(ngModel)]="hotel.hotelName" required #hotelName="ngModel" />
+                <div *ngIf="f2.submitted && hotelName.invalid" class="text-danger">
+                    Hotel name required
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Or Select Hotel Name for Update</label>
+                <select name="hotelId" id="hotelId" [ngModel]="hotel.hotelId" required #hotelName="ngModel" (change)="selectHotel()"></select>
+                <div *ngIf="f2.submitted && hotelName.invalid" class="text-danger">
+                    Hotel name required
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <label class="col-lg-2" style="display:inline !important;">Has Meals Included</label><br />
+                    <input type="checkbox" class="col-lg-1" name="hasMealsIncluded" style="display:inline !important;" [(ngModel)]="hotel.hasMealsIncluded" />
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="form-group">
+        <label>Location</label>
+        <tempLocation [hotel]="hotel" (valueChangeLocation)="addLocation($event)"></tempLocation>
+    </div>
+    <form>
+        <input type="submit" class="btn-primary" value="Make Editable" (click)="makeEditable()" style="display:inline-block;" id="makeEditable">
+    </form>
+    <div class="form-group">
+        <label>Pricing</label>
+        <hotelPricing [hotelPricing]="hotelPricing" (valueChange)="addHotelPricing($event)"></hotelPricing>
+    </div>
+    <form>
+        <input type="button" class="btn-primary" name="select" value="Select Hotel" (click)="selectHotel()" id="selectHotel" />
+        <input type="submit" class="btn-primary"  name="create"  value="Create Hotel" (click)="createHotel()" style="display:inline-block;" id="createHotel">
+        <input type="submit" class="btn-primary" name="update" value="Update Hotel" (click)="updateHotel()"  id="updateHotel" />
+    </form>
+</div>

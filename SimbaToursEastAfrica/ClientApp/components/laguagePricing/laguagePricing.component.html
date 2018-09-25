@@ -1,0 +1,94 @@
+﻿
+<form #f3="ngForm" (ngSubmit)="f3.form.valid && createOrUpdateLaguagePricing">
+    <div #laguagePricingItem>
+        <div class="col-lg-12" style="text-align:left !important; color:black !important;">
+            <h4>Laguage Pricing</h4>
+            <div>
+                <div class="form-group" id="divDealName">
+                    <label>Existing laguage Pricing Name For Update</label>
+                    <select name="laguagePricingName" [ngModel]="laguage.laguagePricingId" #laguagePricingName="ngModel"></select>
+                    <div *ngIf="f3.submitted && laguagePricingName.invalid" class="text-danger">
+                        Pricing name required
+                    </div>
+                    <div>
+                        <label>Or Create new laguage Pricing Name For Update</label>
+                    </div>
+                    <input type="text" name="laguagePricingName" [(ngModel)]="laguage.laguagePricingName" required #laguagePricingName="ngModel" />
+                    <div *ngIf="f3.submitted && laguagePricingName.invalid" class="text-danger">
+                        Pricing name required
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Unit Laguage Pricing Description</label>
+                    <div *ngIf="model.editable">
+                        <textarea name="laguageDescription" [(ngModel)]="laguage.laguageDescription" required #laguageDescription="ngModel"></textarea>
+                        <div *ngIf="f3.submitted && laguageDescription.invalid" class="text-danger">
+                            Description name required
+                        </div>
+                        <div>
+                            <label>Laguage Price</label>
+                            <input type="number" name="unitLaguagePrice" value="0.00" [(ngModel)]="laguage.unitLaguagePrice" required #unitLaguagePrice="ngModel" />
+                            <div *ngIf="f3.submitted && unitLaguagePrice.invalid" class="text-danger">
+                                Price required
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="model.viewable">
+                        <div class="text-info">
+                            {{laguage.laguageDescription}}
+                        </div>
+                        <div class="text-info">
+                            <label>Unit Laguage Price</label>
+                            £{{laguage.unitLaguagePrice}}
+                        </div>
+                    </div>
+                </div>
+                <label>Unit Meal Description</label>
+                <div *ngIf="model.editable">
+                    <div>
+                        <label>Meal Price</label>
+                        <input type="number" name="unitMealPrice" value="0.00" [(ngModel)]="laguage.unitMealPrice" required #unitMealPrice="ngModel" />
+                        <div *ngIf="f3.submitted && unitMealPrice.invalid" class="text-danger">
+                            Price required
+                        </div>
+                    </div>
+                </div>
+                <label>Unit Medical Description</label>
+                <div *ngIf="model.editable">
+                    <div>
+                        <label>Medical Price</label>
+                        <input type="number" name="unitMedicalPrice" value="0.00" [(ngModel)]="laguage.unitMedicalPrice" required #unitMedicalPrice="ngModel" />
+                        <div *ngIf="f3.submitted && unitMedicalPrice.invalid" class="text-danger">
+                            Price required
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="model.viewable">
+                    <div class="text-info">
+                        <label>Medical Price</label>
+                        £{{laguage.unitMedicalPrice}}
+                    </div>
+                </div>
+                <label>Unit Travel Document Description</label>
+                <div *ngIf="model.editable">
+                    <div>
+                        <label>Travel Document Price</label>
+                        <input type="number" name="unitTravelDocumentPrice" value="0.00" [(ngModel)]="laguage.unitTravelDocumentPrice" required #unitTravelDocumentPrice="ngModel" />
+                        <div *ngIf="f3.submitted && unitTravelDocumentPrice.invalid" class="text-danger">
+                            Price required
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="model.viewable">
+                    <div class="text-info">
+                        <label>Travel Document Price</label>
+                        £{{laguage.unitTravelDocumentPrice}}
+                    </div>
+                </div>
+            </div>
+            <input type="button" class="btn-primary" name="select" value="Select Pricing" (click)="selectLaguagePricing()" />
+            <input type="submit" class="btn-primary" name="create" value="Create Or Update" (click)="createOrUpdateLaguagePricing()" />
+            <input type="submit" class="btn-primary" name="update" value="Update Laguage Pricing" (click)="updateLaguagePricing()" />
+        </div>
+    </div>
+</form>

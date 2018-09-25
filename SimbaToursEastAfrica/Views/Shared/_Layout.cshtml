@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simba Tours East Africa</title>
+    <base href="/" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href='/assets/css/main.css' />
+    <noscript><link rel="stylesheet" href='/assets/css/noscript.css' /></noscript>
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+
+    <style type="text/css">
+
+        div#intro {
+            background-color: saddlebrown !important;
+            text-align: center !important;
+        }
+
+        ul#menubarlist {
+            z-index: 100000 !important;
+        }
+
+            ul#menubarlist li {
+                background-color: #1e252d !important;
+                padding: 5px;
+                z-index: 100000 !important;
+            }
+    </style>
+
+    <style type="text/css">
+        body {
+            text-align: left !important;
+        }
+    </style>
+</head>
+    <body class="is-preload">
+        @RenderBody()
+<!-- Scripts -->
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('a').parent('li').click(function () {
+            $(this).addClass('link-active');
+            window.href = $(this).find('a').href;
+        });
+        $('div#main').css('position', 'relative');
+        $('div#header').css('position', 'relative');
+
+        $('div#intro').css('min-height', '10vh');
+        $('div#intro').animate({ 'height': '15vh' }, 'slow');
+
+        $('nav ul.links').click(function (e) {
+
+            $('div#intro').animate({ 'height': '90vh' }, 'slow');
+            $('div#intro').animate({ 'height': '15vh' }, 'slow');
+            e.stopPropagation();
+        });
+        $('checkbox.checkbox').css('display', 'block');
+        $('checkbox.checkbox').val('true');
+        $('checkbox.checkbox').css('border-color', 'grey!important');
+        $('checkbox.checkbox').css('-webkit-appearance', 'checkbox');
+    });
+</script>
+        @RenderSection("Scripts",false)
+</body>
+</html>

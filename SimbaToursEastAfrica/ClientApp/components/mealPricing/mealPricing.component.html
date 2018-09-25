@@ -1,0 +1,58 @@
+﻿
+<form #f3="ngForm" (ngSubmit)="f3.form.valid && createMealPricing()">
+    <div #mealPricingItem>
+        <div class="col-lg-12" style="text-align:left !important; color:black !important;">
+            <h4>Meal Pricing</h4>
+            <div class="form-group">
+                <label>meal Pricing Id - optional</label>
+                <input type="number" name="mealPricingId" value="-1" [(ngModel)]="meal.mealPricingId" />
+            </div>
+            <div>
+                <div class="form-group" id="divDealName">
+                    <label>You can Select Pricing Name</label>
+                    <select name="mealName" [ngModel]="meal.mealPricingId" id="mealName" #mealPricingName="ngModel" required></select>
+                    <div *ngIf="f3.submitted && mealPricingName.invalid" class="text-danger">
+                        Pricing name required
+                    </div>
+                </div>
+                <div class="form-group" id="divDealName">
+                    <label>Or You can create new Meal Pricing Name</label>
+                    <input type="text" name="mealName" [(ngModel)]="meal.mealName" id="mealName" #mealPricingName="ngModel" required/>
+                    <div *ngIf="f3.submitted && mealPricingName.invalid" class="text-danger">
+                        Pricing name required
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Meal Pricing Description</label>
+                </div>
+                <div *ngIf="model.editable">
+                    <textarea name="mealDescription" [(ngModel)]="meal.mealDescription" #description="ngModel" required></textarea>
+                    <div *ngIf="f3.submitted && description.invalid" class="text-danger">
+                        Description required
+                    </div>
+                    <div>
+                        <label>Meal Price</label>
+                        <input type="number" name="price" value="0.00" [(ngModel)]="meal.price" #price="ngModel" required />
+                        <div *ngIf="f3.submitted && price.invalid" class="text-danger">
+                            Pricing required
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="model.viewable">
+                    <div class="text-info">
+                        {{meal.mealDescription}}
+                    </div>
+                    <div>
+                        <label>Meal Price</label>
+                        <div>£{{meal.price}}</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <input type="button" class="btn-primary" value="Select" (click)="selectMealPricing()" />
+                <input type="submit" class="btn-primary" value="Create" (click)="createMealPricing()" />
+                <input type="submit" class="btn-primary" value="Update" (click)="updateMealPricing()" />
+            </div>
+        </div>
+    </div>
+</form>

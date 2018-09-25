@@ -1,0 +1,59 @@
+﻿
+<form #f2="ngForm" (ngSubmit)="f2.form.valid && createOrUpdateDeal()"> 
+    <div #dealsPricingItem>
+        <div class="col-lg-12" style="text-align:left !important; color:black !important;">
+            <h4>Deal Pricing</h4>
+            <div>
+                <div class="form-group" id="divDealName">
+                    <label>Deal Pricing Id - optional</label>
+                    <select name="dealId" id="dealId" [ngModel]="deal.dealsPricingId" #dealName="ngModel" required></select>
+                    <div *ngIf="f2.submitted && dealName.invalid" class="text-danger">
+                        Deal name required
+                    </div>
+                </div>                
+                <div class="form-group" id="divDealName">
+                    <label>Deal Name</label>
+                    <input name="dealName" [(ngModel)]="deal.dealName" id="dealName" #dealName="ngModel" required/>
+                    <div *ngIf="f2.submitted && dealName.invalid" class="text-danger">
+                        Deal name required
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Deal Description</label>
+                    <div *ngIf="model.editable">
+                        <textarea name="description" [(ngModel)]="deal.description" #description="ngModel" id="description" required></textarea>
+                        <div *ngIf="f2.submitted && description.invalid" class="text-danger">
+                            Description name required
+                        </div>
+                    </div>
+                    <div *ngIf="model.viewable">
+                        <div class="text-info">
+                            {{deal.description}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="model.editable">
+                <div class="form-group">
+                    <label>Deal Price</label>
+                    <div>
+                        <input type="number" name="price" value="0.00" [(ngModel)]="deal.price" #price="ngModel" required />
+                        <div *ngIf="f2.submitted && price.invalid" class="text-danger">
+                            Price required
+                        </div>
+                    </div>
+                </div>
+
+                <input type="button" class="btn-primary" value="Create" (click)="selectDealsPricing()" />
+                <input type="submit" class="btn-primary" value="Create" (click)="createOrUpdateDeal()" />
+                <input type="submit" class="btn-primary" value="Update" (click)="updateDeal()" />
+            </div>
+            <div *ngIf="model.viewable">
+                <div class="form-group" id="divDealName">
+                    <label>Deal Price</label>
+                    <div>£{{deal.price}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

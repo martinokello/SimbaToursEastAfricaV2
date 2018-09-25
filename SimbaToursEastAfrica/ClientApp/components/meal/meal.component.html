@@ -1,0 +1,15 @@
+﻿<div #mealView class="col-lg-12" style="text-align:left !important; color:black !important;">
+    <form>
+        <div class="form-group">
+            <label>MealId - optional</label>
+            <input type="number" name="mealId" value="-1" [(ngModel)]="meal.mealId" />
+        </div>
+        <div #mealEntry>
+            <div class="form-group">
+                <label>Item Quantity</label>
+                <input type="number" name="quantity" value="0" [(ngModel)]="meal.quantity" />
+            </div>
+        </div>
+        <input type="button" value="Add Meal" class="but-primary" (click)="addMeal()" />
+    </form>
+</div>
