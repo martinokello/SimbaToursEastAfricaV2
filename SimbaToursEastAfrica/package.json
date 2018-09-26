@@ -6,20 +6,21 @@
     "test": "karma start ClientApp/test/karma.conf.js"
   },
   "devDependencies": {
-    "@angular/animations": "4.2.5",
-    "@angular/common": "^4.2.5",
-    "@angular/compiler": "4.2.5",
+    "@angular/animations": "^4.4.7",
+    "@angular/common": "^4.4.7",
+    "@angular/compiler": "^4.4.7",
     "@angular/compiler-cli": "^4.4.7",
-    "@angular/core": "^4.2.5",
-    "@angular/forms": "^4.2.5",
-    "@angular/http": "^4.2.5",
-    "@angular/platform-browser": "4.2.5",
-    "@angular/platform-browser-dynamic": "4.2.5",
-    "@angular/platform-server": "4.2.5",
-    "@angular/router": "4.2.5",
-    "@ngtools/webpack": "^1.5.0",
+    "@angular/core": "^4.4.7",
+    "@angular/forms": "^4.4.7",
+    "@angular/http": "^4.4.7",
+    "@angular/platform-browser": "^4.4.7",
+    "@angular/platform-browser-dynamic": "^4.4.7",
+    "@angular/platform-server": "^4.4.7",
+    "@angular/router": "^4.4.7",
+    "@ngtools/webpack": "^1.10.2",
     "@types/chai": "4.0.1",
-    "@types/jasmine": "2.5.53",
+    "@types/core-js": "^0.9.36",
+    "@types/jasmine": "^2.5.53",
     "@types/webpack-env": "1.13.0",
     "angular2-router-loader": "0.3.5",
     "angular2-template-loader": "0.6.2",
@@ -38,7 +39,7 @@
     "html-loader": "0.4.5",
     "isomorphic-fetch": "2.2.1",
     "jasmine-core": "2.6.4",
-    "jquery": "3.2.1",
+    "jquery": "^3.3.1",
     "json-loader": "0.5.4",
     "karma": "1.7.0",
     "karma-chai": "0.1.0",
@@ -54,12 +55,13 @@
     "to-string-loader": "1.1.5",
     "typescript": "^2.9.2",
     "url-loader": "0.5.9",
-    "webpack": "^2.7.0",
+    "webpack": "^3.12.0",
     "webpack-hot-middleware": "2.18.2",
     "webpack-merge": "4.1.0",
     "zone.js": "0.8.12"
   },
   "dependencies": {
+    "@angular-devkit/build-angular": "^0.8.3",
     "@types/jquery": "^3.3.10",
     "angular": "^1.7.4",
     "babel": "^6.23.0",
@@ -72,5 +74,10 @@
     "react-dom": "^16.5.2",
     "updates": "^4.3.0",
     "webpack-cli": "^3.1.1"
+  },
+  "environments": {
+    "dev": "environments/environment.ts",
+    "prod": "environments/environment.prod.ts",
+    "e2e": "environments/environment.e2e.ts"
   }
 }

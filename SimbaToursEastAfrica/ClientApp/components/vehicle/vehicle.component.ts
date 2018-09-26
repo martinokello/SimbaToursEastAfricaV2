@@ -28,6 +28,7 @@ export class VehicleComponent implements OnInit, AfterViewInit, AfterViewChecked
     }
     public ngOnInit(): void {
         let tempVeh: IVehicle = {
+            vehicleType: VehicleType.Taxi,
             vehicleid: 0,
             vehicleRegistration: "",
             actualNumberOfPassengersAllocated: 0,

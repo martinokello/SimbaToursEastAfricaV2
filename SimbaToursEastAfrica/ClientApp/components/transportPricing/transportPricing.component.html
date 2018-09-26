@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <label>Transport Pricing Description</label>
                 </div>
-                <textarea name="description" [(ngModel)]="transportPricing.description" #schedulesDescription="ngModel" required></textarea>
+                <textarea name="description" [(ngModel)]="transportPricing.description" #description="ngModel" required></textarea>
                 <div *ngIf="f3.submitted && description.invalid" class="text-danger">
                     Price required
                 </div>
