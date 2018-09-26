@@ -8,7 +8,7 @@
     </div>
     <div id="hotelDetails" style="display:none">
         <h4>Hotel details</h4>
-        <hotelBooking [(ngModel)]="hotel" name="hotel" (valueChangeHotelBooking)="updateHotelBooking($event)" (hotelsAddedChange)="updateHotelBookings($event)" (valueChangeHotel)="updateHotel($event)" ngDefaultControl></hotelBooking>
+        <hotelBooking [(ngModel)]="hotel" name="hotel" (valueChangeHotelBooking)="updateHotelBooking($event)"  (valueChangeHotel)="updateHotel($event)" ngDefaultControl></hotelBooking>
     </div>
     <div style="text-align:center !important;margin-top:2%;">
         <hr style="width:100%;" />
@@ -54,7 +54,7 @@
                         <div class="col-lg-3">
                             <label>Amount you are paying:</label>
                             <input type="number" name="currentPayment" [(ngModel)]="currentPayment" required #currentPaymentq="ngModel" />
-                            <div *ngIf="f4.submitted && currentPayment.invalid" class="text-danger">
+                            <div *ngIf="f4.submitted && currentPaymentq.invalid" class="text-danger">
                                 At least some payment is expected
                             </div>
                         </div>

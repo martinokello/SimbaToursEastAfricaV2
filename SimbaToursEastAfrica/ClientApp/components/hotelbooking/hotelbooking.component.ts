@@ -14,7 +14,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class HotelBookingComponent implements OnInit {
     private safariTourService: SafariTourServices | any;
-    private hotelDetails: IHotel[];
+    private hotelDetails: IHotel[]|any;
     @Input()
     public hotel: IHotel | any;
     @Output() valueChangeHotel = new EventEmitter<IHotel>();
