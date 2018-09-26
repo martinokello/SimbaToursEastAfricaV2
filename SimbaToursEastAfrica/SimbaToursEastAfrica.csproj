@@ -49,10 +49,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\app.browser.module.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\assets\css\font-awesome.min.css" />
     <None Include="wwwroot\assets\css\main.css" />
     <None Include="wwwroot\assets\css\noscript.css" />
@@ -120,7 +116,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\app\app.browser.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app.browser.module.ts" />
     <TypeScriptCompile Include="ClientApp\boot.browser.ts" />
     <TypeScriptCompile Include="ClientApp\boot.server.ts" />
   </ItemGroup>

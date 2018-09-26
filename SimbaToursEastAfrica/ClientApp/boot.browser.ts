@@ -3,7 +3,7 @@ import 'zone.js';
 import 'bootstrap';
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppClientModule } from './app/app.browser.module';
+import { AppClientModule } from './app.browser.module';
 
 if (module.hot) {
     module.hot.accept();

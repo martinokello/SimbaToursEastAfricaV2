@@ -5,7 +5,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { enableProdMode, ApplicationRef, NgZone, ValueProvider } from '@angular/core';
 import { platformDynamicServer, PlatformState, INITIAL_CONFIG } from '@angular/platform-server';
 import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
-import { AppServerModule } from './app/app.server.module';
+import { AppServerModule } from './app.server.module';
 
 enableProdMode();
 
