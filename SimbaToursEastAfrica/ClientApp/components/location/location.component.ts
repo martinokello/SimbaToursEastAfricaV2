@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class LocationComponent implements OnInit, OnChanges {
     private safariTourService: SafariTourServices | any;
-
+    @Output hotelIsSet = new EventEmitter<boolean>();
     @ViewChild('locationView') public locationView: HTMLElement | any;
 
     public constructor(safarTourService: SafariTourServices) {
@@ -54,6 +54,7 @@ export class LocationComponent implements OnInit, OnChanges {
         this.hotel.location = location1;
         */
         this.valueChangeLocation.emit(this.hotel);
+        this.hotelIsSet.emit(true);
         $('div#vehicleDetails').css('display', 'block').slideDown();
     }
     ngOnChanges() {
