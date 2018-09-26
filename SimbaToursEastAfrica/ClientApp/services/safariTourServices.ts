@@ -547,7 +547,7 @@ export class SafariTourServices {
         });
     }
 
-    public GetTransportPricing(): Observable<ISchedulesPricing[]> {
+    public GetTransportPricing(): Observable<ITransportPricing[]> {
 
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
         let requestUrl = this.transportPricingsUrl;

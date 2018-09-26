@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class LocationComponent implements OnInit, OnChanges {
     private safariTourService: SafariTourServices | any;
-    @Output hotelIsSet = new EventEmitter<boolean>();
+    @Output() hotelIsSet = new EventEmitter<boolean>();
     @ViewChild('locationView') public locationView: HTMLElement | any;
 
     public constructor(safarTourService: SafariTourServices) {
