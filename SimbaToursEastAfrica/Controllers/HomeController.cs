@@ -16,6 +16,7 @@ using System.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authorization;
+using UPAEventsPayPal;
 
 namespace SimbaToursEastAfrica.Controllers
 {
@@ -260,10 +261,10 @@ namespace SimbaToursEastAfrica.Controllers
         private void ValidatePayment(TourClient tourClient, decimal amountToPay)
         {
 
-            var productArray = new List<dynamic>();
+            var productArray = new List<Product>();
             if (tourClient != null)
             {
-                productArray.Add(new
+                productArray.Add(new Product
                 {
                     ProductName = tourClient.Hotel.Location.LocationName + "-" + tourClient.Hotel.HotelName,
                     Amount = amountToPay,

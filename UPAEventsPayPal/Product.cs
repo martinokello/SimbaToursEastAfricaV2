@@ -24,12 +24,13 @@ namespace UPAEventsPayPal
         {
             
         }
+        public bool HasPaidInfull { get; set; }
         public int Quantity
         {
             get { return quantity; }
             set { quantity = value; }
         }
-        public decimal Ammount
+        public decimal Amount
         {
             get { return ammount; }
             set { ammount = value; }

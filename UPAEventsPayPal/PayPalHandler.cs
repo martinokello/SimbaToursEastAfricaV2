@@ -29,7 +29,7 @@ namespace UPAEventsPayPal
             this.buyerEmail = buyerEmail;
         }
 
-        public void RedirectToPayPal(List<dynamic> productArray)
+        public void RedirectToPayPal(List<Product> productArray)
         {
             //fill In invoice Details
             

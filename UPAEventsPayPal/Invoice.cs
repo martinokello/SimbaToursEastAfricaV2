@@ -14,14 +14,14 @@ namespace UPAEventsPayPal
     public class Invoice
     {
         private int invoiceNo;
-        private List<dynamic> products;
+        private List<Product> products;
         private string buyerEmail;
         private decimal amount;
         private decimal amountVAT;
         private const int beginGenerate = 1003;
         static private Random randomGenerator = new Random(DateTime.Now.Millisecond);
 
-        public Invoice(List<dynamic> products, decimal amount, string buyerEmail)
+        public Invoice(List<Product> products, decimal amount, string buyerEmail)
         {
             this.products = products;
             this.amount = amount;
@@ -47,7 +47,7 @@ namespace UPAEventsPayPal
         }
 
 
-        public List<dynamic> Products
+        public List<Product> Products
         {
             get { return products; }
             set { products = value; }

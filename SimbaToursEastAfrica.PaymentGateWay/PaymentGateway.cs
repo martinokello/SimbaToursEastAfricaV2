@@ -17,7 +17,7 @@ namespace SimbaToursEastAfrica.PaymentGateWay
             _payPalPayments._HttpContext = context;
         }
 
-        public void MakePaymentByPaypal(List<dynamic> products)
+        public void MakePaymentByPaypal(List<Product> products)
         {
             _payPalPayments.RedirectToPayPal(products);
         }
