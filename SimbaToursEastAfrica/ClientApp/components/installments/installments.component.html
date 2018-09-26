@@ -10,7 +10,7 @@
             </div>
             <div class="form-group">
                 <label>Amount Paying</label>
-                <input type="number" name="currentPayment" value="0" [(ngModel)]="currentPayment"  min="0"/>
+                <input type="number" name="currentPayment" value="0" [(ngModel)]="tourClient.currentPayment"  min="0"/>
             </div>
         </div>
         <input type="submit" value="Pay Installment" class="but-primary" (click)="makePayment()" />

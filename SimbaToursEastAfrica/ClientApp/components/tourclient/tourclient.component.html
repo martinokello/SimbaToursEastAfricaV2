@@ -8,14 +8,14 @@
             <div class="form-group">
                 <label>FirstName</label>
                 <input type="text" name="firstName" value="" [(ngModel)]="tourClient.clientFirstName" required #firstName="ngModel"/>
-                <div *ngIf="f1.submitted && firstName.invalid" class="text-danger">
+                <div *ngIf="f1.submitted && clientFirstName.invalid" class="text-danger">
                     First Name required
                 </div>
             </div>
             <div class="form-group">
                 <label>LastName</label>
                 <input type="text" name="lastName" value="" [(ngModel)]="tourClient.clientLastName" required #lastName="ngModel" />
-                <div *ngIf="f1.submitted && lastName.invalid" class="text-danger">
+                <div *ngIf="f1.submitted && clientLastName.invalid" class="text-danger">
                     Last Name required
                 </div>
             </div>

@@ -27,6 +27,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ForgotPasswordComponent } from './components/forgotPassword/forgotPassword.component';
 import { PayByInstallments } from './components/installments/installments.component';
+import { TransportPricingComponent } from './components/transportPricing/transportPricing.component';
 
 @NgModule({
     declarations: [
@@ -54,7 +55,8 @@ import { PayByInstallments } from './components/installments/installments.compon
         ForgotPasswordComponent,
         RegisterComponent,
         ForgotPasswordComponent,
-        PayByInstallments
+        PayByInstallments,
+        TransportPricingComponent
     ],
     imports: [
         CommonModule,
@@ -79,7 +81,9 @@ import { PayByInstallments } from './components/installments/installments.compon
             { path: 'forgot-password', component: ForgotPasswordComponent },
             { path: 'login', component: LoginComponent },
             { path: 'make-Payments', component: PayByInstallments },
+            { path: 'transport-pricing', component: TransportPricingComponent },
             { path: 'logout', component: HomeComponent },
+
             { path: '**', redirectTo: 'home' }
         ])
     ],

@@ -12,8 +12,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class LaguagePricingComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
-    public laguage: ILaguagePricing | any;
-    public safariTourService: SafariTourServices | any;
+    private laguage: ILaguagePricing | any;
+    private safariTourService: SafariTourServices | any;
     model: any;
 
     @ViewChild('laguagePricingItem') laguagePricingItem: HTMLElement | any;
