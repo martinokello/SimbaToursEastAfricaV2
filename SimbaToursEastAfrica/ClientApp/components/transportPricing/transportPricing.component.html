@@ -1,0 +1,66 @@
+﻿
+<form #f3="ngForm" (ngSubmit)="f3.form.valid && createTransportPricing()">
+    <div #transportPricingItem>
+        <div class="col-lg-12" style="text-align:left !important; color:black !important;">
+            <h4>Transport Pricing</h4>
+            <div>
+                <div class="form-group" id="divDealName">
+                    <label>Select Transport Pricing Name</label>
+                    <select name="transportPricingId" [(ngModel)]="transportPricing.transportPricingId" id="transportPricingId" #transportPricingId="ngModel"></select>
+                </div>                
+                <div class="form-group">
+                    <label>Or Create New Transport Pricing Name</label>
+                    <input name="transportPricingName" type="text" [(ngModel)]="transportPricing.transportPricingName" id="transportPricingName" #transportPricingName="ngModel" required/>
+                    <div *ngIf="f3.submitted && transportPricingName.invalid" class="text-danger">
+                        Pricing name required
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Transport Pricing Description</label>
+                </div>
+                <textarea name="description" [(ngModel)]="transportPricing.description" #schedulesDescription="ngModel" required></textarea>
+                <div *ngIf="f3.submitted && description.invalid" class="text-danger">
+                    Price required
+                </div>
+                <div>
+                    <label>Taxi Price</label>
+                    <input type="number" name="taxiPricing" value="0.00" [(ngModel)]="transportPricing.taxiPricing" #taxiPricing="ngModel" required />
+                    <div *ngIf="f3.submitted && taxiPricing.invalid" class="text-danger">
+                        Price required
+                    </div>
+                </div>
+                <div>
+                    <label>MiniBus Price</label>
+                    <input type="number" name="miniBusPricing" value="0.00" [(ngModel)]="transportPricing.miniBusPricing" #miniBusPricing="ngModel" required />
+                    <div *ngIf="f3.submitted && miniBusPricing.invalid" class="text-danger">
+                        Price required
+                    </div>
+                </div>
+                <div>
+                    <label>Four By Four Price</label>
+                    <input type="number" name="fourByFourPricing" value="0.00" [(ngModel)]="transportPricing.fourByFourPricing" #fourByFourPricing="ngModel" required />
+                    <div *ngIf="f3.submitted && fourByFourPricing.invalid" class="text-danger">
+                        Price required
+                    </div>
+                </div>
+                <div>
+                    <label>Tour Bus Price</label>
+                    <input type="number" name="tourBusPricing" value="0.00" [(ngModel)]="transportPricing.tourBusPricing" #tourBusPricing="ngModel" required />
+                    <div *ngIf="f3.submitted && tourBusPricing.invalid" class="text-danger">
+                        Price required
+                    </div>
+                </div>
+                <div>
+                    <label>PickupTruck Price</label>
+                    <input type="number" name="pickupTruckPricing" value="0.00" [(ngModel)]="transportPricing.pickupTruckPricing" #pickupTruckPricing="ngModel" required />
+                    <div *ngIf="f3.submitted && pickupTruckPricing.invalid" class="text-danger">
+                        Price required
+                    </div>
+                </div>
+            </div>
+            <input type="button" class="btn-primary" value="Select" (click)="selectTransportPricing()" />
+            <input type="submit" class="btn-primary" value="Create" (click)="createTransportPricing()" />
+            <input type="submit" class="btn-primary" value="Update" (click)="updateTransportPricing()" />
+        </div>
+    </div>
+</form>

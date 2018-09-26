@@ -14,6 +14,7 @@ export class LocationComponent implements OnInit, OnChanges {
     private safariTourService: SafariTourServices | any;
 
     @ViewChild('locationView') public locationView: HTMLElement | any;
+    @Output() public hotelIsSet = new EventEmitter<boolean>();
 
     public constructor(safarTourService: SafariTourServices) {
         this.safariTourService = safarTourService;
@@ -30,6 +31,7 @@ export class LocationComponent implements OnInit, OnChanges {
     public valueLocationChanged(): void {
         this.valueChangeLocation.emit(this.hotel);
     }
+    
     public selectLocationChanged() {
 
         let locationIdstr: any = $('select#locationId').val();
@@ -44,16 +46,10 @@ export class LocationComponent implements OnInit, OnChanges {
         this.valueLocationChanged()
     }
     public addLocation(): void {
-        /*
-        let location1: ILocation = {
-            address: this.hotel.location.address,
-            locationName: this.hotel.location.locationName,
-            locationId: this.hotel.location.locationId,
-            addressId: this.hotel.location.address.addressId
-        };
-        this.hotel.location = location1;
-        */
+        
         this.valueChangeLocation.emit(this.hotel);
+
+        this.hotelIsSet.emit(true);
         $('div#vehicleDetails').css('display', 'block').slideDown();
     }
     ngOnChanges() {

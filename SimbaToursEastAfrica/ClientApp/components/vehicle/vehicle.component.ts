@@ -31,7 +31,8 @@ export class VehicleComponent implements OnInit, AfterViewInit, AfterViewChecked
             vehicleid: 0,
             vehicleRegistration: "",
             actualNumberOfPassengersAllocated: 0,
-            maxNumberOfPassengers:0
+            maxNumberOfPassengers: 0,
+            vehicleType: VehicleType.Taxi
         };
         this.vehicle = tempVeh;
         console.log("inside OnInit");

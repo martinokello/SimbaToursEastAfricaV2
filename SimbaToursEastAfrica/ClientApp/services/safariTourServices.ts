@@ -13,6 +13,9 @@ export class SafariTourServices {
     public static isLoginPage: boolean = false;
     public actionResult: any;
     public httpClient: Http;
+    public createTransportPricingUrl: string = "/api/Administration/CreateTransportPricing";
+    public updateTransportPricingUrl: string = "/api/Administration/UpdateTransportPricing"
+    public getTransportPricingById: string = "Home/GetTransportPricingById";
     public postCurrentPaymentUrl: string = "/Home/MakePayment";
     public getTourClientUrl: string = "/Home/GetTourClientByEmail";
     public bookTourUrl: string = "/Home/BookTour";
@@ -21,6 +24,7 @@ export class SafariTourServices {
     public dealsPricingUrl: string = "/Home/GetDealsPricing";
     public hotelPricingUrl: string = "/Home/GetHotelPricing";
     public schedulesPricingsUrl: string = "/Home/GetSchedulesPricing";
+    public transportPricingsUrl: string = "/Home/GetTransportPricing";
     public laguagePricingUrl: string = "/Home/GetLaguagePricing";
     public mealPricingUrl: string = "/Home/GetMealPricing";
     public postOrUpdateLocationUrl: string = "/api/Administration/PostLocation";
@@ -492,7 +496,71 @@ export class SafariTourServices {
             return res.json();
         });
     }
+    public CreateTransportPricing(transportPricing: ITransportPricing) {
 
+        let body = JSON.stringify(transportPricing);
+        let actionResult: any;
+
+        let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: this.createTransportPricingUrl,
+            method: RequestMethod.Post,
+            headers: headers,
+            body: body
+        });
+        return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
+            return res.json();
+        });
+    }
+
+    public UpdateTransportPricing(transportPricing: ITransportPricing) {
+
+        let body = JSON.stringify(transportPricing);
+        let actionResult: any;
+
+        let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: this.updateTransportPricingUrl,
+            method: RequestMethod.Post,
+            headers: headers,
+            body: body
+        });
+        return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
+            return res.json();
+        });
+    }
+
+    public GetTransportPricingById(transportPricingId: number): Observable<ISchedulesPricing[]> {
+
+        let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+        let requestUrl = this.getTransportPricingById+"transportPricingId="+transportPricingId;
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: requestUrl,
+            method: RequestMethod.Get,
+            headers: headers
+        });
+
+        return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
+            return res.json();
+        });
+    }
+
+    public GetTransportPricing(): Observable<ISchedulesPricing[]> {
+
+        let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+        let requestUrl = this.transportPricingsUrl;
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: requestUrl,
+            method: RequestMethod.Get,
+            headers: headers
+        });
+
+        return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
+            return res.json();
+        });
+    }
     public PostCreateHotelPricing(hotelPricing: IHotelPricing): Observable<any> {
 
 
@@ -583,8 +651,8 @@ export class SafariTourServices {
             return res.json();
             });
     }
-    public GetTourClientByEmail(): Observable<ITourClient> {
-        return this.httpClient.get(this.getTourClientUrl).map((res: Response) => {
+    public GetTourClientByEmail(emailAddress: string): Observable<ITourClient> {
+        return this.httpClient.get(this.getTourClientUrl + "?emailAddress=" + emailAddress).map((res: Response) => {
             return res.json();
         });
     }
@@ -607,6 +675,7 @@ export class SafariTourServices {
             return res.json();
         });
     }
+
     public GetMealsPricing(): Observable<IMealPricing[]> {
         var mealPricing: IMealPricing[];
 
@@ -697,7 +766,7 @@ export interface IHotelBooking {
     tourClient: ITourClient;
     location: ILocation;
     meals: IMeal[];
-    laguages: ILaguage[]
+    laguages: ILaguage[],
 }
 export interface ILaguage {
     laguageId: number;
@@ -776,6 +845,7 @@ export interface IHotelBooking {
 }
 export interface IVehicle {
     vehicleid: number;
+    vehicleType: VehicleType;
     vehicleRegistration: string;
     maxNumberOfPassengers: number;
     actualNumberOfPassengersAllocated: number;
@@ -792,6 +862,17 @@ export interface IMealPricing {
     mealDescription: string;
     mealName: string;
     price: number;
+}
+
+export interface ITransportPricing{
+    transportPricingId: number;
+    transportPricingName: string;
+    description: string;
+    fourByFourPricing: number; 
+    miniBusPricing: number;
+    taxiPricing: number;
+    pickupTruckPricing: number;
+    tourBusPricing: number;
 }
 
 export interface ILaguagePricing {

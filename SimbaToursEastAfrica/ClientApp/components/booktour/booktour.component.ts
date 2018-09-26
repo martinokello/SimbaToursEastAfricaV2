@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Element } from '@angular/compiler';
-import { SafariTourServices, IHotelBooking, IHotel, IMeal, ILaguage, ILocation, IHotelPricing, IAddress, IVehicle, IItem, ItemType, IInvoice } from '../../services/safariTourServices';
+import { SafariTourServices, IHotelBooking, IMealPricing, ILaguagePricing, ITransportPricing, IHotel, IMeal, ILaguage, ILocation, IHotelPricing, IAddress, IVehicle, IItem, ItemType, IInvoice, VehicleType } from '../../services/safariTourServices';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 @Component({
@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
     providers: [SafariTourServices]
 })
 export class BookTourComponent implements OnInit {
+    runningCost: number = 0.00;
     vehicles: IVehicle[] = [];
     hotelBookings: IHotelBooking[] = [];
     mealItems: IItem[] = [];
@@ -26,6 +27,12 @@ export class BookTourComponent implements OnInit {
         items: this.items,
         tourClientId:0
     };
+
+    transportPricing: ITransportPricing | any;
+    hotelPrincing: IHotelPricing | any;
+    mealPricing: IMealPricing | any;
+    laguageAccessoriesPricing: ILaguagePricing | any;
+
     private safariTourService: SafariTourServices | any;
     public hotelBooking: IHotelBooking | any;
     public hotel: IHotel|any;
@@ -33,6 +40,23 @@ export class BookTourComponent implements OnInit {
         this.safariTourService = safarTourService;
     }
     ngOnInit(): void {
+        let transportPrincingRes: Observable<ITransportPricing[]> = this.safariTourService.GetTransportPricing();
+
+        transportPrincingRes.map((resp: ITransportPricing[]) => {
+            this.transportPricing = resp[0]
+        }).subscribe();
+        let mealPrincingRes: Observable<IMealPricing[]> = this.safariTourService.GetMealsPricing();
+
+        mealPrincingRes.map((resp: IMealPricing[]) => {
+            this.mealPricing = resp[0]
+        }).subscribe();
+
+        let laguageAccessoriesPricingRes: Observable<ILaguagePricing[]> = this.safariTourService.GetLaguagePricing();
+
+        laguageAccessoriesPricingRes.map((resp: ILaguagePricing[]) => {
+            this.laguageAccessoriesPricing = resp[0]
+        }).subscribe();
+        
         let addTemp: IAddress = {
             addressLine1: "",
             addressLine2: "",
@@ -68,6 +92,7 @@ export class BookTourComponent implements OnInit {
         if(!this.hotel)
             this.hotel = tmpHotel;
         this.vehicles = [];
+
     }
     public updateHotelBooking(hotelBooking:IHotelBooking) {
         this.hotelBooking = hotelBooking;
@@ -76,6 +101,13 @@ export class BookTourComponent implements OnInit {
     public updateHotel(hotel: IHotel) {
         this.hotel = hotel;
         $('input[type="submit"]#submitTourBooking').removeClass('disabled');
+    }
+
+    public hotelSet(isSet: boolean) {
+        if (this.runningCost == 0) {
+            let currentTotal = (this.hotel.hotelPricing.price * SafariTourServices.tourClientModel.numberOfIndividuals);
+            this.runningCost = parseFloat(Math.round(this.runningCost + currentTotal).toFixed(2));
+        }
     }
     public updateMeal(meal: IMeal) {
         let invoice: IInvoice = {
@@ -97,6 +129,9 @@ export class BookTourComponent implements OnInit {
             laguagePricingId:0
         }
         this.combinedMeals.mealItems.push(mealItem);
+        let currentTotal = (mealItem.quantity * this.mealPricing.price);
+
+        this.runningCost = parseFloat(Math.round(this.runningCost+currentTotal).toFixed(2));
     }
 
     public updateLaguage(laguage: ILaguage) {
@@ -119,6 +154,23 @@ export class BookTourComponent implements OnInit {
             laguagePricingId:0
         }
         this.combinedLaguage.items.push(laguageItem);
+        let currentTotal:number = 0;
+        switch (laguageItem.itemType) {
+            case ItemType.Laguage:
+                currentTotal= (laguageItem.quantity * this.laguageAccessoriesPricing.unitLaguagePrice);
+                break;
+            case ItemType.Meal:
+                currentTotal= (laguageItem.quantity * this.mealPricing.price);
+                break;
+            case ItemType.MedicalTreatment:
+                currentTotal= (laguageItem.quantity * this.laguageAccessoriesPricing.unitMedicalPrice);
+                break;
+            case ItemType.TravelDocuments:
+                currentTotal= (laguageItem.quantity * this.laguageAccessoriesPricing.unitTravelDocumentPrice);
+                break;
+        }
+
+        this.runningCost = parseFloat(Math.round(this.runningCost + currentTotal).toFixed(2));
     }
     public updateLocaton(location: ILocation) {
         this.hotel.location = location;
@@ -127,6 +179,25 @@ export class BookTourComponent implements OnInit {
     }
     public updateVehicle(vehicle: IVehicle) {
         this.vehicles.push(vehicle);
+        let currentTotal: number = 0;
+        switch (vehicle.vehicleType) {
+            case VehicleType.Taxi:
+                currentTotal= (vehicle.actualNumberOfPassengersAllocated * this.transportPricing.taxiPricing);
+                break;
+            case VehicleType.MiniBus:
+                currentTotal= (vehicle.actualNumberOfPassengersAllocated * this.transportPricing.miniBusPricing);
+                break;
+            case VehicleType.PickUpTrack:
+                currentTotal= (vehicle.actualNumberOfPassengersAllocated * this.transportPricing.pickupTruckPricing);
+                break;
+            case VehicleType.FourWheelDriveCar:
+                currentTotal= (vehicle.actualNumberOfPassengersAllocated * this.transportPricing.fourByFourPricing);
+                break;
+            case VehicleType.TourBus:
+                currentTotal= (vehicle.actualNumberOfPassengersAllocated * this.transportPricing.tourBusPricing);
+                break;
+        }
+        this.runningCost = parseFloat(Math.round(this.runningCost + currentTotal).toFixed(2));
     }
     public bookTour(): void {
         this.hotelBookings.push(this.hotelBooking);

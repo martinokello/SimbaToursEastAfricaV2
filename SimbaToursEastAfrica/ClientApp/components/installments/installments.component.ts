@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, ViewChild, ElementRef, Input, Injectable, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import {SafariTourServices, ITourClient }  from '../../services/safariTourServices';
+import {SafariTourServices, ITourClient, IMealPricing, IHotelPricing, ILaguagePricing, ITransportPricing }  from '../../services/safariTourServices';
 import { Element } from '@angular/compiler';
 import * as $ from 'jquery';
 import 'rxjs/add/operator/map';
@@ -16,6 +16,8 @@ export class PayByInstallments implements OnInit {
     public currentPayment: number | any;
     public amountLeftToPay: number | any;
     public tourClient: any;
+
+
     public constructor(safariTourService: SafariTourServices) {
         this.safariTourService = safariTourService;
     }
@@ -26,7 +28,6 @@ export class PayByInstallments implements OnInit {
                 alert("Payment made. Currently being processed by paypal service");
             }).subscribe();
     }
-  
     public ngOnInit(): void {
         this.tourClient = {};
         this.currentPayment = 0.00;
@@ -35,7 +36,7 @@ export class PayByInstallments implements OnInit {
 
         result.map((resp: ITourClient) => {
             this.tourClient = resp;
-            this.amountLeftToPay = this.tourClient.grossTotalCosts - this.tourClient.paidInstallments;
+            this.amountLeftToPay = parseFloat((this.tourClient.grossTotalCosts - this.tourClient.paidInstallments).toString()).toFixed(2);;
         }).subscribe();
     }
 }

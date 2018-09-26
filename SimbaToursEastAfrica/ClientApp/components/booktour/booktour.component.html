@@ -15,7 +15,7 @@
     </div>
     <div id="locationDetails" style="display:none">
         <h4>Location details</h4>
-        <tempLocation [(hotel)]="hotel" name="hotel" (valueChangeLocation)="updateHotel($event)" ngDefaultControl></tempLocation>
+        <tempLocation [(hotel)]="hotel" name="hotel" (valueChangeLocation)="updateHotel($event)" (hotelIsSet)="hotelSet($event)" ngDefaultControl></tempLocation>
     </div>
     <div style="text-align:center !important;margin-top:2%;">
         <hr style="width:100%;" />
@@ -44,17 +44,23 @@
     <form #f4="ngForm" (ngSubmit)="f4.form.valid && bookTour()">
         <div>
             <div class="info">You can enter an amount to pay, and pay up every time you login to the amount in installments till the amount is reached.<br /><b>All payments are in US Dollars</b></div>
-            text-align:left !important; color:black !important;">
+            
             <form>
                 <div #payments>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label>Running Cost - Total Amount To Pay:</label>
+                            <input type="number" name="runningCost" [(ngModel)]="runningCost" readonly/>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-lg-4">
                             <img src="/images/paypal_logo.gif" alt="paypal logo" />
                         </div>
                         <div class="col-lg-3">
                             <label>Amount you are paying:</label>
-                            <input type="number" name="currentPayment" [(ngModel)]="currentPayment" required #currentPaymentq="ngModel" />
-                            <div *ngIf="f4.submitted && currentPayment.invalid" class="text-danger">
+                            <input type="number" name="currentPayment" [(ngModel)]="currentPayment" required #currentPaymentTxt="ngModel" />
+                            <div *ngIf="f4.submitted && currentPaymentTxt.invalid" class="text-danger">
                                 At least some payment is expected
                             </div>
                         </div>
