@@ -5,7 +5,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { enableProdMode, ApplicationRef, NgZone, ValueProvider } from '@angular/core';
 import { platformDynamicServer, PlatformState, INITIAL_CONFIG } from '@angular/platform-server';
 import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
-import { AppServerModule } from './app.server.module';
+import { AppModule } from './app.server.module';
 
 enableProdMode();
 
@@ -16,7 +16,7 @@ export default createServerRenderer(params => {
         { provide: 'BASE_URL', useValue: params.origin + params.baseUrl },
     ];
 
-    return platformDynamicServer(providers).bootstrapModule(AppServerModule).then(moduleRef => {
+    return platformDynamicServer(providers).bootstrapModule(AppModule).then(moduleRef => {
         const appRef: ApplicationRef = moduleRef.injector.get(ApplicationRef);
         const state = moduleRef.injector.get(PlatformState);
         const zone = moduleRef.injector.get(NgZone);

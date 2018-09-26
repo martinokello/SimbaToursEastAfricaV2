@@ -3,7 +3,7 @@ import 'zone.js';
 import 'bootstrap';
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppClientModule } from './app.browser.module';
+import { AppModule } from './app.browser.module';
 
 if (module.hot) {
     module.hot.accept();
@@ -20,4 +20,4 @@ if (module.hot) {
 
 // Note: @ng-tools/webpack looks for the following expression when performing production
 // builds. Don't change how this line looks, otherwise you may break tree-shaking.
-const modulePromise = platformBrowserDynamic().bootstrapModule(AppClientModule);
+const modulePromise = platformBrowserDynamic().bootstrapModule(AppModule);
