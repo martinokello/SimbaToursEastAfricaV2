@@ -133,6 +133,7 @@
     <Compile Include="RepositoryServices\Concretes\ScheduleRepository.cs" />
     <Compile Include="RepositoryServices\Concretes\SchedulesPricingRepository.cs" />
     <Compile Include="RepositoryServices\Concretes\TourClientRepository.cs" />
+    <Compile Include="RepositoryServices\Concretes\TransportPricingRepository.cs" />
     <Compile Include="RepositoryServices\Concretes\VehicleRepository.cs" />
     <Compile Include="RepositoryServices\Interfaces\IRepository.cs" />
   </ItemGroup>

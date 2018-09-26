@@ -78,7 +78,7 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
                     }
 
 
-                    var meal = new Meal { TourClient = tourClientModel, TourClientId = tourClientModel.TourClientId, MealPricingId = combinedMeal.Length > 0 ?combinedMeal[0].mealPricing.MealPricingId : 1 };
+                    var meal = new Meal { TourClientId = tourClientModel.TourClientId, MealPricingId = combinedMeal.Length > 0 ?combinedMeal[0].mealPricing.MealPricingId : 1 };
                     _simbaToursUnitOfWork._mealRepository.Insert(meal);
                     _simbaToursUnitOfWork.SaveChanges();
                     var mealInvoice = new Invoice { InvoiceName = string.Format("Combined Meal Invoice for Client {0}", tourClientModel.TourClientId), TourClientId = tourClientModel.TourClientId };
@@ -116,6 +116,7 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             try
             {
                 _simbaToursUnitOfWork._hotelPricingRepository.Update(hotelPricing);
+                _simbaToursUnitOfWork.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -142,6 +143,7 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             try
             {
                 _simbaToursUnitOfWork._schedulesPricingRepository.Update(schedulesPricing);
+                _simbaToursUnitOfWork.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -155,6 +157,7 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             try
             {
                 _simbaToursUnitOfWork._dealsPricingRepository.Update(dealsPricing);
+                _simbaToursUnitOfWork.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -168,6 +171,7 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             try
             {
                 _simbaToursUnitOfWork._locationRepository.Update(location);
+                _simbaToursUnitOfWork.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -186,6 +190,7 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             try
             {
                 _simbaToursUnitOfWork._mealsPricingRepository.Update(mealPricing);
+                _simbaToursUnitOfWork.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -199,6 +204,7 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             try
             {
                 _simbaToursUnitOfWork._vehicleRepository.Update(vehicle);
+                _simbaToursUnitOfWork.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -214,6 +220,7 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             tourClient.HasFullyPaid = tourClient.PaidInstallments == tourClient.GrossTotalCosts;
             tourClient.DateUpdated = DateTime.Now;
             _simbaToursUnitOfWork._tourClientRepository.Update(tourClient);
+            _simbaToursUnitOfWork.SaveChanges();
         }
 
         public bool UpdateLaguagePricing(LaguagePricing laguagePricing)
@@ -221,12 +228,18 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             try
             {
                 _simbaToursUnitOfWork._laguagePricingRepository.Update(laguagePricing);
+                _simbaToursUnitOfWork.SaveChanges();
                 return true;
             }
             catch (Exception e)
             {
                 return false;
             }
+        }
+
+        public TransportPricing[] GetTransportPricing()
+        {
+            return _simbaToursUnitOfWork._transportPricingRepository.GetAll().ToList().ToArray();
         }
 
         public Address GetHotelAddressById(int addressId)
@@ -244,6 +257,7 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             try
             {
                 _simbaToursUnitOfWork._hotelRepository.Update(hotel);
+                _simbaToursUnitOfWork.SaveChanges();
                 return true;
             }
             catch (Exception e)

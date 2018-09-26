@@ -34,6 +34,7 @@ namespace SimbaToursEastAfrica.UnitOfWork.Concretes
         public SchedulesPricingRepository _schedulesPricingRepository;
         public HotelPricingRepository _hotelPricingRepository;
         public HotelRepository _hotelRepository;
+        public TransportPricingRepository _transportPricingRepository;
         public SimbaToursEastAfricaDbContext SimbaToursEastAfricaDbContext { get; set; }
         public SimbaToursEastAfricaUnitOfWork(
             AbstractRepository<Address> addressRepository,
@@ -57,6 +58,7 @@ namespace SimbaToursEastAfrica.UnitOfWork.Concretes
             AbstractRepository<LaguagePricing> laguagePricingRepository,
             AbstractRepository<HotelPricing> hotelPricingRepostory,
             AbstractRepository<Hotel> hotelRepostory,
+            AbstractRepository<TransportPricing> transportPricingRepository,
             Microsoft.EntityFrameworkCore.DbContext simbaToursEastAfricaDbContext)
         {
             SimbaToursEastAfricaDbContext = simbaToursEastAfricaDbContext as SimbaToursEastAfricaDbContext;
@@ -102,6 +104,8 @@ namespace SimbaToursEastAfrica.UnitOfWork.Concretes
             _hotelPricingRepository.SimbaToursEastAfricaDbContext = SimbaToursEastAfricaDbContext;
             _hotelRepository = hotelRepostory as HotelRepository;
             _hotelRepository.SimbaToursEastAfricaDbContext = SimbaToursEastAfricaDbContext;
+            _transportPricingRepository = transportPricingRepository as TransportPricingRepository;
+            _transportPricingRepository.SimbaToursEastAfricaDbContext = SimbaToursEastAfricaDbContext;
         }
         public void SaveChanges()
         {

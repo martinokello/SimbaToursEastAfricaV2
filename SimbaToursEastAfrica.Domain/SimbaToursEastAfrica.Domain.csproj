@@ -65,6 +65,7 @@
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\SchedulesPricing.cs" />
     <Compile Include="Models\TourClient.cs" />
+    <Compile Include="Models\TransportPricing.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

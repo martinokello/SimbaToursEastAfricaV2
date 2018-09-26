@@ -51,5 +51,6 @@ namespace SimbaToursEastAfrica.DataAccess
         public DbSet<MealPricing> MealPricings { get; set; }
         public DbSet<DealsPricing> DealsPricings { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
+        public DbSet<TransportPricing> TransportPricings { get; set; }
     }
 }

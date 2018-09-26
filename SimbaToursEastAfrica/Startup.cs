@@ -123,7 +123,8 @@ namespace SimbaToursEastAfrica
             services.AddTransient<AbstractRepository<LaguagePricing>, LaguagePricingRepository>(); 
             services.AddTransient<AbstractRepository<DealsPricing>, DealsPricingRepository>();
             services.AddTransient<AbstractRepository<HotelPricing>, HotelPricingRepository>();
-            services.AddTransient<AbstractRepository<Hotel>, HotelRepository>();
+            services.AddTransient<AbstractRepository<Hotel>, HotelRepository>(); 
+            services.AddTransient<AbstractRepository<TransportPricing>, TransportPricingRepository>();
 
             AutoMapper.Mapper.Initialize(cfg =>
             {

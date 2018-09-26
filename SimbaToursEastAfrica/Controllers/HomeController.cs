@@ -161,6 +161,15 @@ namespace SimbaToursEastAfrica.Controllers
 
             return Json(hotel);
         }
+
+        public JsonResult GetTransportPricing()
+        {
+            _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);
+
+            TransportPricing[] pricing = _serviceEndPoint.GetTransportPricing();
+
+            return Json(pricing);
+        }
         public JsonResult GetHotelLocations()
         {
             _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);
