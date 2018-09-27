@@ -186,7 +186,7 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             tourClient.Hotel = _simbaToursUnitOfWork._hotelRepository.GetById(tourClient.HotelId);
             tourClient.Hotel.Location = _simbaToursUnitOfWork._locationRepository.GetById(tourClient.Hotel.LocationId);
             tourClient.Hotel.Location.Address = _simbaToursUnitOfWork._addressRepository.GetById(tourClient.Hotel.Location.AddressId);
-            tourClient.HotelBookings = _simbaToursUnitOfWork._hotelBookingRepository.GetAll().Where(p=> p.TourClientId == tourClient.TourClientId).ToList();
+            //tourClient.HotelBookings = _simbaToursUnitOfWork._hotelBookingRepository.GetAll().Where(p=> p.TourClientId == tourClient.TourClientId).ToList();
             return tourClient;
         }
 
