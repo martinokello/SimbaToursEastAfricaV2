@@ -287,7 +287,6 @@ namespace SimbaToursEastAfrica.Controllers
 
         private void ValidatePayment(TourClient tourClient, decimal amountToPay)
         {
-
             _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);
             var productArray = new List<Product>();
             if (tourClient != null)
@@ -305,7 +304,7 @@ namespace SimbaToursEastAfrica.Controllers
             paymentGateway.MakePaymentByPaypal(productArray);
         }
 
-        JsonResult GetTourClientByEmail(string emailAddress)
+        public JsonResult GetTourClientByEmail(string emailAddress)
         {
             _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);
             var tourClient = _serviceEndPoint.GetTourClient(emailAddress);
