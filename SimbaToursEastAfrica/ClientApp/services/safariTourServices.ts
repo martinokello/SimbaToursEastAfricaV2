@@ -637,7 +637,6 @@ export class SafariTourServices {
     public MakePayment(currentPayment: number, emailAddress: string): Observable<any> {
         let load = { currentPayment: currentPayment, emailAddress: emailAddress };
         let body = JSON.stringify(load);
-        var actionResult: any;
 
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
 
