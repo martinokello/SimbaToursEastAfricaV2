@@ -1,10 +1,10 @@
 using System;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Microsoft.AspNetCore.Http;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using SimbaToursEastAfrica.Services.EmailServices.Concretes;
 using SimbaToursEastAfrica.Services.EmailServices.Interfaces;
 using SimbaToursEastAfrica.UnitOfWork.Interfaces;
@@ -273,7 +273,7 @@ namespace SimbaToursEastAfrica.Controllers
 
             }
             _serviceEndPoint.SavePayment(tourClient, amountToPay);
-            var paymentGateway = new PaymentGateway(_applicationConstants.Value.BaseUrl, _applicationConstants.Value.BusinessEmail, _applicationConstants.Value.SuccessUrl, _applicationConstants.Value.CancelUrl, _applicationConstants.Value.NotifyUrl, tourClient.EmailAddress,HttpContext);
+            var paymentGateway = new PaymentGateway(_applicationConstants.Value.BaseUrl, _applicationConstants.Value.BusinessEmail, _applicationConstants.Value.SuccessUrl, _applicationConstants.Value.CancelUrl, _applicationConstants.Value.NotifyUrl, tourClient.EmailAddress,Request.HttpContext);
             paymentGateway.MakePaymentByPaypal(productArray);
         }
 
