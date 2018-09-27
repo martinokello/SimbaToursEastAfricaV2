@@ -182,7 +182,12 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
 
         public TourClient GetTourClient(string emailAddress)
         {
-            return _simbaToursUnitOfWork._tourClientRepository.GetAll().FirstOrDefault(p => p.EmailAddress.ToLower().Equals(emailAddress.ToLower()) && !p.HasFullyPaid && p.GrossTotalCosts > p.PaidInstallments);
+            var tourClient = _simbaToursUnitOfWork._tourClientRepository.GetAll().FirstOrDefault(p => p.EmailAddress.ToLower().Equals(emailAddress.ToLower()) && !p.HasFullyPaid && p.GrossTotalCosts > p.PaidInstallments);
+            tourClient.Hotel = _simbaToursUnitOfWork._hotelRepository.GetById(tourClient.HotelId);
+            tourClient.Hotel.Location = _simbaToursUnitOfWork._locationRepository.GetById(tourClient.Hotel.LocationId);
+            tourClient.Hotel.Location.Address = _simbaToursUnitOfWork._addressRepository.GetById(tourClient.Hotel.Location.AddressId);
+            tourClient.HotelBookings = _simbaToursUnitOfWork._hotelBookingRepository.GetAll().Where(p=> p.TourClientId == tourClient.TourClientId).ToList();
+            return tourClient;
         }
 
         public bool UpdateMealPricing(MealPricing mealPricing)

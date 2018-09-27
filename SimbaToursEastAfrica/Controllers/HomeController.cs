@@ -275,13 +275,13 @@ namespace SimbaToursEastAfrica.Controllers
             return Json(deals);
 
         }
-            
-        public JsonResult MakePayment(string emailAddress, decimal currentPayment)
+
+        public JsonResult MakePayment([FromBody] UserDetailViewModel userDetail)
         {
             _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);
-            TourClient tourClient = _serviceEndPoint.GetTourClient(emailAddress);
+            TourClient tourClient = _serviceEndPoint.GetTourClient(userDetail.EmailAddress);
 
-            ValidatePayment(tourClient, currentPayment);
+            ValidatePayment(tourClient, userDetail.CurrentPayment);
             return Json(new { PaymentCompletion = "Success", Message = "The payment will be acquired by Paypal reporting, and you will be informed by email whether successful. Wait for the email." });
         }
 
@@ -311,4 +311,5 @@ namespace SimbaToursEastAfrica.Controllers
             return Json(tourClient);
         }
     }
+
 }
