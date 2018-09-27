@@ -154,8 +154,9 @@ export class BookTourComponent implements OnInit {
             laguagePricingId:0
         }
         this.combinedLaguage.items.push(laguageItem);
-        let currentTotal:number = 0;
-        switch (laguageItem.itemType) {
+        let currentTotal: number = 0;
+        let strLaguageType:string = laguageItem.itemType + "";
+        switch (parseInt(strLaguageType)) {
             case ItemType.Laguage:
                 currentTotal= (laguageItem.quantity * this.laguageAccessoriesPricing.unitLaguagePrice);
                 break;
@@ -180,7 +181,8 @@ export class BookTourComponent implements OnInit {
     public updateVehicle(vehicle: IVehicle) {
         this.vehicles.push(vehicle);
         let currentTotal: number = 0;
-        switch (vehicle.vehicleType) {
+        let vehType: string = vehicle.vehicleType + "";
+        switch (parseInt(vehType)) {
             case VehicleType.Taxi:
                 currentTotal= (vehicle.actualNumberOfPassengersAllocated * this.transportPricing.taxiPricing);
                 break;
