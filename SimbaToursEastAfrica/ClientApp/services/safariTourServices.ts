@@ -652,39 +652,86 @@ export class SafariTourServices {
             });
     }
     public GetTourClientByEmail(emailAddress: string): Observable<ITourClient> {
-        return this.httpClient.get(this.getTourClientUrl + "?emailAddress=" + emailAddress).map((res: Response) => {
+        let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+        let requestUrl = this.getTourClientUrl + "?emailAddress=" + emailAddress;
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: requestUrl,
+            method: RequestMethod.Get,
+            headers: headers
+        });
+
+        return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
             return res.json();
         });
     }
     public GetDealsPricing(): Observable<IDealsPricing[]> {
+        let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+        let requestUrl = this.dealsPricingUrl;
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: requestUrl,
+            method: RequestMethod.Get,
+            headers: headers
+        });
 
-        return this.httpClient.get(this.dealsPricingUrl).map((res: Response) => {
+        return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
             return res.json();
         });
     }
 
     public GetLaguagePricing(): Observable<ILaguagePricing[]> {
-
-        return this.httpClient.get(this.laguagePricingUrl).map((res: Response) => {
-            return res.json();
+        
+        let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+        let requestUrl = this.laguagePricingUrl;
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: requestUrl,
+            method: RequestMethod.Get,
+            headers: headers
         });
 
+        return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
+            return res.json();
+        });
     }
     public GetSchedulesPricing(): Observable<ISchedulesPricing[]> {
-        return this.httpClient.get(this.schedulesPricingsUrl).map((res: Response) => {
+
+        let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+        let requestUrl = this.schedulesPricingsUrl;
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: requestUrl,
+            method: RequestMethod.Get,
+            headers: headers
+        });
+
+        return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
             return res.json();
         });
     }
 
     public GetMealsPricing(): Observable<IMealPricing[]> {
-        var mealPricing: IMealPricing[];
 
-        return this.httpClient.get(this.mealPricingUrl).map((res: Response) => {
+        let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+        let requestUrl = this.mealPricingUrl;
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: requestUrl,
+            method: RequestMethod.Get,
+            headers: headers
+        });
+
+        return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
             return res.json();
         });
     }
     public GetHotelPricing(): Observable<IHotelPricing[]> {
-        return this.httpClient.get(this.hotelPricingUrl).map((res: Response) => {
+
+        let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+        let requestUrl = this.hotelPricingUrl;
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: requestUrl,
+            method: RequestMethod.Get,
+            headers: headers
+        });
+
+        return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
             return res.json();
         });
     }

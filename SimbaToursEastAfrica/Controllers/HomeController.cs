@@ -278,6 +278,7 @@ namespace SimbaToursEastAfrica.Controllers
             
         public JsonResult MakePayment(string emailAddress, decimal amountToPay)
         {
+            _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);
             TourClient tourClient = _serviceEndPoint.GetTourClient(emailAddress);
 
             ValidatePayment(tourClient, amountToPay);
@@ -287,6 +288,7 @@ namespace SimbaToursEastAfrica.Controllers
         private void ValidatePayment(TourClient tourClient, decimal amountToPay)
         {
 
+            _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);
             var productArray = new List<Product>();
             if (tourClient != null)
             {
@@ -305,6 +307,7 @@ namespace SimbaToursEastAfrica.Controllers
 
         JsonResult GetTourClientByEmail(string emailAddress)
         {
+            _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);
             var tourClient = _serviceEndPoint.GetTourClient(emailAddress);
             return Json(tourClient);
         }
