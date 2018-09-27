@@ -27,7 +27,6 @@ export class LaguageComponent implements OnInit, AfterViewInit, AfterViewChecked
     }
     public addLaguage(): void {
         this.updateLaguageAndPricingReferences();
-        alert('Laguage and assortments added successfully');
     }
     public updateLaguageAndPricingReferences(): void {
         //get hotel pricing and location:
@@ -38,6 +37,7 @@ export class LaguageComponent implements OnInit, AfterViewInit, AfterViewChecked
             this.laguagePrices = p;
             this.laguage.laguagePricing = this.laguagePrices[0];
             this.valueChangeLaguage.emit(this.laguage);
+            alert('Laguage and assortments added successfully');
         });
     }
 
