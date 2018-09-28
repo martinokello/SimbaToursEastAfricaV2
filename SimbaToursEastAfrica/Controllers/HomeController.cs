@@ -122,8 +122,8 @@ namespace SimbaToursEastAfrica.Controllers
                 if (isBooked)
                 {
                     var tourClientFullView = _serviceEndPoint.GetTourClientById(tourClient.TourClientId);
-                    ValidatePayment(tourClientFullView, tourClient.CurrentPayment);
-                    return Json(new { Result = isBooked });
+                    var payPalRedirectUrl = ValidatePayment(tourClientFullView, tourClient.CurrentPayment);
+                    return Json(new { Result = isBooked, PayPalRedirectUrl = payPalRedirectUrl, });
                 }
                 else return Json(new { Result = false, Message = "Failed To Book Tour. Please contact the administrators of the site!" });
 
@@ -286,11 +286,11 @@ namespace SimbaToursEastAfrica.Controllers
             _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);
             TourClient tourClient = _serviceEndPoint.GetTourClient(userDetail.EmailAddress);
 
-            ValidatePayment(tourClient, userDetail.CurrentPayment);
-            return Json(new { PaymentCompletion = "Success", Message = "The payment will be acquired by Paypal reporting, and you will be informed by email whether successful. Wait for the email." });
+            var payPalRedirectUrl = ValidatePayment(tourClient, userDetail.CurrentPayment);
+            return Json(new { PayPalRedirectUrl= payPalRedirectUrl, PaymentCompletion = "Success", Message = "The payment will be acquired by Paypal reporting, and you will be informed by email whether successful. Wait for the email." });
         }
 
-        private void ValidatePayment(TourClient tourClient, decimal amountToPay)
+        private string ValidatePayment(TourClient tourClient, decimal amountToPay)
         {
             _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);
             var productArray = new List<Product>();
@@ -305,8 +305,8 @@ namespace SimbaToursEastAfrica.Controllers
 
             }
             _serviceEndPoint.SavePayment(tourClient, amountToPay);
-            var paymentGateway = new PaymentGateway(_applicationConstants.Value.BaseUrl, _applicationConstants.Value.BusinessEmail, _applicationConstants.Value.SuccessUrl, _applicationConstants.Value.CancelUrl, _applicationConstants.Value.NotifyUrl, tourClient.EmailAddress,Request.HttpContext);
-            paymentGateway.MakePaymentByPaypal(productArray);
+            var paymentGateway = new PaymentGateway(_applicationConstants.Value.BaseUrl, _applicationConstants.Value.BusinessEmail, _applicationConstants.Value.SuccessUrl, _applicationConstants.Value.CancelUrl, _applicationConstants.Value.NotifyUrl, tourClient.EmailAddress);
+            return paymentGateway.MakePaymentByPaypal(productArray);
         }
 
         public JsonResult GetTourClientByEmail(string emailAddress)

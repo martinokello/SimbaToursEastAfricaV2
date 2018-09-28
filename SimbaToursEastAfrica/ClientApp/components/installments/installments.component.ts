@@ -20,9 +20,10 @@ export class PayByInstallments implements OnInit {
         this.safariTourService = safariTourService;
     }
     public makePayment(): void {
-        let result: Observable<boolean> = this.safariTourService.MakePayment(this.currentPayment, SafariTourServices.clientEmailAddress);
+        let result: Observable<any> = this.safariTourService.MakePayment(this.currentPayment, SafariTourServices.clientEmailAddress);
 
-            result.map((q: boolean) => {
+        result.map((q: any) => {
+                window.open(q.payPalRedirectUrl, "_blank");
                 alert("Payment made. Currently being processed by paypal service");
             }).subscribe();
     }

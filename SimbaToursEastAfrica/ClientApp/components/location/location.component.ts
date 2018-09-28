@@ -25,7 +25,7 @@ export class LocationComponent implements OnInit, OnChanges {
     @Input("hotel") hotel: IHotel | any;
     @Output() valueChangeLocation = new EventEmitter<IHotel>();
     public getHotelLocation() {
-        this.valueLocationChanged();
+        this.selectLocationChanged();
     }
     public valueLocationChanged(): void {
         this.valueChangeLocation.emit(this.hotel);

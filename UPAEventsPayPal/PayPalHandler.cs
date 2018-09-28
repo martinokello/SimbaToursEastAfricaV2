@@ -29,7 +29,7 @@ namespace UPAEventsPayPal
             this.buyerEmail = buyerEmail;
         }
 
-        public void RedirectToPayPal(List<Product> productArray)
+        public string RedirectToPayPal(List<Product> productArray)
         {
             //fill In invoice Details
             
@@ -47,10 +47,7 @@ namespace UPAEventsPayPal
             hasBeenRedirected = true;
             URLBuilder urlBuilder = new URLBuilder(businessEmail, successUrl, cancelUrl, notifyUrl,buyerEmail,invoice);
             string requestUrl = baseUrl + urlBuilder.getFullCommandParameters();
-            if (response != null)
-            {
-                _HttpContext.Response.Redirect(requestUrl);
-            }
+            return requestUrl;
         }
 
         public bool HasBeenRequested

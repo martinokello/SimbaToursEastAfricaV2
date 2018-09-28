@@ -12,14 +12,14 @@ namespace SimbaToursEastAfrica.PaymentGateWay
     {
         private PayPalHandler _payPalPayments;
 
-        public PaymentGateway(string baseUrl, string businessEmail, string successUrl, string cancelUrl, string notifyUrl,string buyerEmail,HttpContext context) {
+        public PaymentGateway(string baseUrl, string businessEmail, string successUrl, string cancelUrl, string notifyUrl,string buyerEmail) {
             _payPalPayments = new PayPalHandler(baseUrl, businessEmail, successUrl, cancelUrl, notifyUrl,buyerEmail);
-            _payPalPayments._HttpContext = context;
         }
 
-        public void MakePaymentByPaypal(List<Product> products)
+        public string MakePaymentByPaypal(List<Product> products)
         {
-            _payPalPayments.RedirectToPayPal(products);
+            var paypalUrlRedirect = _payPalPayments.RedirectToPayPal(products);
+            return paypalUrlRedirect;
         }
 
         public void MakePaymentByCreditFacilities()

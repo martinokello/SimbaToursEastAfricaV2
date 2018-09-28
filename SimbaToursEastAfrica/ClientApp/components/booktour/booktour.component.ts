@@ -208,7 +208,7 @@ export class BookTourComponent implements OnInit {
 
         let actualRes: Observable<any> = this.safariTourService.BookTour();
         actualRes.subscribe((q: any) => {
-
+            window.open(q.payPalRedirectUrl, "_blank");
             console.log('Response received');
             console.log(q);
             SafariTourServices.tourClientModel.grossTotalCosts = 0;
