@@ -152,6 +152,15 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             }
         }
 
+        public TourClient GetTourClientById(int tourClientId)
+        {
+            var tourClient =  _simbaToursUnitOfWork._tourClientRepository.GetById(tourClientId);
+            tourClient.Hotel = _simbaToursUnitOfWork._hotelRepository.GetById(tourClient.HotelId);
+            tourClient.Hotel.Location = _simbaToursUnitOfWork._locationRepository.GetById(tourClient.Hotel.LocationId);
+            tourClient.Hotel.Location.Address = _simbaToursUnitOfWork._addressRepository.GetById(tourClient.Hotel.Location.AddressId);
+            return tourClient;
+        }
+
         public bool UpdateDealPricing(DealsPricing dealsPricing)
         {
             try

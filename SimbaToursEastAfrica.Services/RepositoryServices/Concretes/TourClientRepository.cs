@@ -41,7 +41,6 @@ namespace SimbaToursEastAfrica.Services.RepositoryServices.Concretes
                 tourClient.HotelBookings = toUpdate.HotelBookings;
                 tourClient.Nationality = toUpdate.Nationality;
                 tourClient.NumberOfIndividuals = toUpdate.NumberOfIndividuals;
-                tourClient.Vehicles = toUpdate.Vehicles;
                 tourClient.EmailAddress = toUpdate.EmailAddress;
                 tourClient.PaidInstallments = toUpdate.PaidInstallments;
                 tourClient.CurrentPayment = toUpdate.CurrentPayment;

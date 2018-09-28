@@ -75,7 +75,7 @@ namespace SimbaToursEastAfrica.Controllers
                         if (it.ItemType == Models.ItemType.Meal)
                         {
                             CalculateRunningItemCostMeal(itemType, tourClientModel, it, unitPaymentMeal, ref runningCostItems, ref actualItemCost);
-                            mealItems.Add(new Item {mealPricing = unitPaymentMeal, mealPricingId = unitPaymentMeal.MealPricingId, ItemCost = actualItemCost, ItemId = it.ItemId, ItemType = (Domain.Models.ItemType)Enum.Parse<Domain.Models.ItemType>(it.ItemType.ToString()), Meal = new Meal { MealId = 0, TourClientId = tourClient.TourClientId }, Quantity = it.Quantity });
+                            mealItems.Add(new Item { mealPricing = unitPaymentMeal, mealPricingId = unitPaymentMeal.MealPricingId, ItemCost = actualItemCost, ItemId = it.ItemId, ItemType = (Domain.Models.ItemType)Enum.Parse<Domain.Models.ItemType>(it.ItemType.ToString()), Meal = new Meal { MealId = 0, TourClientId = tourClient.TourClientId }, Quantity = it.Quantity });
                         }
                         else
                         {
@@ -85,7 +85,7 @@ namespace SimbaToursEastAfrica.Controllers
                     }
                 }
 
-                foreach(var vh in tourClientModel.Vehicles)
+                foreach (var vh in tourClientModel.Vehicles)
                 {
                     switch (vh.VehicleType)
                     {
@@ -119,9 +119,14 @@ namespace SimbaToursEastAfrica.Controllers
                     tourClient.PaidInstallments = tourClient.CurrentPayment;
                 }
                 var isBooked = _serviceEndPoint.BookSafariPackage(tourClient, mealItems.ToArray(), laguageItems.ToArray());
+                if (isBooked)
+                {
+                    var tourClientFullView = _serviceEndPoint.GetTourClient(tourClientModel.EmailAddress);
+                    ValidatePayment(tourClientFullView, tourClient.CurrentPayment);
+                    return Json(new { Result = isBooked });
+                }
+                else return Json(new { Result = false, Message = "Failed To Book Tour. Please contact the administrators of the site!" });
 
-                ValidatePayment(tourClient, tourClient.CurrentPayment);
-                return Json(new { Result = isBooked });
             }
             catch(Exception e)
             {

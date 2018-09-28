@@ -35,7 +35,7 @@ export class PayByInstallments implements OnInit {
 
         result.map((resp: ITourClient) => {
             this.tourClient = resp;
-            this.amountLeftToPay = this.tourClient.grossTotalCosts - this.tourClient.paidInstallments;
+            this.amountLeftToPay = Math.round(this.tourClient.grossTotalCosts - this.tourClient.paidInstallments).toFixed(2);
         }).subscribe();
     }
 }

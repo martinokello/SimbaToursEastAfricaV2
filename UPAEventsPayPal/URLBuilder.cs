@@ -35,13 +35,12 @@ namespace UPAEventsPayPal
             StringBuilder sbUrl = new StringBuilder();
             sbUrl.Append("cmd=_cart&upload=1");
             sbUrl.AppendFormat("&business={0}",HttpUtility.UrlEncode(businessEmail));
-
-            int index = 1;
-           
-            var prod = invoice.Products[0];
-            sbUrl.AppendFormat("&item_name_{0}={1}", index.ToString(), HttpUtility.UrlEncode(prod.ProductName));
-            sbUrl.AppendFormat("&quantity_{0}=1");
-
+            
+            foreach (var prod in invoice.Products)
+            {
+                sbUrl.AppendFormat("&item_name_{0}={1}", prod.Quantity, HttpUtility.UrlEncode(prod.ProductName));
+                sbUrl.AppendFormat("&quantity_{0}={1}", prod.ProductName, HttpUtility.UrlEncode(prod.Quantity.ToString()));
+            }
             sbUrl.AppendFormat("&amount={0}", HttpUtility.UrlEncode(invoice.Ammount.ToString()));
             sbUrl.AppendFormat("&invoice={0}", HttpUtility.UrlEncode(invoiceNo.ToString()));
             sbUrl.AppendFormat("&return={0}&username={1}", HttpUtility.UrlEncode(successUrl),HttpUtility.UrlEncode(clientEmail));
