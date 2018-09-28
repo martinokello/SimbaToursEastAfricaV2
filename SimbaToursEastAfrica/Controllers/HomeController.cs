@@ -121,7 +121,7 @@ namespace SimbaToursEastAfrica.Controllers
                 var isBooked = _serviceEndPoint.BookSafariPackage(tourClient, mealItems.ToArray(), laguageItems.ToArray());
                 if (isBooked)
                 {
-                    var tourClientFullView = _serviceEndPoint.GetTourClient(tourClientModel.EmailAddress);
+                    var tourClientFullView = _serviceEndPoint.GetTourClientById(tourClient.TourClientId);
                     ValidatePayment(tourClientFullView, tourClient.CurrentPayment);
                     return Json(new { Result = isBooked });
                 }

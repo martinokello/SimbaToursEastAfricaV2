@@ -30,6 +30,7 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
                     var tourClientModel = new TourClient {DateCreated = DateTime.Now, ClientFirstName = tourClient.ClientFirstName, ClientLastName = tourClient.ClientLastName, HotelId = tourClient.Hotel.HotelId, GrossTotalCosts = tourClient.GrossTotalCosts, HasRequiredVisaStatus = tourClient.HasRequiredVisaStatus, Nationality = tourClient.Nationality, NumberOfIndividuals = tourClient.NumberOfIndividuals, EmailAddress = tourClient.EmailAddress };
                     _simbaToursUnitOfWork._tourClientRepository.Insert(tourClientModel);
                     _simbaToursUnitOfWork.SaveChanges();
+                    tourClient.TourClientId = tourClientModel.TourClientId;
                     foreach (var vehicle in tourClient.Vehicles)
                     {
                         _simbaToursUnitOfWork._vehicleRepository.Insert(vehicle);
