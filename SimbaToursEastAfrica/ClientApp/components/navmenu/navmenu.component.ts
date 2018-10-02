@@ -3,6 +3,7 @@ import { Element } from '@angular/compiler';
 import { Observable } from 'rxjs/Observable';
 import { SafariTourServices, IUserStatus } from '../../services/safariTourServices';
 import 'rxjs/add/operator/map';
+import * as $ from 'jquery';
 
 @Component({
     selector: 'nav-menu',

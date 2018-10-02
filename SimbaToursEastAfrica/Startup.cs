@@ -140,6 +140,14 @@ namespace SimbaToursEastAfrica
             app.UseCors(
                 options => options.WithOrigins("*").AllowAnyMethod()
             );
+
+            app.UsePathBase("/SimbaSafariToursV2");
+
+            app.Use((context, next) =>
+            {
+                context.Request.PathBase = "/SimbaSafariToursV2";
+                return next();
+            });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

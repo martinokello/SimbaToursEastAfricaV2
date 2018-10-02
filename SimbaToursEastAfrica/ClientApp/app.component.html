@@ -1,52 +1,16 @@
 <div class='container-fluid'>
     <div>
-        <div>
-            <nav-menu name="actUserStatus" [actUserStatus]="actUserStatus"  ngDefaultControl></nav-menu>
-        </div>
         <!-- Wrapper -->
-        <div id="wrapper">
-
-            <!-- Intro -->
-            <div id="intro" style="background-color:saddlebrown;">
-                <h1>
-                    This is<br />
-                    Massively
-                </h1>
-                <p>
-                    A free, fully responsive HTML5 + CSS3 site template designed by <a href="https://twitter.com/ajlkn">MartinLayooInc</a> for <a href="https://html5up.net">HTML5 UP</a><br />
-                    and released for free under the <a href="https://html5up.net/license">Creative Commons license</a>.
-                </p>
-                <ul class="actions">
-                    <li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
-                </ul>
-            </div>
-
-            <!-- Header -->
-            <header id="header">
-                <a href="index.html" class="logo">Massively</a>
-            </header>
+        <div id="wrapper" style="position:relative !important; z-index:1;">
             <!-- Main -->
             <div id="main">
-                <div #contentContainer>
-                    <!-- Featured Post -->
-                    <article class="post featured" style="text-align:left;">
-                        <header class="major">
-                            <span class="date">April 25, 2017</span>
-                            <h2>
-                                <a href="#">
-                                    Simba<br />
-                                    Tours East Africa
-                                </a>
-                            </h2>
-                            <div>
-                                <router-outlet></router-outlet>
-                            </div>
-                        </header>
-                        <a href="#" class="image main"><img src="/images/pic01.jpg" alt="" /></a>
-                        <ul class="actions special">
-                            <li><a href="#" class="button large">Full Story</a></li>
-                        </ul>
-                    </article>
+                <div style="position:relative !important;margin-top:5px;">
+                    <nav-menu style="position:relative !important;width:100%;height:auto;" name="actUserStatus" [actUserStatus]="actUserStatus" ngDefaultControl></nav-menu>
+                </div>
+                <div #contentContainer style="position:relative !important;margin-top:5px;">
+                    <div style="position:relative !important;margin-top:5px;">
+                        <router-outlet></router-outlet>
+                    </div>
                 </div>
                 <!-- Posts -->
                 <section class="posts">
@@ -60,7 +24,7 @@
                                 </a>
                             </h2>
                         </header>
-                        <a href="#" class="image fit"><img src="/images/pic02.jpg" alt="" /></a>
+                        <a href="#" class="image fit"><img src="/SimbaSafariToursV2/images/pic02.jpg" alt="" /></a>
                         <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
                         <ul class="actions special">
                             <li><a href="#" class="button">Full Story</a></li>
@@ -76,7 +40,7 @@
                                 </a>
                             </h2>
                         </header>
-                        <a href="#" class="image fit"><img src="/images/pic03.jpg" alt="" /></a>
+                        <a href="#" class="image fit"><img src="/SimbaSafariToursV2/images/pic03.jpg" alt="" /></a>
                         <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
                         <ul class="actions special">
                             <li><a href="#" class="button">Full Story</a></li>
@@ -92,7 +56,7 @@
                                 </a>
                             </h2>
                         </header>
-                        <a href="#" class="image fit"><img src="/images/pic04.jpg" alt="" /></a>
+                        <a href="#" class="image fit"><img src="/SimbaSafariToursV2/images/pic04.jpg" alt="" /></a>
                         <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
                         <ul class="actions special">
                             <li><a href="#" class="button">Full Story</a></li>
@@ -108,7 +72,7 @@
                                 </a>
                             </h2>
                         </header>
-                        <a href="#" class="image fit"><img src="/images/pic05.jpg" alt="" /></a>
+                        <a href="#" class="image fit"><img src="/SimbaSafariToursV2/images/pic05.jpg" alt="" /></a>
                         <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
                         <ul class="actions special">
                             <li><a href="#" class="button">Full Story</a></li>
@@ -124,7 +88,7 @@
                                 </a>
                             </h2>
                         </header>
-                        <a href="#" class="image fit"><img src="/images/pic06.jpg" alt="" /></a>
+                        <a href="#" class="image fit"><img src="/SimbaSafariToursV2/images/pic06.jpg" alt="" /></a>
                         <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
                         <ul class="actions special">
                             <li><a href="#" class="button">Full Story</a></li>
@@ -140,7 +104,7 @@
                                 </a>
                             </h2>
                         </header>
-                        <a href="#" class="image fit"><img src="/images/pic07.jpg" alt="" /></a>
+                        <a href="#" class="image fit"><img src="/SimbaSafariToursV2/images/pic07.jpg" alt="" /></a>
                         <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
                         <ul class="actions special">
                             <li><a href="#" class="button">Full Story</a></li>

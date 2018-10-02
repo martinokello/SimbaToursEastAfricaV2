@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SafariTourServices, IUserDetail, IUserStatus } from './services/safariTourServices';
+import { SafariTourServices, IUserDetail, IUserStatus } from './services/safariTourServices';
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
