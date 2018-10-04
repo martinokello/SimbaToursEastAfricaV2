@@ -105,9 +105,7 @@ export class AddHotelComponent implements OnInit, AfterViewChecked, OnChanges  {
 
     }
     ngOnChanges(): void {
-
-        console.log('location: ' + this.theLocation);
-        console.log('hotelPricing: ' + this.hotelPricing);
+        
     }
     ngAfterViewChecked(): void {
         console.log("view AddHotel: this.hotelPricing.model.editable: ", this.hotelPricing.model.editable)

@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authorization;
 using UPAEventsPayPal;
+using Microsoft.AspNetCore.Cors;
 
 namespace SimbaToursEastAfrica.Controllers
 {
@@ -39,7 +40,7 @@ namespace SimbaToursEastAfrica.Controllers
         }
         [Authorize()]
         [HttpPost]
-        [Filters.XCorsFilter]
+        [EnableCors(PolicyName = "CorsPolicy")]
         public IActionResult BookTour([FromBody] TourClientViewModel tourClientModel)
         {
             try
@@ -282,7 +283,7 @@ namespace SimbaToursEastAfrica.Controllers
             return Json(deals);
 
         }
-        [Filters.XCorsFilter]
+        [EnableCors(PolicyName = "CorsPolicy")]
         public IActionResult MakePayment([FromBody] UserDetailViewModel userDetail)
         {
             _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);

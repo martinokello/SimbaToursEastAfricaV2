@@ -10,7 +10,14 @@ namespace SimbaToursEastAfrica.Filters
     {
         public override void OnActionExecuted(ActionExecutedContext context)
         {
+            context.HttpContext.Request.Headers.Add("Access-Control-Allow-Origin", "*");
+            context.HttpContext.Request.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+            context.HttpContext.Request.Headers.Add("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token");
+
+
             context.HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            context.HttpContext.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+            context.HttpContext.Response.Headers.Add("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token");
             base.OnActionExecuted(context);
 
         }

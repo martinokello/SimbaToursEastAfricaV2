@@ -1,4 +1,5 @@
 ﻿import { Component, OnInit, ViewChild, ElementRef, Injectable, AfterViewInit, AfterViewChecked, Inject } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { IVehicle, SafariTourServices, IUserDetail } from '../../services/safariTourServices';
 import * as $ from "jquery";
 import 'rxjs/add/operator/map';
@@ -28,6 +29,16 @@ export class RegisterComponent implements OnInit{
         this.safariTourService = safarTourService;
     }
     public registerUser(): void {
-        this.safariTourService.RegisterByPost(this.userDetail);
+        let registeResults: Observable<any> =this.safariTourService.registerByPost(this.userDetail);
+
+        registeResults.map((q: any) => {
+            if (q.isRegistered) {
+                alert('Registration Successfull: ' + q.isRegistered);
+            }
+            else {
+                alert('Failed to Register user. Please contact the Site Administrator')
+            }
+        }).subscribe();
+
     }
 }

@@ -88,7 +88,6 @@ export class MealPricingComponent implements OnInit, AfterViewInit, AfterViewChe
             for (let i = 0; i < items.length; i++) {
                 $(select).append('<option value="' + items[i].mealPricingId + '">' + items[i].mealName + '</option>');
             }
-            alert('Location Added: ' + p);
         }).subscribe();
         
     }

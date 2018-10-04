@@ -35,19 +35,20 @@ namespace UPAEventsPayPal
             StringBuilder sbUrl = new StringBuilder();
             sbUrl.Append("cmd=_cart&upload=1");
             sbUrl.AppendFormat("&business={0}",HttpUtility.UrlEncode(businessEmail));
-            
+            var index = 1;
             foreach (var prod in invoice.Products)
             {
-                sbUrl.AppendFormat("&item_name_{0}={1}", prod.Quantity, HttpUtility.UrlEncode(prod.ProductName));
-                sbUrl.AppendFormat("&quantity_{0}={1}", prod.ProductName, HttpUtility.UrlEncode(prod.Quantity.ToString()));
+                sbUrl.AppendFormat("&item_name_{0}={1}",index, HttpUtility.UrlEncode(prod.ProductName));
+                sbUrl.AppendFormat("&quantity_{0}={1}", index, HttpUtility.UrlEncode(index.ToString()));
+                sbUrl.AppendFormat("&amount_{0}={1}", index, HttpUtility.UrlEncode(invoice.Ammount.ToString()));
+                sbUrl.AppendFormat("&invoice={0}", HttpUtility.UrlEncode(index.ToString()));
+                index++;
             }
-            sbUrl.AppendFormat("&amount={0}", HttpUtility.UrlEncode(invoice.Ammount.ToString()));
-            sbUrl.AppendFormat("&invoice={0}", HttpUtility.UrlEncode(invoiceNo.ToString()));
-            sbUrl.AppendFormat("&return={0}&username={1}", HttpUtility.UrlEncode(successUrl),HttpUtility.UrlEncode(clientEmail));
+
+            sbUrl.AppendFormat("&return={0}&username={1}", HttpUtility.UrlEncode(successUrl), HttpUtility.UrlEncode(clientEmail));
             sbUrl.AppendFormat("&cancel_return={0}&username={1}", HttpUtility.UrlEncode(cancelUrl), HttpUtility.UrlEncode((string)clientEmail));
             sbUrl.AppendFormat("&notify_url={0}", HttpUtility.UrlEncode(notifyUrl));
             sbUrl.AppendFormat("&buyer_email={0}", HttpUtility.UrlEncode(clientEmail));
-
             return sbUrl.ToString();
         }
     }
