@@ -1,5 +1,4 @@
 ﻿<div #clientDetails class="col-lg-12" style="text-align:left !important; color:black !important;">
-    <iframe id="payPalPayments" style="display:none;"></iframe>
     <div>
         <h4>Person details</h4>
         <tourclient></tourclient>
@@ -56,6 +55,7 @@
                 <div class="col-lg-4">
                     <img src="/images/paypal_logo.gif" alt="paypal logo" />
                 </div>
+                <iframe id="payPalPayments" style="display:none;"></iframe>
                 <div class="col-lg-3">
                     <label>Amount you are paying:</label>
                     <input type="number" name="currentPayment" [(ngModel)]="currentPayment" required #currentPaymentTxt="ngModel" />
