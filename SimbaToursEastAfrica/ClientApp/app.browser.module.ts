@@ -1,6 +1,8 @@
 ﻿import { NgModule } from '@angular/core';
 import { AppModule } from './app.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserXhr } from '@angular/http';
+import { CustExtBrowserXhr } from './cust-ext-browser-xhr';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -18,6 +20,7 @@ import { AppComponent } from './app.component';
         RouterModule
     ],
     providers: [
+        { provide: BrowserXhr, useClass: CustExtBrowserXhr },
         { provide: 'BASE_URL', useFactory: getBaseUrl }
     ],
     bootstrap: [AppComponent]

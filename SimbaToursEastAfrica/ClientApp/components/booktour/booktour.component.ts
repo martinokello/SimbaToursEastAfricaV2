@@ -4,6 +4,7 @@ import { Element } from '@angular/compiler';
 import { SafariTourServices, IHotelBooking, IMealPricing, ILaguagePricing, ITransportPricing, IHotel, IMeal, ILaguage, ILocation, IHotelPricing, IAddress, IVehicle, IItem, ItemType, IInvoice, VehicleType } from '../../services/safariTourServices';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import * as $ from 'jquery';
 @Component({
     selector: 'booktour',
     templateUrl: './booktour.component.html',
@@ -11,6 +12,7 @@ import 'rxjs/add/operator/map';
     providers: [SafariTourServices]
 })
 export class BookTourComponent implements OnInit {
+    @ViewChild("f4") paymentsForm: HTMLElement | any;
     runningCost: number = 0.00;
     vehicles: IVehicle[] = [];
     hotelBookings: IHotelBooking[] = [];
@@ -208,7 +210,9 @@ export class BookTourComponent implements OnInit {
 
         let actualRes: Observable<any> = this.safariTourService.BookTour();
         actualRes.subscribe((q: any) => {
-            window.open(q.payPalRedirectUrl, "_blank");
+            //this.safariTourService.GetRequest(q.payPalRedirectUrl);
+            $(this.paymentsForm.nativeElement).attr("action", q.payPalRedirectUrl);
+            $(this.paymentsForm.nativeElement).submit();
             console.log('Response received');
             console.log(q);
             SafariTourServices.tourClientModel.grossTotalCosts = 0;

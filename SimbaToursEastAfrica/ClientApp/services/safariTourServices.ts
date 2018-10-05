@@ -45,7 +45,7 @@ export class SafariTourServices {
     public postCreateHotelUrl: string = "/SimbaSafariToursV2/api/Administration/PostHotel";
     public updateHotelUrl: string = "/SimbaSafariToursV2/api/Administration/UpdateHotel";
     public getHotelPricingById: string = "/SimbaSafariToursV2/api/Administration/GetHotelPricingById";
-    public getHotelLocationByHotelIdUrl:string = "/SimbaSafariToursV2/Home/GetHotelLocationByHotelId"
+    public getHotelLocationByHotelIdUrl: string = "/SimbaSafariToursV2/Home/GetHotelLocationByHotelId"
     public getHotelLocationById: string = "/SimbaSafariToursV2/api/Administration/GetLocationByHotelId";
     public getHotelLocationsUrl: string = "/SimbaSafariToursV2/Home/GetHotelLocations";
     public getHotelAddressById: string = "/SimbaSafariToursV2/api/Administration/GetHotelAddressById";
@@ -110,13 +110,20 @@ export class SafariTourServices {
         return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
             console.log('Response received ' + res.json());
             return res.json();
-            });
+        });
     }
 
 
-    public LogOut():Observable<any>{
+    public LogOut(): Observable<any> {
 
         return this.httpClient.get(this.getLogoutUrl).map((res: Response) => {
+            console.log('Response received ' + res.json());
+            return res.json();
+        });
+    }
+    public GetRequest(url): Observable<any> {
+
+        return this.httpClient.get(url).map((res: Response) => {
             console.log('Response received ' + res.json());
             return res.json();
         });

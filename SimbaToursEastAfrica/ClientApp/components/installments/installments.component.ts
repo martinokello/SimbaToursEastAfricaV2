@@ -13,6 +13,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class PayByInstallments implements OnInit {
     private safariTourService: SafariTourServices | any;
+    @ViewChild("paymentsForm") paymentsForm: HTMLElement | any;
     public currentPayment: number | any;
     public amountLeftToPay: number | any;
     public tourClient: any;
@@ -23,9 +24,11 @@ export class PayByInstallments implements OnInit {
         let result: Observable<any> = this.safariTourService.MakePayment(this.currentPayment, SafariTourServices.clientEmailAddress);
 
         result.map((q: any) => {
-                window.open(q.payPalRedirectUrl, "_blank");
-                alert("Payment made. Currently being processed by paypal service");
-            }).subscribe();
+            $(this.paymentsForm.nativeElement).attr("action", q.payPalRedirectUrl);
+            $(this.paymentsForm.nativeElement).submit();
+            //this.safariTourService.GetRequest(q.payPalRedirectUrl);
+            alert("Payment made. Currently being processed by paypal service");
+        }).subscribe();
     }
   
     public ngOnInit(): void {

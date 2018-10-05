@@ -125,8 +125,8 @@ namespace SimbaToursEastAfrica.Controllers
                 {
                     var tourClientFullView = _serviceEndPoint.GetTourClientById(tourClient.TourClientId);
                     var payPalRedirectUrl = ValidatePayment(tourClientFullView, tourClient.CurrentPayment);
-                    //return Json(new { Result = isBooked, PayPalRedirectUrl = payPalRedirectUrl, });
-                    return Redirect(payPalRedirectUrl);
+                    return Json(new { Result = isBooked, PayPalRedirectUrl = payPalRedirectUrl, });
+                    //return Redirect(payPalRedirectUrl);
                 }
                 else return Json(new { Result = false, Message = "Failed To Book Tour. Please contact the administrators of the site!" });
 
@@ -291,8 +291,8 @@ namespace SimbaToursEastAfrica.Controllers
 
             var payPalRedirectUrl = ValidatePayment(tourClient, userDetail.CurrentPayment);
 
-            return Redirect(payPalRedirectUrl);
-            //return Json(new { PayPalRedirectUrl= payPalRedirectUrl, PaymentCompletion = "Success", Message = "The payment will be acquired by Paypal reporting, and you will be informed by email whether successful. Wait for the email." });
+            //return Redirect(payPalRedirectUrl);
+            return Json(new { PayPalRedirectUrl= payPalRedirectUrl, PaymentCompletion = "Success", Message = "The payment will be acquired by Paypal reporting, and you will be informed by email whether successful. Wait for the email." });
         }
 
         private string ValidatePayment(TourClient tourClient, decimal amountToPay)

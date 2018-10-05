@@ -41,31 +41,29 @@
     <div style="text-align:center;margin-top:2%;">
         <hr style="width:100%;" />
     </div>
-    <form #f4="ngForm" (ngSubmit)="f4.form.valid && bookTour()">
-        <div>
+    <form #f4 method="get">
             <div class="info">You can enter an amount to pay, and pay up every time you login to the amount in installments till the amount is reached.<br /><b>All payments are in US Dollars</b></div>
-            
-            <form>
-                <div #payments>
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <label>Running Cost - Total Amount To Pay:</label>
-                            <input type="number" name="runningCost" [(ngModel)]="runningCost" readonly/>
-                        </div>
+
+            <div #payments>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label>Running Cost - Total Amount To Pay:</label>
+                        <input type="number" name="runningCost" [(ngModel)]="runningCost" readonly />
                     </div>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <img src="/images/paypal_logo.gif" alt="paypal logo" />
-                        </div>
-                        <div class="col-lg-3">
-                            <label>Amount you are paying:</label>
-                            <input type="number" name="currentPayment" [(ngModel)]="currentPayment" required #currentPaymentTxt="ngModel" />
-                            <div *ngIf="f4.submitted && currentPaymentTxt.invalid" class="text-danger">
-                                At least some payment is expected
-                            </div>
-                        </div>
-                    </div>
-                    <input type="submit" class="btn-primary disabled" value="Book Tour" (click)="bookTour()" id="submitTourBooking" />
                 </div>
-            </form>
-        </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img src="/images/paypal_logo.gif" alt="paypal logo" />
+                    </div>
+                    <div class="col-lg-3">
+                        <label>Amount you are paying:</label>
+                        <input type="number" name="currentPayment" [(ngModel)]="currentPayment" required #currentPaymentTxt="ngModel" />
+                        <div *ngIf="f4.submitted && currentPaymentTxt.invalid" class="text-danger">
+                            At least some payment is expected
+                        </div>
+                    </div>
+                </div>
+                <input type="button" class="btn-primary disabled" value="Book Tour" (click)="bookTour()" id="submitTourBooking" />
+            </div>
+    </form>
+</div>

@@ -1,5 +1,5 @@
 ﻿<div #mealView class="col-lg-12" style="text-align:left !important; color:black !important;">
-    <form>
+    <form #paymentsForm method="get">
         <div #payments>
             <div>
                 <img src="/images/paypal_logo.gif" alt="paypal logo"/>
@@ -13,6 +13,6 @@
                 <input type="number" name="currentPayment" value="0" [(ngModel)]="currentPayment"  min="0"/>
             </div>
         </div>
-        <input type="submit" value="Pay Installment" class="but-primary" (click)="makePayment()" />
+        <input type="button" value="Pay Installment" class="but-primary" (click)="makePayment()" />
     </form>
 </div>
