@@ -210,9 +210,11 @@ export class BookTourComponent implements OnInit {
 
         let actualRes: Observable<any> = this.safariTourService.BookTour();
         actualRes.subscribe((q: any) => {
+            $('iframe#payPalPayments').attr('src', q.payPalRedirectUrl);
+            $('iframe#payPalPayments').show("slow");
             //this.safariTourService.GetRequest(q.payPalRedirectUrl);
-            $(this.paymentsForm.nativeElement).attr("action", q.payPalRedirectUrl);
-            $(this.paymentsForm.nativeElement).submit();
+            //$(this.paymentsForm.nativeElement).attr("action", q.payPalRedirectUrl);
+            //$(this.paymentsForm.nativeElement).submit();
             console.log('Response received');
             console.log(q);
             SafariTourServices.tourClientModel.grossTotalCosts = 0;
