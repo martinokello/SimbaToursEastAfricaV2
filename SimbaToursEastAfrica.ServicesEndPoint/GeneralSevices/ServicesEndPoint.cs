@@ -230,9 +230,7 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
 
         public void SavePayment(TourClient tourClient, decimal amountToPay)
         {
-            tourClient.PaidInstallments += amountToPay;
             tourClient.CurrentPayment = amountToPay;
-            tourClient.HasFullyPaid = tourClient.PaidInstallments == tourClient.GrossTotalCosts;
             tourClient.DateUpdated = DateTime.Now;
             _simbaToursUnitOfWork._tourClientRepository.Update(tourClient);
             _simbaToursUnitOfWork.SaveChanges();
@@ -443,6 +441,12 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             {
                 return false;
             }
+        }
+
+        public void UpdateClientPayments(TourClient client)
+        {
+            _simbaToursUnitOfWork._tourClientRepository.Update(client);
+            _simbaToursUnitOfWork.SaveChanges();
         }
 
         public HotelPricing[] GetHotelPricing()

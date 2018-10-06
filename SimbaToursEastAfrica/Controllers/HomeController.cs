@@ -56,75 +56,24 @@ namespace SimbaToursEastAfrica.Controllers
                 var unitPaymentMeal = _serviceEndPoint.GetMealPricing()[0];
                 var vehiclePayment = _serviceEndPoint.GetTransportPricing()[0];
                 decimal runningCostItems = 0.00M;
-                foreach (var it in tourClientModel.CombinedMeals.MealItems)
-                {
-                    var actualItemCost = 0.00M;
 
-                    var itemType = (Domain.Models.ItemType)Enum.Parse<Domain.Models.ItemType>(it.ItemType.ToString());
-                    if (it.Quantity > 0)
-                    {
-                        CalculateRunningItemCostMeal(itemType, tourClientModel, it, unitPaymentMeal, ref runningCostItems, ref actualItemCost);
-                        mealItems.Add(new Item { mealPricing = unitPaymentMeal, mealPricingId = unitPaymentMeal.MealPricingId, ItemCost = actualItemCost, ItemId = it.ItemId, ItemType = (Domain.Models.ItemType)Enum.Parse<Domain.Models.ItemType>(it.ItemType.ToString()), Meal = new Meal { MealId = 0, TourClient = tourClient, TourClientId = tourClient.TourClientId }, Quantity = it.Quantity });
-                    }
-                }
-
-                foreach (var it in tourClientModel.CombinedLaguage.Items)
-                {
-                    var actualItemCost = 0.00M;
-                    var itemType = (Domain.Models.ItemType)Enum.Parse<Domain.Models.ItemType>(it.ItemType.ToString());
-                    if (it.Quantity > 0)
-                    {
-                        if (it.ItemType == Models.ItemType.Meal)
-                        {
-                            CalculateRunningItemCostMeal(itemType, tourClientModel, it, unitPaymentMeal, ref runningCostItems, ref actualItemCost);
-                            mealItems.Add(new Item { mealPricing = unitPaymentMeal, mealPricingId = unitPaymentMeal.MealPricingId, ItemCost = actualItemCost, ItemId = it.ItemId, ItemType = (Domain.Models.ItemType)Enum.Parse<Domain.Models.ItemType>(it.ItemType.ToString()), Meal = new Meal { MealId = 0, TourClientId = tourClient.TourClientId }, Quantity = it.Quantity });
-                        }
-                        else
-                        {
-                            CalculateRunningItemCostLaguage(itemType, tourClientModel, it, unitPayment, ref runningCostItems, ref actualItemCost);
-                            laguageItems.Add(new Item { laguagePricing = unitPayment, laguagePricingId = unitPayment.LaguagePricingId, ItemCost = actualItemCost, ItemId = it.ItemId, ItemType = (Domain.Models.ItemType)Enum.Parse<Domain.Models.ItemType>(it.ItemType.ToString()), Laguage = new Laguage { LaguageId = 0, TourClientId = tourClient.TourClientId }, Quantity = it.Quantity });
-                        }
-                    }
-                }
-
-                foreach (var vh in tourClientModel.Vehicles)
-                {
-                    switch (vh.VehicleType)
-                    {
-                        case Models.VehicleType.Taxi:
-                            runningCostItems += vh.AcutualNumberOfPassengersAllocated * vehiclePayment.TaxiPricing;
-                            break;
-                        case Models.VehicleType.TourBus:
-                            runningCostItems += vh.AcutualNumberOfPassengersAllocated * vehiclePayment.TourBusPricing;
-                            break;
-                        case Models.VehicleType.MiniBus:
-                            runningCostItems += vh.AcutualNumberOfPassengersAllocated * vehiclePayment.MiniBusPricing;
-                            break;
-                        case Models.VehicleType.PickUpTrack:
-                            runningCostItems += vh.AcutualNumberOfPassengersAllocated * vehiclePayment.PickupTruckPricing;
-                            break;
-                        case Models.VehicleType.FourWheelDriveCar:
-                            runningCostItems += vh.AcutualNumberOfPassengersAllocated * vehiclePayment.FourByFourPricing;
-                            break;
-
-                    }
-                }
+                IterateThroughMeals(mealItems, ref runningCostItems, unitPaymentMeal, tourClientModel, tourClient);
+                IterateThroughLaguageAssortments(laguageItems, mealItems, ref runningCostItems, unitPaymentMeal, unitPayment, tourClientModel, tourClient);
+                IterateThroughVehicles(tourClientModel,vehiclePayment,ref runningCostItems);
+               
                 tourClient.GrossTotalCosts += runningCostItems;
                 _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);
                 tourClient.DateCreated = DateTime.Now;
                 tourClient.DateUpdated = DateTime.Now;
 
-                tourClient.HasFullyPaid = tourClient.CurrentPayment < tourClient.GrossTotalCosts ? false : true;
-                if (!tourClient.HasFullyPaid) tourClient.PaidInstallments += tourClient.CurrentPayment;
-                else
-                {
-                    tourClient.PaidInstallments = tourClient.CurrentPayment;
-                }
+                tourClient.HasFullyPaid = false;
+
                 var isBooked = _serviceEndPoint.BookSafariPackage(tourClient, mealItems.ToArray(), laguageItems.ToArray());
                 if (isBooked)
                 {
                     var tourClientFullView = _serviceEndPoint.GetTourClientById(tourClient.TourClientId);
                     var payPalRedirectUrl = ValidatePayment(tourClientFullView, tourClient.CurrentPayment);
+                    payPalRedirectUrl += "&clientId=" + tourClient.TourClientId;
                     return Json(new { Result = isBooked, PayPalRedirectUrl = payPalRedirectUrl, });
                     //return Redirect(payPalRedirectUrl);
                 }
@@ -137,6 +86,69 @@ namespace SimbaToursEastAfrica.Controllers
             }
         }
 
+        private void IterateThroughMeals(IList<Item> mealItems, ref decimal runningCostItems, MealPricing unitPaymentMeal, TourClientViewModel tourClientModel, TourClient tourClient)
+        {
+            foreach (var it in tourClientModel.CombinedMeals.MealItems)
+            {
+                var actualItemCost = 0.00M;
+
+                var itemType = (Domain.Models.ItemType)Enum.Parse<Domain.Models.ItemType>(it.ItemType.ToString());
+                if (it.Quantity > 0)
+                {
+                    CalculateRunningItemCostMeal(itemType, tourClientModel, it, unitPaymentMeal, ref runningCostItems, ref actualItemCost);
+                    mealItems.Add(new Item { mealPricing = unitPaymentMeal, mealPricingId = unitPaymentMeal.MealPricingId, ItemCost = actualItemCost, ItemId = it.ItemId,
+                        ItemType = (Domain.Models.ItemType)Enum.Parse<Domain.Models.ItemType>(it.ItemType.ToString()),
+                        Meal = new Meal { MealId = 0, TourClient = tourClient, TourClientId = tourClient.TourClientId }, Quantity = it.Quantity });
+                }
+            }
+        }
+        private void IterateThroughLaguageAssortments(IList<Item> laguageItems, IList<Item> mealItems, ref decimal runningCostItems, MealPricing unitPaymentMeal, LaguagePricing unitPayment, TourClientViewModel tourClientModel, TourClient tourClient)
+        {
+            foreach (var it in tourClientModel.CombinedLaguage.Items)
+            {
+                var actualItemCost = 0.00M;
+                var itemType = (Domain.Models.ItemType)Enum.Parse<Domain.Models.ItemType>(it.ItemType.ToString());
+                if (it.Quantity > 0)
+                {
+                    if (it.ItemType == Models.ItemType.Meal)
+                    {
+                        CalculateRunningItemCostMeal(itemType, tourClientModel, it, unitPaymentMeal, ref runningCostItems, ref actualItemCost);
+                        mealItems.Add(new Item { mealPricing = unitPaymentMeal, mealPricingId = unitPaymentMeal.MealPricingId, ItemCost = actualItemCost, ItemId = it.ItemId, ItemType = (Domain.Models.ItemType)Enum.Parse<Domain.Models.ItemType>(it.ItemType.ToString()), Meal = new Meal { MealId = 0, TourClientId = tourClient.TourClientId }, Quantity = it.Quantity });
+                    }
+                    else
+                    {
+                        CalculateRunningItemCostLaguage(itemType, tourClientModel, it, unitPayment, ref runningCostItems, ref actualItemCost);
+                        laguageItems.Add(new Item { laguagePricing = unitPayment, laguagePricingId = unitPayment.LaguagePricingId, ItemCost = actualItemCost, ItemId = it.ItemId, ItemType = (Domain.Models.ItemType)Enum.Parse<Domain.Models.ItemType>(it.ItemType.ToString()), Laguage = new Laguage { LaguageId = 0, TourClientId = tourClient.TourClientId }, Quantity = it.Quantity });
+                    }
+                }
+            }
+        }
+
+        private void IterateThroughVehicles(TourClientViewModel tourClientModel, TransportPricing vehiclePayment, ref decimal runningCostItems)
+        {
+            foreach (var vh in tourClientModel.Vehicles)
+            {
+                switch (vh.VehicleType)
+                {
+                    case Models.VehicleType.Taxi:
+                        runningCostItems += vh.AcutualNumberOfPassengersAllocated * vehiclePayment.TaxiPricing;
+                        break;
+                    case Models.VehicleType.TourBus:
+                        runningCostItems += vh.AcutualNumberOfPassengersAllocated * vehiclePayment.TourBusPricing;
+                        break;
+                    case Models.VehicleType.MiniBus:
+                        runningCostItems += vh.AcutualNumberOfPassengersAllocated * vehiclePayment.MiniBusPricing;
+                        break;
+                    case Models.VehicleType.PickUpTrack:
+                        runningCostItems += vh.AcutualNumberOfPassengersAllocated * vehiclePayment.PickupTruckPricing;
+                        break;
+                    case Models.VehicleType.FourWheelDriveCar:
+                        runningCostItems += vh.AcutualNumberOfPassengersAllocated * vehiclePayment.FourByFourPricing;
+                        break;
+
+                }
+            }
+        }
         private void CalculateRunningItemCostMeal(Domain.Models.ItemType itemType, TourClientViewModel tourClient, ItemViewModel it, MealPricing unitPaymentMeal, ref decimal runningCostOfItems, ref decimal actualItemCost)
         {
             switch (itemType)
@@ -290,7 +302,7 @@ namespace SimbaToursEastAfrica.Controllers
             TourClient tourClient = _serviceEndPoint.GetTourClient(userDetail.EmailAddress);
 
             var payPalRedirectUrl = ValidatePayment(tourClient, userDetail.CurrentPayment);
-
+            payPalRedirectUrl += "&clientId=" + tourClient.TourClientId;
             //return Redirect(payPalRedirectUrl);
             return Json(new { PayPalRedirectUrl= payPalRedirectUrl, PaymentCompletion = "Success", Message = "The payment will be acquired by Paypal reporting, and you will be informed by email whether successful. Wait for the email." });
         }
@@ -314,6 +326,28 @@ namespace SimbaToursEastAfrica.Controllers
             return paymentGateway.MakePaymentByPaypal(productArray);
         }
 
+        public JsonResult CheckAndValidatePaypalPayments(FormCollection formsCollection)
+        {
+            decimal amountPaid = Decimal.Parse(formsCollection["amount"]);
+            int clientId = Int32.Parse(formsCollection["clientId"]);
+            try
+            {
+                _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);
+                var client = _serviceEndPoint.GetTourClientById(clientId);
+
+                client.CurrentPayment = amountPaid;
+                client.PaidInstallments += amountPaid;
+                client.HasFullyPaid = client.GrossTotalCosts <= client.PaidInstallments;
+
+                _serviceEndPoint.UpdateClientPayments(client);
+                return Json(new { Result = "Success" });
+            }
+            catch(Exception e)
+            {
+                //email exception to admin email
+                return Json(new { Result = "Failed" });
+            }
+        }
         public JsonResult GetTourClientByEmail(string emailAddress)
         {
             _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);
