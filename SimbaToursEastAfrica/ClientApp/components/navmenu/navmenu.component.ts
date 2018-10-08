@@ -37,7 +37,7 @@ export class NavMenuComponent implements OnInit {
         SafariTourServices.isLoginPage = true;
     }
     logOut(): void {
-
+        $('span#loginName').css('display', 'none');
         this.actUserStatus.isUserLoggedIn = SafariTourServices.actUserStatus.isUserLoggedIn = false;
         this.actUserStatus.isUserAdministrator = SafariTourServices.actUserStatus.isUserAdministrator = false;
         let logOutResult: Observable<any> = this.safariTourService.LogOut();
