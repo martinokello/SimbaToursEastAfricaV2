@@ -92,7 +92,6 @@ export class DealsPricingComponent implements OnInit, AfterViewInit, AfterViewCh
                 $(select).append('<option value="' + items[i].dealsPricingId + '">' + items[i].dealName + '</option>');
             }
             console.log(select);
-            alert('Vehicle Added Tour Been Booked successfully: ' + p);
         }).subscribe();
     }
 }

@@ -94,7 +94,6 @@ export class LaguagePricingComponent implements OnInit, AfterViewInit, AfterView
             for (let i = 0; i < items.length; i++) {
                 $(select).append('<option value="' + items[i].laguagePricingId + '">' + items[i].laguagePricingName + '</option>');
             }
-            alert('Location Added: ' + p);
         }).subscribe();
         
     }
