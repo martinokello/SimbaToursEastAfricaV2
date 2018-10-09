@@ -14,7 +14,7 @@
                 </div>
                 <div class="form-group" id="divDealName">
                     <label>Or Create New Schedules Pricing</label>
-                    <input name="schedulesPricingName" [ngModel]="schedules.SchedulesPricingName" id="schedulesPricingName" #schedulesPricingName="ngModel" required/>
+                    <input name="schedulesPricingName" [ngModel]="schedules.SchedulesPricingName" id="schedulesPricingName" #schedulesPricingName="ngModel" required type="text"/>
                     <div *ngIf="f3.submitted && schedulesPricingName.invalid" class="text-danger">
                         Pricing name required
                     </div>
