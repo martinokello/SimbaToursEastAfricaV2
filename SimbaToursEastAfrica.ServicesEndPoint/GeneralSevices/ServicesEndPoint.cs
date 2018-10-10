@@ -154,14 +154,14 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             }
         }
 
-        public TourClient GetTourClientById(int tourClientId)
+       /* public TourClient GetTourClientById(int tourClientId)
         {
             var tourClient =  _simbaToursUnitOfWork._tourClientRepository.GetById(tourClientId);
             tourClient.Hotel = _simbaToursUnitOfWork._hotelRepository.GetById(tourClient.HotelId);
             tourClient.Hotel.Location = _simbaToursUnitOfWork._locationRepository.GetById(tourClient.Hotel.LocationId);
             tourClient.Hotel.Location.Address = _simbaToursUnitOfWork._addressRepository.GetById(tourClient.Hotel.Location.AddressId);
             return tourClient;
-        }
+        }*/
 
         public bool UpdateDealPricing(DealsPricing dealsPricing)
         {
@@ -200,7 +200,7 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             //tourClient.HotelBookings = _simbaToursUnitOfWork._hotelBookingRepository.GetAll().Where(p=> p.TourClientId == tourClient.TourClientId).ToList();
             return tourClient;
         }
-        public TourClient GetTourClientById2nd(int id)
+        public TourClient GetTourClientById(int id)
         {
             var tourClient = (from t in _simbaToursUnitOfWork.SimbaToursEastAfricaDbContext.TourClients.Include("Hotel").
                 Include("Hotel.Location").Include("Hotel.Location.Address")
