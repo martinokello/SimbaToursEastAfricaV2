@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
 {
@@ -199,7 +200,15 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             //tourClient.HotelBookings = _simbaToursUnitOfWork._hotelBookingRepository.GetAll().Where(p=> p.TourClientId == tourClient.TourClientId).ToList();
             return tourClient;
         }
-
+        public TourClient GetTourClientById2nd(int id)
+        {
+            var tourClient = (from t in _simbaToursUnitOfWork.SimbaToursEastAfricaDbContext.TourClients.Include("Hotel").
+                Include("Hotel.Location").Include("Hotel.Location.Address")
+                              where t.TourClientId == id
+                              select t).FirstOrDefault<TourClient>();
+          
+            return tourClient;
+        }
         public bool UpdateMealPricing(MealPricing mealPricing)
         {
             try
