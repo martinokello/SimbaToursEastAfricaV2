@@ -13,7 +13,10 @@ namespace SimbaToursEastAfrica.Services.RepositoryServices.Abstracts
         public SimbaToursEastAfricaDbContext SimbaToursEastAfricaDbContext { get; set; }
         public abstract bool Delete(T toDelete);
 
-        public T[] GetAll() => SimbaToursEastAfricaDbContext.Set<T>().ToList<T>().ToArray<T>();
+        public IQueryable<T> GetAll()
+        {
+            return SimbaToursEastAfricaDbContext.Set<T>().AsQueryable<T>();
+        }
 
         public abstract T GetById(int id);
 

@@ -135,7 +135,7 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
 
         public Location[] GetAllHotelLocations()
         {
-            var location = _simbaToursUnitOfWork._locationRepository.GetAll();
+            var location = _simbaToursUnitOfWork._locationRepository.GetAll().ToArray();
             return location;
         }
 
@@ -451,27 +451,27 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
 
         public HotelPricing[] GetHotelPricing()
         {
-            return _simbaToursUnitOfWork._hotelPricingRepository.GetAll();
+            return _simbaToursUnitOfWork._hotelPricingRepository.GetAll().ToArray();
         }
 
         public DealsPricing[] GetDealsPricing()
         {
-            return _simbaToursUnitOfWork._dealsPricingRepository.GetAll();
+            return _simbaToursUnitOfWork._dealsPricingRepository.GetAll().ToArray();
         }
 
 
         public SchedulesPricing[] GetSchedulesPricing()
         {
-            return _simbaToursUnitOfWork._schedulesPricingRepository.GetAll();
+            return _simbaToursUnitOfWork._schedulesPricingRepository.GetAll().ToArray();
         }
 
         public LaguagePricing[] GetLaguagePricing()
         {
-            return _simbaToursUnitOfWork._laguagePricingRepository.GetAll();
+            return _simbaToursUnitOfWork._laguagePricingRepository.GetAll().ToArray();
         }
         public MealPricing[] GetMealPricing()
         {
-            return _simbaToursUnitOfWork._mealsPricingRepository.GetAll();
+            return _simbaToursUnitOfWork._mealsPricingRepository.GetAll().ToArray();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace SimbaToursEastAfrica.Services.RepositoryServices.Interfaces
     public interface IRepository<T>
     {
         T GetById(int id);
-        T[] GetAll();
+        IQueryable<T> GetAll();
         bool Update(T toUpdate);
         bool Delete(T toDelete);
         bool Insert(T toInsert);
