@@ -57,11 +57,6 @@
                     Meal Pricing
                 </a>
             </li>
-            <li [routerLinkActive]="['link-active']">
-                <a [routerLink]="['/schedules-pricing']">
-                    Schedules &amp; Pricing
-                </a>
-            </li>
         </span>
         <span *ngIf="!actUserStatus.isUserLoggedIn" ngModel="actUserStatus.isUserLoggedIn" ngDefaultControl>
             <li [routerLinkActive]="['link-active']">

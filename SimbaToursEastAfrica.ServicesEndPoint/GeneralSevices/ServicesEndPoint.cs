@@ -154,15 +154,6 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             }
         }
 
-       /* public TourClient GetTourClientById(int tourClientId)
-        {
-            var tourClient =  _simbaToursUnitOfWork._tourClientRepository.GetById(tourClientId);
-            tourClient.Hotel = _simbaToursUnitOfWork._hotelRepository.GetById(tourClient.HotelId);
-            tourClient.Hotel.Location = _simbaToursUnitOfWork._locationRepository.GetById(tourClient.Hotel.LocationId);
-            tourClient.Hotel.Location.Address = _simbaToursUnitOfWork._addressRepository.GetById(tourClient.Hotel.Location.AddressId);
-            return tourClient;
-        }*/
-
         public bool UpdateDealPricing(DealsPricing dealsPricing)
         {
             try
@@ -193,11 +184,10 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
 
         public TourClient GetTourClient(string emailAddress)
         {
-            var tourClient = _simbaToursUnitOfWork._tourClientRepository.GetAll().FirstOrDefault(p => p.EmailAddress.ToLower().Equals(emailAddress.ToLower()) && !p.HasFullyPaid && p.GrossTotalCosts > p.PaidInstallments);
-            tourClient.Hotel = _simbaToursUnitOfWork._hotelRepository.GetById(tourClient.HotelId);
-            tourClient.Hotel.Location = _simbaToursUnitOfWork._locationRepository.GetById(tourClient.Hotel.LocationId);
-            tourClient.Hotel.Location.Address = _simbaToursUnitOfWork._addressRepository.GetById(tourClient.Hotel.Location.AddressId);
-            //tourClient.HotelBookings = _simbaToursUnitOfWork._hotelBookingRepository.GetAll().Where(p=> p.TourClientId == tourClient.TourClientId).ToList();
+            var tourClient = (from t in _simbaToursUnitOfWork.SimbaToursEastAfricaDbContext.TourClients.Include("Hotel").
+               Include("Hotel.Location").Include("Hotel.Location.Address")
+                              where t.EmailAddress.ToLower().Equals(emailAddress.ToLower())
+                              select t).FirstOrDefault<TourClient>();
             return tourClient;
         }
         public TourClient GetTourClientById(int id)
