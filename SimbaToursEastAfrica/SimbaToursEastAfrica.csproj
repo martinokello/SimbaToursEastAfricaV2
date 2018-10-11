@@ -111,9 +111,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApplicationConstants\ApplicationConstants.csproj" />
+    <ProjectReference Include="..\SimbaToursEastAfrica.Caching\SimbaToursEastAfrica.Caching.csproj" />
     <ProjectReference Include="..\SimbaToursEastAfrica.DataAccess\SimbaToursEastAfrica.DataAccess.csproj" />
     <ProjectReference Include="..\SimbaToursEastAfrica.PaymentGateWay\SimbaToursEastAfrica.PaymentGateWay.csproj" />
     <ProjectReference Include="..\SimbaToursEastAfrica.ServicesEndPoint\SimbaToursEastAfrica.ServicesEndPoint.csproj" />
+    <ProjectReference Include="..\SimbaToursEastAfrica.SocialMedia\SimbaToursEastAfrica.SocialMedia.csproj" />
   </ItemGroup>
 
   <ItemGroup>

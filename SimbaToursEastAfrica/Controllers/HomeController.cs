@@ -357,6 +357,28 @@ namespace SimbaToursEastAfrica.Controllers
             var tourClient = _serviceEndPoint.GetTourClient(emailAddress);
             return Json(tourClient);
         }
+        public JsonResult TwitterProfileFeeds()
+        {
+            var caching = new SimbaToursEastAfrica.Caching.Concretes.SimbaToursEastAfricaCahing();
+            var twitterEngine = new MartinLayooInc.SocialMedia.TwitterProfileFeed<Twitter.WidgetGroupItemList>();
+            Twitter.WidgetGroupItemList tweets = new Twitter.WidgetGroupItemList();
+
+            lock (_locker)
+            {
+                tweets = caching.GetOrSaveToCache(tweets,"TwitterProfileFeeds", 900, twitterEngine.GetFeeds);
+
+
+                if (tweets != null && tweets.Any())
+                {
+                    ViewBag.TwitterProfileFeeds = tweets;
+                }
+                else if (tweets == null || !tweets.Any())
+                    tweets = new Twitter.WidgetGroupItemList();
+            }
+            return Json(tweets);
+
+        }
+        private readonly static object _locker = new object();
     }
 
 }
