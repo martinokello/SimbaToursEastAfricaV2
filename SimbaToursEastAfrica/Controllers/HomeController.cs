@@ -28,11 +28,14 @@ namespace SimbaToursEastAfrica.Controllers
         private IUnitOfWork _simbaToursUnitOfWork;
         private ServicesEndPoint.GeneralSevices.ServicesEndPoint _serviceEndPoint;
         public readonly IOptions<ApplicationConstants.ApplicationConstants> _applicationConstants;
-        public HomeController(IMailService emailService, IUnitOfWork simbaToursUnitOfWork, IOptions<ApplicationConstants.ApplicationConstants> applicationConstants)
+        public readonly IOptions<ApplicationConstants.twitterProfileFiguration> _twitterProfileFiguration;
+
+        public HomeController(IMailService emailService, IUnitOfWork simbaToursUnitOfWork, IOptions<ApplicationConstants.ApplicationConstants> applicationConstants, IOptions<ApplicationConstants.twitterProfileFiguration> twitterProfileFiguration)
         {
             _emailService = emailService;
             _simbaToursUnitOfWork = simbaToursUnitOfWork;
             _applicationConstants = applicationConstants;
+            _twitterProfileFiguration = twitterProfileFiguration;
         }
         public IActionResult Index()
         {

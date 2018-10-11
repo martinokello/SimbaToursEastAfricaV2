@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimbaToursEastAfrica.SocialMedia
+namespace Twitter
 {
-    public class Class1
+    public class RssFeeds
     {
+
     }
 }

@@ -64,6 +64,7 @@ namespace SimbaToursEastAfrica
             var identityConectionString = Configuration.GetConnectionString("DefaultConnection");
 
             services.Configure<ApplicationConstants.ApplicationConstants>(Configuration.GetSection("ApplicationConstants"));
+            services.Configure<ApplicationConstants.twitterProfileFiguration>(Configuration.GetSection("twitterProfileFiguration"));
 
             services.AddDbContext<SimbaToursEastAfricaDbContext>(
                 options => { options.UseSqlServer(connectionString, b => b.MigrationsAssembly("SimbaToursEastAfrica"));
