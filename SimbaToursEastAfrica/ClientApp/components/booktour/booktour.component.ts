@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
+﻿import { Component, OnInit, Input,ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Element } from '@angular/compiler';
 import { SafariTourServices, IHotelBooking, IMealPricing, ILaguagePricing, ITransportPricing, IHotel, IMeal, ILaguage, ILocation, IHotelPricing, IAddress, IVehicle, IItem, ItemType, IInvoice, VehicleType } from '../../services/safariTourServices';
@@ -207,7 +207,6 @@ export class BookTourComponent implements OnInit {
         this.hotelBookings.push(this.hotelBooking);
         this.safariTourService.AddItemsToTourClient(this.hotel,this.combinedMeals, this.combinedLaguage, this.vehicles, this.currentPayment)
 
-
         let actualRes: Observable<any> = this.safariTourService.BookTour();
         actualRes.subscribe((q: any) => {
             $('iframe#payPalPayments').attr('src', q.payPalRedirectUrl);
@@ -224,5 +223,6 @@ export class BookTourComponent implements OnInit {
             alert('Tour Booked successfully: ' + q.result + ', Message: ' + q.message);
             console.log(q.stackTrace);
         });
+        
     }
 }

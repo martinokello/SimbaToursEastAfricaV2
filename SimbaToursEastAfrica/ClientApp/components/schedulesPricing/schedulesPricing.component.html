@@ -46,8 +46,10 @@
                 </div>
             </div>
             <input type="button" class="btn-primary" value="Select" (click)="selectSchedulesPricing()" />
-            <input type="submit" class="btn-primary" value="Create" (click)="createOrUpdateSchedules()" />
-            <input type="submit" class="btn-primary" value="Update" (click)="updateSchedules()" />
+            <span *ngIf="isAdminUser">
+                <input type="submit" class="btn-primary" value="Create" (click)="createOrUpdateSchedules()" />
+                <input type="submit" class="btn-primary" value="Update" (click)="updateSchedules()" />
+            </span>
         </div>
     </div>
 </form>

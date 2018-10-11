@@ -12,6 +12,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
+    isAdminUser: boolean | any;
     public schedules: ISchedulesPricing | any;
     model: any;
 
@@ -49,6 +50,7 @@ export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterVi
     }
     ngOnInit() {
         //console.log("inside OnInit");
+        this.isAdminUser = SafariTourServices.actUserStatus.isUserAdministrator;
         this.model = {};
         this.model.editable = true;
         this.model.viewable = false;
