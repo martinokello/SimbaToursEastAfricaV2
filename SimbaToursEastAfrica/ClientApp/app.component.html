@@ -12,29 +12,29 @@
                         <router-outlet></router-outlet>
                     </div>
                 </div>
-                <div style="margin: 0px; text-align: left;margin-top:0px;width:100%;">
-                    <div id="genTweetsDiv" style="background-color: whitesmoke; text-align: left;  padding: 10px;" *ngIf="twitterFeeds != null && twitterFeeds.length > 0">
+                <div style="margin: 0px; text-align: left;margin-top:0px;width:100%;color:teal;font-size:smaller; text-align:center;">
+                    <div id="genTweetsDiv" style="background-color: whitesmoke; text-align: left;  margin: 10px;" *ngIf="twitterFeeds != null && twitterFeeds.length > 0">
                         <div id="tweeterProfile"><span><a href="https://twitter.com/martinokello">@martinokello</a></span><span style="margin-left: 20px;"><img width="20px;" height="20px;" src="/SimbaSafariToursV2/Images/twitter.png" /></span></div>
                         <div style="width:60%; float: left;">
                             <ul style="clear:both;width:100%;" *ngFor="let tweet of twitterFeeds">
                                 <li style="width:100%;padding-bottom:10px;clear:both;">
                                     <div style="width:100%;">
-                                        <div style="float: left; width: 20%;"><a href="https://twitter.com/{{tweet.Username}}"><img id="img1" style="width:100%;height:auto;" src='{{tweet.GroupAvatarUrl}}' /></a></div>
-                                        <div class="content" style="float: left; padding: 0px; margin-left: 2%;width:78%;padding-top:10px;">
-                                            {{tweet.GroupDescription}}
+                                        <div style="float: left; width: 20%;"><a href="https://twitter.com/{{tweet.username}}"><img id="img1" style="width:100%;height:auto;" src='{{tweet.groupAvatarUrl}}' /></a></div>
+                                        <div class="content" style="float: left; padding: 0px; margin-left: 2%;width:78%;padding-top:10px;color:teal; text-align:left;" innerHTML="{{tweet.groupDescription}}">
+                                            
                                         </div>
                                         <div style="clear:both;"></div>
                                     </div>
-                                    <div class="spacer2" style="width:100%;clear:both;padding-right:15px;" *ngIf="tweet.MediaUrl != '' && tweet.MediaUrl != null">
-                                        <img src="{{tweet.MediaUrl}}" alt="" style="width:80%;height:auto;" />
+                                    <div class="spacer2" style="width:100%;clear:both;padding-right:15px;text-align:center;" *ngIf="tweet.MediaUrl != '' && tweet.MediaUrl != null">
+                                        <img src="{{tweet.mediaUrl}}" alt="" style="width:80%;height:auto;" />
                                     </div>
 
-                                    <div style="text-align:center;width:100%;clear:both;"><span class="duration">{{tweet.Duration}}</span><br /></div>
+                                    <div style="text-align:center;width:100%;clear:both;"><span class="duration">{{tweet.duration}}</span><br /></div>
                                     <div class="spacer2" style="text-align:center;width:100%;clear:both;">
                                         <div class="tweet-operation">
-                                            <span class="vseparator">|</span> <a class="tweetResponsePads" href='https://twitter.com/share?in_reply_to_status_id={{tweet.TweetStatusId}}'>
+                                            <span class="vseparator">|</span> <a class="tweetResponsePads" href='https://twitter.com/share?in_reply_to_status_id={{tweet.tweetStatusId}}'>
                                                 reply
-                                            </a> <span class="vseparator">|</span><a class="tweetResponsePads" href='https://twitter.com/intent/retweet?tweet_id={{tweet.TweetStatusId}}'>
+                                            </a> <span class="vseparator">|</span><a class="tweetResponsePads" href='https://twitter.com/intent/retweet?tweet_id={{tweet.tweetStatusId}}'>
                                                 retweet
                                             </a> <span class="vseparator">|</span> <a class="tweetResponsePads" href="https://twitter.com/share">
                                                 tweet
