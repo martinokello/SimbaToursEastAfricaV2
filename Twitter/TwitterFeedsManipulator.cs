@@ -23,7 +23,6 @@ namespace Twitter
         private string _groupHeaderText;
         private string _cacheKey;
         private string _cacheTimeSecs;
-        private Cache _cache;
 
         public TwitterFeedsManipulator(GroupObject twitterConfig)
         {
@@ -32,7 +31,6 @@ namespace Twitter
             _groupHeaderText = twitterConfig.GroupHeaderText;
             _cacheKey = twitterConfig.CacheKey;
             _cacheTimeSecs = twitterConfig.CacheTimeInSeconds;
-            _cache = HttpRuntime.Cache;
         }
 
         public string GetOauthTwitterToken(OauthAuthentication oauthAuthentication)
@@ -352,7 +350,7 @@ namespace Twitter
                                         oauth_version
                                         );
             }
-            else if (network.Equals(OAuthSocialNetwork.LinkedIn))
+           /* else if (network.Equals(OAuthSocialNetwork.LinkedIn))
             {
                 baseFormat = "oauth_consumer_key={0}&oauth_nonce={1}&oauth_signature_method={2}" +
                              "&oauth_timestamp={3}&oauth_callback={4}&oauth_version={5}&client_id={6}&redirect_uri={7}&scope=r_fullprofile%20w_share&state=MezZanillionsxein2859";
@@ -368,7 +366,7 @@ namespace Twitter
                                          );
             }
 
-
+    */
 
             var compositeKey = string.Concat(Uri.EscapeDataString(oauthentication.ConsumerSecret),
                         "&", Uri.EscapeDataString(oauthentication.TokenSecret));

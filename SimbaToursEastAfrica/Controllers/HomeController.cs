@@ -360,12 +360,14 @@ namespace SimbaToursEastAfrica.Controllers
         public JsonResult TwitterProfileFeeds()
         {
             var caching = new SimbaToursEastAfrica.Caching.Concretes.SimbaToursEastAfricaCahing();
+            
             var twitterEngine = new MartinLayooInc.SocialMedia.TwitterProfileFeed<Twitter.WidgetGroupItemList>();
+            twitterEngine.TwitterProfileFiguration = this._twitterProfileFiguration;
             Twitter.WidgetGroupItemList tweets = new Twitter.WidgetGroupItemList();
 
             lock (_locker)
             {
-                tweets = caching.GetOrSaveToCache(tweets,"TwitterProfileFeeds", 900, twitterEngine.GetFeeds);
+                tweets = caching.GetOrSaveToCache(tweets,this._twitterProfileFiguration.Value.cachKey, this._twitterProfileFiguration.Value.cacheTimeSecs, twitterEngine.GetFeeds);
 
 
                 if (tweets != null && tweets.Any())

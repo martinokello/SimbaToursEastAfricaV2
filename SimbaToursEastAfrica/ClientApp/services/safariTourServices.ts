@@ -13,6 +13,7 @@ export class SafariTourServices {
     public static isLoginPage: boolean = false;
     public actionResult: any;
     public httpClient: Http;
+    public twitterFeedsUrl: string = "/SimbaSafariToursV2/Home/TwitterProfileFeeds";
     public createTransportPricingUrl: string = "/SimbaSafariToursV2/api/Administration/CreateTransportPricing";
     public updateTransportPricingUrl: string = "/SimbaSafariToursV2/api/Administration/UpdateTransportPricing"
     public getTransportPricingById: string = "/SimbaSafariToursV2/Home/GetTransportPricingById";
@@ -94,6 +95,21 @@ export class SafariTourServices {
             alert("failed to book tour" + e);
             return null;
         }
+    }
+
+    public GetTwitterFeeds(): Observable<any[]> {
+        
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        let requestUrl = this.twitterFeedsUrl;
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: requestUrl,
+            method: RequestMethod.Get,
+            headers: headers
+        });
+
+        return this.httpClient.request(new Request(requestoptions)).map((resp: Response) => {
+            return resp.json();
+        });
     }
     public LoginByPost(userDetail: IUserDetail): Observable<any> {
         let body = JSON.stringify(userDetail);
