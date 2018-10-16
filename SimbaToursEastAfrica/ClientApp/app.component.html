@@ -25,14 +25,14 @@
                                 <div *ngFor="let tweet of twitterFeeds">
                                     <div class="row" style="padding-bottom:10px;">
                                         <div class="col-lg-12">
-                                            <div class="col-lg-2"><a href="https://twitter.com/{{tweet.username}}"><img id="img1" style="width:80px;height:auto;" src='{{tweet.groupAvatarUrl}}' /></a></div>
-                                            <div class="col-lg-10" style="padding-left: 2%;padding-top:10px;color:teal; text-align:left;" innerHTML="{{tweet.groupDescription}}"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="padding-right:15px;text-align:center;" *ngIf="tweet.mediaUrl != '' && tweet.mediaUrl != null">
-                                        <div class="col-lg-12">
-                                            <div class="col-lg-offset-1">
-                                                <img src="{{tweet.mediaUrl}}" alt="" style="width:50%;height:auto;" />
+                                            <div class="row">
+                                                <div class="col-lg-2" style="text-align:right;"><a href="https://twitter.com/{{tweet.username}}"><img id="img1" style="width:80px;height:auto;" src='{{tweet.groupAvatarUrl}}' /></a></div>
+                                                <div class="col-lg-10" style="padding-left: 2%;padding-top:10px;color:teal; text-align:left;" innerHTML="{{tweet.groupDescription}}"></div>
+                                            </div>
+                                            <div class="row" style="padding-right:15px;padding-top:8px;text-align:left;" *ngIf="tweet.mediaUrl != '' && tweet.mediaUrl != null">
+                                                <div class="col-lg-offset-2">
+                                                    <img src="{{tweet.mediaUrl}}" alt="" style="width:50%;height:auto;" />   
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

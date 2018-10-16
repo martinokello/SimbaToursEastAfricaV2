@@ -54,6 +54,7 @@ export class SafariTourServices {
     public getMealPricingById: string = "/SimbaSafariToursV2/api/Administration/GetMealPricingById";
     public getDealsPricingById: string = "/SimbaSafariToursV2/api/Administration/GetDealsPricingById";
     public postLoginUrl: string = "/SimbaSafariToursV2/Account/Login";
+    public getVerifyLoggedInUser: string = "/SimbaSafariToursV2/Account/VerifyLoggedInUser";
     public getLogoutUrl: string = "/SimbaSafariToursV2/Account/Logout";
     public postRegisterUrl: string = "/SimbaSafariToursV2/Account/Register";
     public postForgotPasswordUrl: string = "/SimbaSafariToursV2/Account/ForgotPassword";
@@ -110,6 +111,21 @@ export class SafariTourServices {
         return this.httpClient.request(new Request(requestoptions)).map((resp: Response) => {
             return resp.json();
         });
+    }
+
+    public VerifyLoggedInUser(): any {
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        let requestUrl = this.getVerifyLoggedInUser;
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: requestUrl,
+            method: RequestMethod.Get,
+            headers: headers
+        });
+
+        return this.httpClient.request(new Request(requestoptions)).map((resp: Response) => {
+            return resp.json();
+        });
+        
     }
     public LoginByPost(userDetail: IUserDetail): Observable<any> {
         let body = JSON.stringify(userDetail);

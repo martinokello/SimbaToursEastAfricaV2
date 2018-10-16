@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input,Output, EventEmitter } from '@angular/core';
 import { Element } from '@angular/compiler';
 import { Observable } from 'rxjs/Observable';
-import { SafariTourServices, IUserStatus } from '../../services/safariTourServices';
+import { SafariTourServices, IUserStatus, IUserDetail } from '../../services/safariTourServices';
 import 'rxjs/add/operator/map';
 import * as $ from 'jquery';
 
@@ -14,7 +14,7 @@ import * as $ from 'jquery';
 export class NavMenuComponent implements OnInit {
     @Input() actUserStatus: IUserStatus = {
         isUserLoggedIn: false,
-        isUserAdministrator: false
+        isUserAdministrator: false,
     };
     private safariTourService: SafariTourServices | any;
     public constructor(safariTourService: SafariTourServices) {
@@ -22,6 +22,7 @@ export class NavMenuComponent implements OnInit {
         this.safariTourService = safariTourService;
     }
     ngOnInit(): void {
+        this.verifyLoggedInUser();
         if (!this.actUserStatus.isUserLoggedIn &&
         window.location.href.toLowerCase().indexOf('/book-tour') > -1 &&
         window.location.href.toLowerCase().indexOf('/login') > -1 &&
@@ -30,6 +31,19 @@ export class NavMenuComponent implements OnInit {
         {
             window.location.href = "/home";
         }
+    }
+
+    verifyLoggedInUser(): void {
+        let verifyResult: Observable<any> = this.safariTourService.VerifyLoggedInUser();
+        verifyResult.map((p: any) => {
+            if (p.isLoggedIn) {
+                $('span#loginName').css('display', 'block');
+                $('span#loginName').text("logged in as: " + p.name);
+                SafariTourServices.SetUserEmail(p.name);
+                this.actUserStatus.isUserLoggedIn = true;
+                this.actUserStatus.isUserAdministrator = p.isAdministrator;
+            }
+        }).subscribe();
     }
     makePayments(): void {
     }

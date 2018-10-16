@@ -53,6 +53,17 @@ namespace SimbaToursEastAfrica.Controllers
             }
 
         }
+        [HttpGet]
+        public JsonResult VerifyLoggedInUser()
+        {
+            if (User != null && User.Identity.IsAuthenticated)
+            {
+                var user = _userManager.FindByNameAsync(User.Identity.Name).ConfigureAwait(true).GetAwaiter().GetResult();
+
+                return Json(new {name= user.Email, IsLoggedIn = true, IsAdministrator = _userManager.IsInRoleAsync(user, "Administrator").ConfigureAwait(true).GetAwaiter().GetResult() });
+            }
+            return Json(new { IsLoggedIn = false });
+        }
         [HttpPost]
         public async Task<JsonResult> Register([FromBody] UserDetails userDetails)
         {
