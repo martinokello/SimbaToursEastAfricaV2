@@ -70,7 +70,7 @@
     "babel-preset-react": "^6.24.1",
     "cors": "^2.8.4",
     "loader": "^2.1.1",
-    "node": "^10.11.0",
+    "node": "^10.12.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "updates": "^4.3.0",
