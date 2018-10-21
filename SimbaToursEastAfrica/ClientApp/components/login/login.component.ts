@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit{
                 }
                 SafariTourServices.isLoginPage = false;
                 SafariTourServices.SetUserEmail(this.userDetail.emailAddress);
+                window.location.href="/SimbaSafariToursV2/book-tour"
             }
         }).subscribe();
     }
