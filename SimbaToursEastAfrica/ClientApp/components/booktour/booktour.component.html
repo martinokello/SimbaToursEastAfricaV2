@@ -46,16 +46,10 @@
 
         <div #payments>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <label>Running Cost - Total Amount To Pay:</label>
                     <input type="number" name="runningCost" [(ngModel)]="runningCost" readonly />
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <img src="/images/paypal_logo.gif" alt="paypal logo" />
-                </div>
-                <iframe id="payPalPayments" style="display:none;"></iframe>
                 <div class="col-lg-3">
                     <label>Amount you are paying:</label>
                     <input type="number" name="currentPayment" [(ngModel)]="currentPayment" required #currentPaymentTxt="ngModel" />
@@ -63,6 +57,12 @@
                         At least some payment is expected
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <img src="/images/paypal_logo.gif" alt="paypal logo" />
+                </div>
+                <iframe id="payPalPayments" style="display:none;"></iframe>
             </div>
             <input type="button" class="btn-primary disabled" value="Book Tour" (click)="bookTour()" id="submitTourBooking" />
         </div>
