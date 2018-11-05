@@ -201,9 +201,19 @@ namespace SimbaToursEastAfrica.Controllers
         }
         [HttpGet]
         [Authorize(Roles = "Administrator")]
-        public dynamic GetAllRoles()
+        public Role[] GetAllRoles()
         {
-           return _roleManager.Roles.Select(p => new { Name = p.Name }).ToArray();
+            try
+            {
+                var roles = _roleManager.Roles.Select(p => new Role { Name = p.Name });
+                return roles.ToArray();
+            }
+            catch (Exception ex)
+            {
+                return new Role[] { new Role { Name = ex.Message } };
+            }
         }
     }
+
+    public class Role { public string Name { get; set; } }
 }
