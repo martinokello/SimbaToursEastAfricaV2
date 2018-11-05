@@ -28,6 +28,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ForgotPasswordComponent } from './components/forgotPassword/forgotPassword.component';
 import { PayByInstallments } from './components/installments/installments.component';
 import { TransportPricingComponent } from './components/transportPricing/transportPricing.component';
+import { UserRolesComponent } from './components/userroles/userroles.component';
 
 @NgModule({
     declarations: [
@@ -56,7 +57,8 @@ import { TransportPricingComponent } from './components/transportPricing/transpo
         RegisterComponent,
         ForgotPasswordComponent,
         PayByInstallments,
-        TransportPricingComponent
+        TransportPricingComponent,
+        UserRolesComponent
     ],
     imports: [
         CommonModule,
@@ -83,6 +85,7 @@ import { TransportPricingComponent } from './components/transportPricing/transpo
             { path: 'make-Payments', component: PayByInstallments },
             { path: 'transport-pricing', component: TransportPricingComponent },
             { path: 'logout', component: HomeComponent },
+            { path: 'manage-roles', component: UserRolesComponent }, 
 
             { path: '**', redirectTo: 'home' }
         ])

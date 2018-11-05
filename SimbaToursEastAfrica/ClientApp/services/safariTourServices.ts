@@ -13,6 +13,9 @@ export class SafariTourServices {
     public static isLoginPage: boolean = false;
     public actionResult: any;
     public httpClient: Http;
+    public getAllRoles: string = "/SimbaSafariToursV2/Account/GetAllRoles";
+    public postRmoveUserFromRole: string = "/SimbaSafariToursV2/Account/RemoveUserFromRole";
+    public postAddUserToRole: string = "/SimbaSafariToursV2/Account/AddUserToRole";
     public twitterFeedsUrl: string = "/SimbaSafariToursV2/Home/TwitterProfileFeeds";
     public createTransportPricingUrl: string = "/SimbaSafariToursV2/api/Administration/CreateTransportPricing";
     public updateTransportPricingUrl: string = "/SimbaSafariToursV2/api/Administration/UpdateTransportPricing"
@@ -67,6 +70,54 @@ export class SafariTourServices {
     }
     public static SetUserEmail(userEmailAddress: string) {
         SafariTourServices.clientEmailAddress = userEmailAddress;
+    } 
+    public GetAllRoles(): Observable<any> {
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        let requestUrl = this.getAllRoles;
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: requestUrl,
+            method: RequestMethod.Get,
+            headers: headers
+        });
+
+        return this.httpClient.request(new Request(requestoptions)).map((resp: Response) => {
+            return resp.json();
+        });
+    }
+    public AddUserToRole(username:string, role:string): Observable<any>{
+        let body = JSON.stringify({username:username,role:role});
+
+        let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: this.postAddUserToRole,
+            method: RequestMethod.Post,
+            headers: headers,
+            body: body
+        });
+
+        return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
+            console.log('Response received ' + res.json());
+            return res.json();
+        });
+    }
+
+    public RemoveUserFromRole(username: string, role: string): Observable<any> {
+        let body = JSON.stringify({ username: username, role: role });
+
+        let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: this.postRmoveUserFromRole,
+            method: RequestMethod.Post,
+            headers: headers,
+            body: body
+        });
+
+        return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
+            console.log('Response received ' + res.json());
+            return res.json();
+        });
     }
     public BookTour(): any {
         try {
@@ -1012,4 +1063,8 @@ export interface IUserStatus {
 
     isUserLoggedIn: boolean,
     isUserAdministrator: boolean
+}
+
+export interface IUserRole {
+    name: string
 }

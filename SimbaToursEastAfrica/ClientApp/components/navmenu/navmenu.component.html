@@ -53,6 +53,11 @@
                     Meal Pricing
                 </a>
             </li>
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/manage-roles']">
+                    Roles
+                </a>
+            </li>
         </span>
         <span *ngIf="!actUserStatus.isUserLoggedIn" ngModel="actUserStatus.isUserLoggedIn" ngDefaultControl>
             <li [routerLinkActive]="['link-active']">

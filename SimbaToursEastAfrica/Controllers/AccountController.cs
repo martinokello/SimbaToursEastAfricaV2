@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Security.Principal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SimbaToursEastAfrica.Controllers
 {
@@ -167,6 +168,42 @@ namespace SimbaToursEastAfrica.Controllers
         {
              _signInManager.SignOutAsync().ConfigureAwait(true).GetAwaiter().GetResult();
             return Json(new { isLoggedIn = false, Message="Logged Out" });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public bool AddUserToRole(string email, string role)
+        {
+            var user = _userManager.FindByEmailAsync(email).ConfigureAwait(true).GetAwaiter().GetResult();
+            var checkedRole = _roleManager.FindByNameAsync(role).ConfigureAwait(true).GetAwaiter().GetResult();
+
+            if (!_userManager.IsInRoleAsync(user, checkedRole.Name).ConfigureAwait(true).GetAwaiter().GetResult())
+            {
+                _userManager.AddToRoleAsync(user, checkedRole.Name);
+                return true;
+            }
+            return false;
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public bool RemoveUserFromRole(string email, string role)
+        {
+            var user = _userManager.FindByEmailAsync(email).ConfigureAwait(true).GetAwaiter().GetResult();
+            var checkedRole = _roleManager.FindByNameAsync(role).ConfigureAwait(true).GetAwaiter().GetResult();
+
+            if (!_userManager.IsInRoleAsync(user, checkedRole.Name).ConfigureAwait(true).GetAwaiter().GetResult())
+            {
+                _userManager.RemoveFromRolesAsync(user,new string[] { checkedRole.Name });
+                return true;
+            }
+            return false;
+        }
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public dynamic GetAllRoles()
+        {
+           return _roleManager.Roles.Select(p => new { Name = p.Name }).ToArray();
         }
     }
 }
