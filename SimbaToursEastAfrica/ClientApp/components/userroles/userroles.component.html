@@ -3,14 +3,14 @@
     <form #f3="ngForm" (ngSubmit)="f3.form.valid && addUserToRole()">
         <div class="form-group">
             <label>Email</label>
-            <input type="email" name="email" [(ngModel)]="userDetail.emailAddress" required #emailAddress="ngModel" />
+            <input type="email" name="email" [(ngModel)]="email" required #emailAddress="ngModel" />
             <div *ngIf="f3.submitted && emailAddress.invalid" class="text-danger">
                 Email required
             </div>
         </div>
         <div class="form-group">
             <label>Roles</label>
-            <select name="roleName" [(ngModel)]="userRole" required #roleName="ngModel" />
+            <select required #roleName></select>
             <div *ngIf="f3.submitted && roleName.invalid" class="text-danger">
                 Role name required
             </div>

@@ -84,8 +84,8 @@ export class SafariTourServices {
             return resp.json();
         });
     }
-    public AddUserToRole(username:string, role:string): Observable<any>{
-        let body = JSON.stringify({username:username,role:role});
+    public AddUserToRole(email:string, role:string): Observable<any>{
+        let body = JSON.stringify({ email: email,role:role});
 
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
 
@@ -102,8 +102,8 @@ export class SafariTourServices {
         });
     }
 
-    public RemoveUserFromRole(username: string, role: string): Observable<any> {
-        let body = JSON.stringify({ username: username, role: role });
+    public RemoveUserFromRole(email: string, role: string): Observable<any> {
+        let body = JSON.stringify({ email: email, role: role });
 
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
 

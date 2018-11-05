@@ -1,6 +1,6 @@
-﻿import { Component, OnInit, ViewChild, ElementRef, Injectable, AfterViewInit, AfterViewChecked, Inject, Output, Input, EventEmitter } from '@angular/core';
+﻿import { Component, OnInit, ViewChild, ElementRef, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import {SafariTourServices, IUserDetail, IUserStatus, IUserRole } from '../../services/safariTourServices';
+import {SafariTourServices, IUserRole } from '../../services/safariTourServices';
 import 'rxjs/add/operator/map';
 import * as $ from 'jquery';
 
@@ -14,10 +14,9 @@ import * as $ from 'jquery';
 export class UserRolesComponent implements OnInit{
 
     @ViewChild('rolesView') div: HTMLElement | any;
-    public userDetail: IUserDetail | any;
     private safariTourService: SafariTourServices | any;
-    private userRoles: IUserRole[] | any;
-    private email: string | any;
+    public userRoles: IUserRole[] | any;
+    public email: string | any;
 
     ngOnInit(): void {
         this.getAllRoles();
