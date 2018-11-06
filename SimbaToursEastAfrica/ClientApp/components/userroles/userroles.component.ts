@@ -59,7 +59,7 @@ export class UserRolesComponent implements OnInit{
 
     public getAllRoles() {
         let results: Observable<any> = this.safariTourService.GetAllRoles();
-        results.map((q: IUserRole[]) => {
+        results.map((q: any) => {
             this.userRoles = q;
 
             let select = this.div.nativeElement.querySelector("select#roleName");
