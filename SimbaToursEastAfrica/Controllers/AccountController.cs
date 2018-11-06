@@ -66,7 +66,7 @@ namespace SimbaToursEastAfrica.Controllers
             return Json(new { IsLoggedIn = false });
         }
         [HttpPost]
-        public async Task<JsonResult> Register([FromBody] UserDetails userDetails)
+        public JsonResult Register([FromBody] UserDetails userDetails)
         {
             if (userDetails.password != userDetails.repassword)
             {
@@ -96,7 +96,7 @@ namespace SimbaToursEastAfrica.Controllers
             return Json(new { IsRegistered = true, IsAdministrator = false});
         }
 
-        public async Task<IdentityResult> AddUserAsClaim(IdentityUser identityUser)
+        public IdentityResult AddUserAsClaim(IdentityUser identityUser)
         {
             //Here’s an example of how to add the “Administrator” role to a user:
 
@@ -105,7 +105,7 @@ namespace SimbaToursEastAfrica.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Login([FromBody] UserDetails userDetails)
+        public JsonResult Login([FromBody] UserDetails userDetails)
         {
             var user = _userManager.FindByEmailAsync(userDetails.emailAddress).ConfigureAwait(true).GetAwaiter().GetResult();
             if (user == null)
@@ -126,7 +126,7 @@ namespace SimbaToursEastAfrica.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> ForgotPassword(string emailAddress)
+        public JsonResult ForgotPassword(string emailAddress)
         {
             var user = _userManager.FindByEmailAsync(emailAddress).ConfigureAwait(true).GetAwaiter().GetResult();
             if (user == null)
@@ -140,7 +140,7 @@ namespace SimbaToursEastAfrica.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ResetPassword(string id, string token, string password, string repassword)
+        public IActionResult ResetPassword(string id, string token, string password, string repassword)
         {
             var user = _userManager.FindByIdAsync(id).ConfigureAwait(true).GetAwaiter().GetResult();
             if (user == null)
@@ -164,7 +164,7 @@ namespace SimbaToursEastAfrica.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Logout()
+        public IActionResult Logout()
         {
              _signInManager.SignOutAsync().ConfigureAwait(true).GetAwaiter().GetResult();
             return Json(new { isLoggedIn = false, Message="Logged Out" });
@@ -179,7 +179,7 @@ namespace SimbaToursEastAfrica.Controllers
 
             if (!_userManager.IsInRoleAsync(user, checkedRole.Name).ConfigureAwait(true).GetAwaiter().GetResult())
             {
-                _userManager.AddToRoleAsync(user, checkedRole.Name);
+                _userManager.AddToRoleAsync(user, checkedRole.Name).ConfigureAwait(true).GetAwaiter().GetResult();
                 return true;
             }
             return false;
@@ -194,7 +194,7 @@ namespace SimbaToursEastAfrica.Controllers
 
             if (!_userManager.IsInRoleAsync(user, checkedRole.Name).ConfigureAwait(true).GetAwaiter().GetResult())
             {
-                _userManager.RemoveFromRolesAsync(user,new string[] { checkedRole.Name });
+                _userManager.RemoveFromRolesAsync(user,new string[] { checkedRole.Name }).ConfigureAwait(true).GetAwaiter().GetResult();
                 return true;
             }
             return false;
