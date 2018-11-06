@@ -27,8 +27,8 @@ export class UserRolesComponent implements OnInit{
 
     getSelectedRole(): string {
 
-        let select = this.div.nativeElement.querySelector("select#roleName");
-        return $(select).val()+"";
+        let select = $("select#roleName");
+        return select.val()+"";
     }
     public addUserToRole(): void {
         let role = this.getSelectedRole();
@@ -62,13 +62,13 @@ export class UserRolesComponent implements OnInit{
         results.map((q: any) => {
             this.userRoles = q;
 
-            let select = this.div.nativeElement.querySelector("select#roleName");
+            let select = $("select#roleName");
             console.log(select);
 
-            $(select).remove('option');
-            $(select).append('<option value="" selected="true">Select A Role</option>');
+            select.remove('option');
+            select.append('<option value="" selected="true">Select A Role</option>');
             for (let i = 0; i < this.userRoles.length; i++) {
-                $(select).append('<option value="' + this.userRoles[i].name + '">' + this.userRoles[i].name + '</option>');
+                select.append('<option value="' + this.userRoles[i].name + '">' + this.userRoles[i].name + '</option>');
             } 
         }).subscribe();
     }
