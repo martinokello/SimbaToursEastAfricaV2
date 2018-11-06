@@ -175,7 +175,7 @@ namespace SimbaToursEastAfrica.Controllers
         public bool AddUserToRole([FromBody] UserRole userRole)
         {
             var user = _userManager.FindByEmailAsync(userRole.Email).ConfigureAwait(true).GetAwaiter().GetResult();
-            var checkedRole = _roleManager.FindByNameAsync(userRole.Name).ConfigureAwait(true).GetAwaiter().GetResult();
+            var checkedRole = _roleManager.FindByNameAsync(userRole.Role).ConfigureAwait(true).GetAwaiter().GetResult();
 
             if (!_userManager.IsInRoleAsync(user, checkedRole.Name).ConfigureAwait(true).GetAwaiter().GetResult())
             {
@@ -190,7 +190,7 @@ namespace SimbaToursEastAfrica.Controllers
         public bool RemoveUserFromRole([FromBody] UserRole userRole)
         {
             var user = _userManager.FindByEmailAsync(userRole.Email).ConfigureAwait(true).GetAwaiter().GetResult();
-            var checkedRole = _roleManager.FindByNameAsync(userRole.Name).ConfigureAwait(true).GetAwaiter().GetResult();
+            var checkedRole = _roleManager.FindByNameAsync(userRole.Role).ConfigureAwait(true).GetAwaiter().GetResult();
 
             if (!_userManager.IsInRoleAsync(user, checkedRole.Name).ConfigureAwait(true).GetAwaiter().GetResult())
             {
