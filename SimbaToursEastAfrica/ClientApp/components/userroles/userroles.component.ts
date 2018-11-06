@@ -66,7 +66,7 @@ export class UserRolesComponent implements OnInit{
             console.log(select);
 
             $(select).remove('option');
-            $(select).append('<option value="-1" selected="true">Select A Role</option>');
+            $(select).append('<option value="" selected="true">Select A Role</option>');
             for (let i = 0; i < this.userRoles.length; i++) {
                 $(select).append('<option value="' + this.userRoles[i].name + '">' + this.userRoles[i].name + '</option>');
             } 
