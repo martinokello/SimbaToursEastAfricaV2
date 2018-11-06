@@ -192,7 +192,7 @@ namespace SimbaToursEastAfrica.Controllers
             var user = _userManager.FindByEmailAsync(userRole.Email).ConfigureAwait(true).GetAwaiter().GetResult();
             var checkedRole = _roleManager.FindByNameAsync(userRole.Role).ConfigureAwait(true).GetAwaiter().GetResult();
 
-            if (!_userManager.IsInRoleAsync(user, checkedRole.Name).ConfigureAwait(true).GetAwaiter().GetResult())
+            if (_userManager.IsInRoleAsync(user, checkedRole.Name).ConfigureAwait(true).GetAwaiter().GetResult())
             {
                 _userManager.RemoveFromRolesAsync(user,new string[] { checkedRole.Name }).ConfigureAwait(true).GetAwaiter().GetResult();
                 return true;
