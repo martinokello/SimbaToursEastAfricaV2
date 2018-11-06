@@ -133,27 +133,27 @@ namespace SimbaToursEastAfrica.Controllers
                 return Json(new { message = "Reset your password through email link" });
 
             var passwordResetToken = _userManager.GeneratePasswordResetTokenAsync(user).ConfigureAwait(true).GetAwaiter().GetResult();
-            var passwordResetUrl = Url.Action("ResetPassword", "Account", new { id = user.Id, token = passwordResetToken }, Request.Scheme);
+            var passwordResetUrl = Url.Action("ResetPassword", "Account", new ResetPassword { Id = user.Id, Token = passwordResetToken }, Request.Scheme);
 
             //await _messageService.Send(email, "Password reset", $"Click <a href=\"" + passwordResetUrl + "\">here</a> to reset your password");
             return Json(new { message = "Reset your password through email link" });
         }
 
         [HttpPost]
-        public IActionResult ResetPassword(string id, string token, string password, string repassword)
+        public IActionResult ResetPassword([FromBody] ResetPassword resetPassword)
         {
-            var user = _userManager.FindByIdAsync(id).ConfigureAwait(true).GetAwaiter().GetResult();
+            var user = _userManager.FindByIdAsync(resetPassword.Id).ConfigureAwait(true).GetAwaiter().GetResult();
             if (user == null)
                 throw new InvalidOperationException();
 
-            if (password != repassword)
+            if (resetPassword.Password != resetPassword.Repassword)
             {
                 ModelState.AddModelError(string.Empty, "Passwords do not match");
 
                 return Json(new { message = "Password and retyped Passwords don't match" });
             }
 
-            var resetPasswordResult = _userManager.ResetPasswordAsync(user, token, password).ConfigureAwait(true).GetAwaiter().GetResult();
+            var resetPasswordResult = _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Password).ConfigureAwait(true).GetAwaiter().GetResult();
             if (!resetPasswordResult.Succeeded)
             {
                 foreach (var error in resetPasswordResult.Errors)
@@ -172,10 +172,10 @@ namespace SimbaToursEastAfrica.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Administrator")]
-        public bool AddUserToRole(string email, string role)
+        public bool AddUserToRole([FromBody] UserRole userRole)
         {
-            var user = _userManager.FindByEmailAsync(email).ConfigureAwait(true).GetAwaiter().GetResult();
-            var checkedRole = _roleManager.FindByNameAsync(role).ConfigureAwait(true).GetAwaiter().GetResult();
+            var user = _userManager.FindByEmailAsync(userRole.Email).ConfigureAwait(true).GetAwaiter().GetResult();
+            var checkedRole = _roleManager.FindByNameAsync(userRole.Name).ConfigureAwait(true).GetAwaiter().GetResult();
 
             if (!_userManager.IsInRoleAsync(user, checkedRole.Name).ConfigureAwait(true).GetAwaiter().GetResult())
             {
@@ -187,10 +187,10 @@ namespace SimbaToursEastAfrica.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Administrator")]
-        public bool RemoveUserFromRole(string email, string role)
+        public bool RemoveUserFromRole([FromBody] UserRole userRole)
         {
-            var user = _userManager.FindByEmailAsync(email).ConfigureAwait(true).GetAwaiter().GetResult();
-            var checkedRole = _roleManager.FindByNameAsync(role).ConfigureAwait(true).GetAwaiter().GetResult();
+            var user = _userManager.FindByEmailAsync(userRole.Email).ConfigureAwait(true).GetAwaiter().GetResult();
+            var checkedRole = _roleManager.FindByNameAsync(userRole.Name).ConfigureAwait(true).GetAwaiter().GetResult();
 
             if (!_userManager.IsInRoleAsync(user, checkedRole.Name).ConfigureAwait(true).GetAwaiter().GetResult())
             {
