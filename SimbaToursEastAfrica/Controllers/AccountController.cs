@@ -46,7 +46,7 @@ namespace SimbaToursEastAfrica.Controllers
 
             }
 
-            if (_roleManager.FindByNameAsync("StandardUser") == null)
+            if (_roleManager.FindByNameAsync("StandardUser").ConfigureAwait(true).GetAwaiter().GetResult() == null)
             {
                 var roleStandard = new IdentityRole();
                 roleStandard.Name = "StandardUser";
