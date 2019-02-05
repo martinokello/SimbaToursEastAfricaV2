@@ -22,6 +22,18 @@
                 </a>
             </li>
         </span>
+        <span *ngIf="!actUserStatus.isUserAdministrator" ngDefaultControl ngModel="actUserStatus">
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/contactus']">
+                    Contact Us
+                </a>
+            </li>
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/aboutus']">
+                    About Us
+                </a>
+            </li>
+        </span>
         <span *ngIf="actUserStatus.isUserLoggedIn && actUserStatus.isUserAdministrator" ngDefaultControl ngModel="actUserStatus">
             <li [routerLinkActive]="['link-active']">
                 <a [routerLink]="['/add-hotel']">

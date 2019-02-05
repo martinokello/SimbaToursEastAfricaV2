@@ -3,6 +3,7 @@ import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs/Subscription';
 import { Injectable, Inject, ReflectiveInjector } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Binary } from '@angular/compiler';
 
 @Injectable()
 export class SafariTourServices {
@@ -64,6 +65,7 @@ export class SafariTourServices {
     public static tourClientModel: ITourClient | any = {};
     public static grossTotalCosts: number = 0;
     public static clientEmailAddress: string = "";
+    public postSendEmail: string = " /SimbaSafariToursV2/Home/SendEmail";
 
     public constructor(httpClient: Http) {
         this.httpClient = httpClient;
@@ -97,6 +99,14 @@ export class SafariTourServices {
         });
 
         return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
+            console.log('Response received ' + res.json());
+            return res.json();
+        });
+    }
+    public SendEmail(body: FormData): Observable<any>
+    {
+        let headers = new Headers({'Content-Type': 'multipart/form-data' });
+        return this.httpClient.post(this.postSendEmail, body, new RequestOptions({ headers: headers})).map((res: Response) => {
             console.log('Response received ' + res.json());
             return res.json();
         });
@@ -1058,6 +1068,13 @@ export interface IUserDetail {
     keepLoggedIn: boolean,
     repassword: string,
     role: string
+}
+export interface IEmailMessage {
+    emailFrom: string,
+    emailTo: string,
+    attachment: Binary,
+    emailSubject:string,
+    emailBody:string
 }
 export interface IUserStatus {
 

@@ -4,6 +4,11 @@
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
+    "@agm/core": {
+      "version": "1.0.0-beta.5",
+      "resolved": "https://registry.npmjs.org/@agm/core/-/core-1.0.0-beta.5.tgz",
+      "integrity": "sha512-LVENJqtBZEWpX+uJkGI0zgg+Xkm2KkktQm4ojZozArbeNvQkVL6pqVc04Mme6vvOzwJpD1cET5w4byC8Xaq1QQ=="
+    },
     "@angular-devkit/architect": {
       "version": "0.8.3",
       "resolved": "https://registry.npmjs.org/@angular-devkit/architect/-/architect-0.8.3.tgz",
@@ -781,6 +786,21 @@
         "tsickle": "^0.21.0"
       }
     },
+    "@ng-bootstrap/ng-bootstrap": {
+      "version": "4.0.2",
+      "resolved": "https://registry.npmjs.org/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-4.0.2.tgz",
+      "integrity": "sha512-SBsN8ORvj/WXpZGSyR2+CRkg6GCtax5+fsLKt9ImHKUVWwePVqRxiGlnxXqwNPHQ46vOdd7nDN9cwE7dfbGaAQ==",
+      "requires": {
+        "tslib": "^1.9.0"
+      },
+      "dependencies": {
+        "tslib": {
+          "version": "1.9.3",
+          "resolved": "https://registry.npmjs.org/tslib/-/tslib-1.9.3.tgz",
+          "integrity": "sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ=="
+        }
+      }
+    },
     "@ngtools/webpack": {
       "version": "1.10.2",
       "resolved": "http://registry.npmjs.org/@ngtools/webpack/-/webpack-1.10.2.tgz",
@@ -879,6 +899,12 @@
       "version": "0.9.36",
       "resolved": "https://registry.npmjs.org/@types/core-js/-/core-js-0.9.36.tgz",
       "integrity": "sha1-1yHnzAAH0QzmatJj6/R4pAccU/Q=",
+      "dev": true
+    },
+    "@types/googlemaps": {
+      "version": "3.30.16",
+      "resolved": "https://registry.npmjs.org/@types/googlemaps/-/googlemaps-3.30.16.tgz",
+      "integrity": "sha512-6OZ64ahLzYfzuSr71y4jAHZXiwxjvvEM2bfF2tzjIc9KUZVbO30SkYa8WewTsR8aM5BFz/uBiNlZ14eRLXYS0g==",
       "dev": true
     },
     "@types/jasmine": {
@@ -3999,6 +4025,11 @@
         "domelementtype": "1"
       }
     },
+    "dompurify": {
+      "version": "1.0.9",
+      "resolved": "https://registry.npmjs.org/dompurify/-/dompurify-1.0.9.tgz",
+      "integrity": "sha512-lt9f3A3RO1OCNaWdA+s/k7YVn0Typ5MbAKmX94PLCZbs8wLNccX3Bj4xXA7GLKOoDb/MeVoAoeIJarZD1JUnjg=="
+    },
     "domutils": {
       "version": "1.5.1",
       "resolved": "https://registry.npmjs.org/domutils/-/domutils-1.5.1.tgz",
@@ -6861,8 +6892,7 @@
     "jquery": {
       "version": "3.3.1",
       "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.3.1.tgz",
-      "integrity": "sha512-Ubldcmxp5np52/ENotGxlLe6aGMvmF4R8S6tZjsP6Knsaxd/xp3Zrh50cG93lR6nPXyUFwzN3ZSOQI0wRJNdGg==",
-      "dev": true
+      "integrity": "sha512-Ubldcmxp5np52/ENotGxlLe6aGMvmF4R8S6tZjsP6Knsaxd/xp3Zrh50cG93lR6nPXyUFwzN3ZSOQI0wRJNdGg=="
     },
     "js-base64": {
       "version": "2.1.9",
@@ -8028,6 +8058,26 @@
       "resolved": "https://registry.npmjs.org/next-tick/-/next-tick-1.0.0.tgz",
       "integrity": "sha1-yobR/ogoFpsBICCOPchCS524NCw=",
       "dev": true
+    },
+    "ngx-bootstrap": {
+      "version": "3.2.0",
+      "resolved": "https://registry.npmjs.org/ngx-bootstrap/-/ngx-bootstrap-3.2.0.tgz",
+      "integrity": "sha512-oLSLIWZgRiIfcuxyXLMZUOhX3wZtg6lpuMbdo/0UzMDg2bSOe1XPskcKZ/iuOa3FOlU9rjuYMzswHYYV5f/QCA=="
+    },
+    "ngx-editor": {
+      "version": "4.1.0",
+      "resolved": "https://registry.npmjs.org/ngx-editor/-/ngx-editor-4.1.0.tgz",
+      "integrity": "sha512-TdbFoHYJjWjyrYEw6fiYrP50s7mLcRErvSYfQ+Nz47Hse44klogi7FDl+hUjVZPBQVc5xXtTwcGSzId3ptxf8w==",
+      "requires": {
+        "tslib": "^1.9.0"
+      },
+      "dependencies": {
+        "tslib": {
+          "version": "1.9.3",
+          "resolved": "https://registry.npmjs.org/tslib/-/tslib-1.9.3.tgz",
+          "integrity": "sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ=="
+        }
+      }
     },
     "nice-try": {
       "version": "1.0.5",
@@ -10288,6 +10338,11 @@
         "symbol-observable": "^1.0.1"
       }
     },
+    "rxjs-compat": {
+      "version": "6.4.0",
+      "resolved": "https://registry.npmjs.org/rxjs-compat/-/rxjs-compat-6.4.0.tgz",
+      "integrity": "sha512-eo/O8RS83hJdJukCtA+IF6qnqa8FPOuVo+OPCzgVi+dbTle9KCdNv97IcQO0WwNVik7DJLKmf0F8uwzc0q40vw=="
+    },
     "safe-buffer": {
       "version": "5.1.1",
       "resolved": "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.1.1.tgz",
@@ -10812,6 +10867,66 @@
       "version": "3.0.2",
       "resolved": "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.2.tgz",
       "integrity": "sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0="
+    },
+    "simditor": {
+      "version": "2.3.23",
+      "resolved": "https://registry.npmjs.org/simditor/-/simditor-2.3.23.tgz",
+      "integrity": "sha512-duGugv2RIJbAtBzoy/+87C/Ij68HNRJJnHpcfR9HH7uXa+2jUYHjKWM8XBDQrNZOZ3x346zWuwgtbyXSgtbG9A==",
+      "requires": {
+        "dompurify": "^1.0.8",
+        "jquery": "^3.3.1",
+        "simple-hotkeys": "^1.0.3",
+        "simple-module": "^3.0.3",
+        "simple-uploader": "^3.0.0"
+      }
+    },
+    "simple-hotkeys": {
+      "version": "1.0.3",
+      "resolved": "https://registry.npmjs.org/simple-hotkeys/-/simple-hotkeys-1.0.3.tgz",
+      "integrity": "sha1-R6W8NTYspzOWEb0JqE+jeBiwu8Y=",
+      "requires": {
+        "jquery": "2.x",
+        "simple-module": "~2.0.5"
+      },
+      "dependencies": {
+        "jquery": {
+          "version": "2.2.4",
+          "resolved": "https://registry.npmjs.org/jquery/-/jquery-2.2.4.tgz",
+          "integrity": "sha1-LInWiJterFIqfuoywUUhVZxsvwI="
+        },
+        "simple-module": {
+          "version": "2.0.6",
+          "resolved": "https://registry.npmjs.org/simple-module/-/simple-module-2.0.6.tgz",
+          "integrity": "sha1-zsglAyX4x/V19Kp1yRmzg5amA3s=",
+          "requires": {
+            "jquery": "2.x"
+          }
+        }
+      }
+    },
+    "simple-module": {
+      "version": "3.0.3",
+      "resolved": "https://registry.npmjs.org/simple-module/-/simple-module-3.0.3.tgz",
+      "integrity": "sha1-rVJ2Z4XSfNlCfuhkWknkEZlyWpI=",
+      "requires": {
+        "jquery": "^3.0.0"
+      }
+    },
+    "simple-uploader": {
+      "version": "3.0.0",
+      "resolved": "https://registry.npmjs.org/simple-uploader/-/simple-uploader-3.0.0.tgz",
+      "integrity": "sha1-wJ9wbxz8vqH+eA41dZpoOxM21NE=",
+      "requires": {
+        "jquery": "~3.1.0",
+        "simple-module": "~3.0.0"
+      },
+      "dependencies": {
+        "jquery": {
+          "version": "3.1.1",
+          "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.1.1.tgz",
+          "integrity": "sha1-NHwcIcfgBBFeCk2jLOzgQfrTyKM="
+        }
+      }
     },
     "slash": {
       "version": "1.0.0",

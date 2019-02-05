@@ -18,6 +18,9 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authorization;
 using UPAEventsPayPal;
 using Microsoft.AspNetCore.Cors;
+using System.Net.Mail;
+using ApplicationConstants;
+using System.IO;
 
 namespace SimbaToursEastAfrica.Controllers
 {
@@ -29,17 +32,36 @@ namespace SimbaToursEastAfrica.Controllers
         private ServicesEndPoint.GeneralSevices.ServicesEndPoint _serviceEndPoint;
         public readonly IOptions<ApplicationConstants.ApplicationConstants> _applicationConstants;
         public readonly IOptions<ApplicationConstants.twitterProfileFiguration> _twitterProfileFiguration;
+        public readonly IOptions<ApplicationConstants.BusinessEmailDetails> _businessSmtpDetails;
 
-        public HomeController(IMailService emailService, IUnitOfWork simbaToursUnitOfWork, IOptions<ApplicationConstants.ApplicationConstants> applicationConstants, IOptions<ApplicationConstants.twitterProfileFiguration> twitterProfileFiguration)
+        public HomeController(IMailService emailService, IUnitOfWork simbaToursUnitOfWork, IOptions<ApplicationConstants.ApplicationConstants> applicationConstants, IOptions<ApplicationConstants.twitterProfileFiguration> twitterProfileFiguration, IOptions<ApplicationConstants.BusinessEmailDetails> businessSmtpDetails)
         {
             _emailService = emailService;
             _simbaToursUnitOfWork = simbaToursUnitOfWork;
             _applicationConstants = applicationConstants;
             _twitterProfileFiguration = twitterProfileFiguration;
+            _businessSmtpDetails = businessSmtpDetails;
         }
         public IActionResult Index()
         {
             return View();
+        }
+        [Authorize()]
+        [HttpPost]
+        [Consumes("multipart/form-data")]
+        public IActionResult SendEmail()
+        {
+            try
+            {
+                _emailService.BusinessEmailDetails = _businessSmtpDetails; 
+                //Send Email:
+                _emailService.SendEmail(new EmailDao { Attachment = Request.Form.Files.Any()? Request.Form.Files[0]:null, EmailBody = Request.Form["emailBody"], EmailFrom = Request.Form["emailFrom"], EmailSubject = Request.Form["emailSubject"], EmailTo = Request.Form["emailTo"] });
+                return View("Index");
+            }
+            catch(Exception e)
+            {
+                return Json(new { Result = false });
+            }
         }
         [Authorize()]
         [HttpPost]

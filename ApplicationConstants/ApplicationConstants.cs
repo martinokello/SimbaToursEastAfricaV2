@@ -29,4 +29,12 @@ namespace ApplicationConstants
         public int cacheTimeSecs { get; set; }
         public string cachKey { get; set; }
     }
+
+    public class BusinessEmailDetails
+    {
+        public string SmtpServer { get; set; }
+        public string BusinessEmail { get; set; }
+        public string NetworkUsername { get; set; }
+        public string NetworkPassword { get; set; }
+    }
 }

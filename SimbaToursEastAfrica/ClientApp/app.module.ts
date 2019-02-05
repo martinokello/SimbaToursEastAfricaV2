@@ -29,6 +29,8 @@ import { ForgotPasswordComponent } from './components/forgotPassword/forgotPassw
 import { PayByInstallments } from './components/installments/installments.component';
 import { TransportPricingComponent } from './components/transportPricing/transportPricing.component';
 import { UserRolesComponent } from './components/userroles/userroles.component';
+import { ContactUsComponent } from './components/contactus/contactus.component';
+import { AboutUsComponent } from './components/about/aboutus.component'; 
 
 @NgModule({
     declarations: [
@@ -58,7 +60,9 @@ import { UserRolesComponent } from './components/userroles/userroles.component';
         ForgotPasswordComponent,
         PayByInstallments,
         TransportPricingComponent,
-        UserRolesComponent
+        UserRolesComponent,
+        ContactUsComponent,
+        AboutUsComponent
     ],
     imports: [
         CommonModule,
@@ -85,7 +89,10 @@ import { UserRolesComponent } from './components/userroles/userroles.component';
             { path: 'make-Payments', component: PayByInstallments },
             { path: 'transport-pricing', component: TransportPricingComponent },
             { path: 'logout', component: HomeComponent },
-            { path: 'manage-roles', component: UserRolesComponent }, 
+            { path: 'manage-roles', component: UserRolesComponent },
+            { path: 'contactus', component: ContactUsComponent },
+            { path: 'aboutus', component: AboutUsComponent }, 
+
 
             { path: '**', redirectTo: 'home' }
         ])

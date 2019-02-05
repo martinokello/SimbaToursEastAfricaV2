@@ -9,7 +9,7 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true, // Workaround for https://github.com/angular/angular/issues/17863. Remove this if you upgrade to a fixed version of Angular.
     "lib": [ "es5", "dom", "es2015.promise" ],
-    "types": [ "webpack-env" ]
+    "types": [ "webpack-env", "googlemaps" ]
   },
   "exclude": [ "bin", "node_modules" ],
   "atom": { "rewriteTsconfig": false }

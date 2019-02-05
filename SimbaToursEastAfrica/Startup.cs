@@ -63,6 +63,7 @@ namespace SimbaToursEastAfrica
             var connectionString = Configuration.GetConnectionString("SimbaToursEastAfrica");
             var identityConectionString = Configuration.GetConnectionString("DefaultConnection");
 
+            services.Configure<ApplicationConstants.BusinessEmailDetails>(Configuration.GetSection("BusinessEmailDetails"));
             services.Configure<ApplicationConstants.ApplicationConstants>(Configuration.GetSection("ApplicationConstants"));
             services.Configure<ApplicationConstants.twitterProfileFiguration>(Configuration.GetSection("twitterProfileFiguration"));
 
