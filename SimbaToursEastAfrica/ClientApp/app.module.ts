@@ -20,6 +20,7 @@ import { LaguagePricingComponent } from './components/laguagePricing/laguagePric
 import { HotelPricingComponent } from './components/hotelPricing/hotelPricing.component';
 import { DealsPricingComponent } from './components/dealsPricing/dealsPricing.component';
 import { SchedulesPricingComponent } from './components/schedulesPricing/schedulesPricing.component';
+import { SchedulesAdminComponent } from './components/schedulesAdmin/schedulesAdmin.component';
 import { AddLocationComponent } from './components/addLocation/addLocation.component';
 import { AddVehicleComponent } from './components/addVehicle/addVehicle.component';
 import { AddHotelComponent } from './components/addHotel/addHotel.component';
@@ -51,6 +52,7 @@ import { AboutUsComponent } from './components/about/aboutus.component';
         HotelPricingComponent,
         DealsPricingComponent,
         SchedulesPricingComponent,
+        SchedulesAdminComponent,
         AddVehicleComponent,
         AddHotelComponent,
         AddLocationComponent,
@@ -78,6 +80,7 @@ import { AboutUsComponent } from './components/about/aboutus.component';
             { path: 'hotel-pricing', component: HotelPricingComponent },
             { path: 'laguage-pricing', component: LaguagePricingComponent },
             { path: 'meal-pricing', component: MealPricingComponent },
+            { path: 'schedules-admin', component: SchedulesAdminComponent },
             { path: 'schedules-pricing', component: SchedulesPricingComponent },
             { path: 'add-hotel', component: AddHotelComponent },
             { path: 'add-location', component: AddLocationComponent },

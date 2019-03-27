@@ -19,7 +19,6 @@ namespace SimbaToursEastAfrica.Models
         public LaguageViewModel CombinedLaguage { get; set; }
         public MealViewModel CombinedMeals { get; set; }
         public List<VehicleViewModel> Vehicles { get; set; }
-        public List<HotelBookingViewModel> HotelBookings { get; set; }
         public decimal CostPerIndividual { get; set; }
         public decimal GrossTotalCosts { get; set; }
         public int LaguageId { get; set; }

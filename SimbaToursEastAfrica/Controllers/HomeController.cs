@@ -300,14 +300,23 @@ namespace SimbaToursEastAfrica.Controllers
             return Json(deals);
 
         }
-        public JsonResult GetSchedulesPricing()
-        {
 
+        public JsonResult GetSchedulesPricing(int schedulesPricingId = -1)
+        {
             _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);
 
-            SchedulesPricing[] deals = _serviceEndPoint.GetSchedulesPricing();
+            if (schedulesPricingId < 1)
+            { 
+                var deal = _serviceEndPoint.GetSchedulesPricing();
 
-            return Json(deals);
+                return Json(deal);
+            }
+            else
+            {
+                var deal = _serviceEndPoint.GetSchedulesPricing().SingleOrDefault(p => p.SchedulesPricingId == schedulesPricingId);
+
+                return Json(deal);
+            }
 
         }
         public JsonResult GetHotelPricing()

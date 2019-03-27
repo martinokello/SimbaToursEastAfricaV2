@@ -23,7 +23,7 @@
     <script src="~/assets/js/browser.min.js"></script>
     <script src="~/assets/js/breakpoints.min.js"></script>
     <script src="~/assets/js/util.js"></script>
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCNPbLu2PRqU9dWbtw6WE5qijg9o7B3FDQ&sensor=false" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNPbLu2PRqU9dWbtw6WE5qijg9o7B3FDQ&sensor=false" type="text/javascript"></script>
     <style type="text/css">
 
         div#intro {
@@ -47,29 +47,51 @@
             text-align: left !important;
             font-size: medium !important;
         }
+        input[type="button"], button {margin-top:2%;}
+        a.icon {
+            color: blue;
+        }
     </style>
 </head>
-    <body class="is-preload">
-        @RenderBody()
-<!-- Scripts -->
-<script type="text/javascript">
+<body class="is-preload">
+    @RenderBody()
+    <!-- Scripts -->
+    <script type="text/javascript">
 
-    $(document).ready(function () {
-        $('a').parent('li').click(function () {
-            $(this).addClass('link-active');
-            window.href = $(this).find('a').href;
+        $(document).ready(function () {
+            $('a').parent('li').click(function () {
+                $(this).addClass('link-active');
+                window.href = $(this).find('a').href;
+            });
+            $('checkbox.checkbox').css('display', 'block');
+            $('checkbox.checkbox').val('true');
+            $('checkbox.checkbox').css('border-color', 'grey!important');
+            $('checkbox.checkbox').css('-webkit-appearance', 'checkbox');
+
+            //var editor = new Simditor({
+            //    textarea: $('textarea#MessageText')
+            //    //optional options
+            //});
         });
-        $('checkbox.checkbox').css('display', 'block');
-        $('checkbox.checkbox').val('true');
-        $('checkbox.checkbox').css('border-color', 'grey!important');
-        $('checkbox.checkbox').css('-webkit-appearance', 'checkbox');
+    </script>
+    @RenderSection("Scripts",false)
+    
+    <script type="text/javascript" src="https://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4fd0dd2922276224"></script>
+    <script type="text/javascript">
 
-        //var editor = new Simditor({
-        //    textarea: $('textarea#MessageText')
-        //    //optional options
-        //});
-    });
-</script>
-        @RenderSection("Scripts",false)
+        var addthis_config = {
+            data_ga_property: 'UA-17123788-1',
+            data_ga_social: true,
+            "data_track_addressbar": false
+        };
+        var addthis_share = {
+            url_transforms: {
+                clean: true,
+                shorten: {
+                    twitter: 'bitly'
+                }
+            }
+        };
+    </script>
 </body>
 </html>

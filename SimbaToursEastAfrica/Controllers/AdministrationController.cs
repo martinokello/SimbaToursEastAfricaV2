@@ -95,6 +95,7 @@ namespace SimbaToursEastAfrica.Controllers
 
             return Json(result);
         }
+        [HttpGet]
         [HttpPost]
         [Authorize(Roles = ("Administrator"))]
         [Route("PostDealPricing")]

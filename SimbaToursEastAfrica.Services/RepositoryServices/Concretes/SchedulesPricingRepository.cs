@@ -35,6 +35,7 @@ namespace SimbaToursEastAfrica.Services.RepositoryServices.Concretes
             {
                 var schedulesPricing = SimbaToursEastAfricaDbContext.SchedulesPricings.ToList().SingleOrDefault(p => p.SchedulesPricingId == toUpdate.SchedulesPricingId);
                 schedulesPricing.SchedulesDescription = toUpdate.SchedulesDescription;
+                schedulesPricing.SchedulesPricingName = toUpdate.SchedulesPricingName;
                 schedulesPricing.Price = toUpdate.Price;
                 return true;
             }

@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Input,ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Element } from '@angular/compiler';
-import { SafariTourServices, IHotelBooking, IMealPricing, ILaguagePricing, ITransportPricing, IHotel, IMeal, ILaguage, ILocation, IHotelPricing, IAddress, IVehicle, IItem, ItemType, IInvoice, VehicleType } from '../../services/safariTourServices';
+import { SafariTourServices, ITourClient, IHotelBooking, IMealPricing, ILaguagePricing, ITransportPricing, IHotel, IMeal, ILaguage, ILocation, IHotelPricing, IAddress, IVehicle, IItem, ItemType, IInvoice, VehicleType } from '../../services/safariTourServices';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import * as $ from 'jquery';
@@ -216,10 +216,31 @@ export class BookTourComponent implements OnInit {
             //$(this.paymentsForm.nativeElement).submit();
             console.log('Response received');
             console.log(q);
-            SafariTourServices.tourClientModel.grossTotalCosts = 0;
-            SafariTourServices.tourClientModel.combinedLaguage = {};
-            SafariTourServices.tourClientModel.combinedMeals = {};
-            SafariTourServices.tourClientModel = {};
+            localStorage.extraCharges = 0;
+            let model: ITourClient = {
+                tourClientId: 0,
+                mealId: 0,
+                laguageId: 0,
+                clientFirstName: "",
+                clientLastName: "",
+                nationality: "",
+                hasRequiredVisaStatus: true,
+                numberOfIndividuals: 0,
+                vehicles: null,
+                hotelBookings: null,
+                costPerIndividual: 0,
+                hotel: null,
+                emailAddress: "",
+                hasFullyPaid: false,
+                paidInstallments: 0,
+                currentPayment: 0,
+                grossTotalCosts: 0,
+                dateCreated: new Date(),
+                dateUpdated: new Date(),
+                combinedLaguage: null,
+                combinedMeals: null
+            };
+            SafariTourServices.tourClientModel = model;
             alert('Tour Booked successfully: ' + q.result + ', Message: ' + q.message);
             console.log(q.stackTrace);
         });

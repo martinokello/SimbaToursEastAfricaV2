@@ -4,13 +4,13 @@ import * as $ from "jquery";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 @Component({
-    selector: 'schedulesPricing',
-    templateUrl: './schedulesPricing.component.html',
-    styleUrls: ['./schedulesPricing.component.css'],
+    selector: 'schedulesAdmin',
+    templateUrl: './schedulesAdmin.component.html',
+    styleUrls: ['./schedulesAdmin.component.css'],
     providers: [SafariTourServices]
 })
 @Injectable()
-export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterViewChecked {
+export class SchedulesAdminComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
     isAdminUser: boolean | any;
     public schedules: ISchedulesPricing | any;
@@ -24,17 +24,29 @@ export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterVi
 
         this.safariTourService = safariTourService;
     }
+    public updateSchedules() {
+        let div = this.schedulesPricingItem;
+
+        let select = div.nativeElement.querySelector("select");
+        this.schedules.schedulesPricingId = $(select).val();
+        this.safariTourService.UpdateSchedulesPricing(this.schedules).subscribe((data: any) => {
+            alert("Schedules Pricing Updated: " + data.result);
+        });
+    }
+    public createSchedules(): void {
+        this.safariTourService.PostOrCreateSchedulesPricing(this.schedules).subscribe((data: any) => {
+            alert("Schedules Pricing Set: " + data.result);
+        });
+    }
     public selectSchedulesPricing() {
         let div = this.schedulesPricingItem;
 
         let select = div.nativeElement.querySelector("select");
         this.schedules.schedulesPricingId = $(select).val();
+
         let results: Observable<ISchedulesPricing> = this.safariTourService.GetSchedulesPricingById(this.schedules.schedulesPricingId);
         results.map((q: ISchedulesPricing) => {
             this.schedules = q;
-
-            localStorage.extraCharges += this.schedules.price;
-
         }).subscribe();
     }
     ngAfterViewChecked() {
@@ -62,7 +74,6 @@ export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterVi
         let div = this.schedulesPricingItem;
 
         let select = div.nativeElement.querySelector("select");
-        console.log(select);
 
         let actualResult: Observable<ISchedulesPricing[]> = this.safariTourService.GetSchedulesPricing();
         actualResult.map((p: ISchedulesPricing[]) => {

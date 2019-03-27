@@ -26,9 +26,9 @@ export class SafariTourServices {
     public bookTourUrl: string = "/SimbaSafariToursV2/Home/BookTour";
     public getHotelDetailsUrl: string = "/SimbaSafariToursV2/Home/GetHotelDetails";
     public getAllHotelDetailsUrl: string = "/SimbaSafariToursV2/Home/GetAllHotelDetails";
-    public dealsPricingUrl: string = "/SimbaSafariToursV2/Home/GetDealsPricing";
     public hotelPricingUrl: string = "/SimbaSafariToursV2/Home/GetHotelPricing";
     public schedulesPricingsUrl: string = "/SimbaSafariToursV2/Home/GetSchedulesPricing";
+    public dealsPricingsUrl: string = "/SimbaSafariToursV2/Home/GetDealsPricing";
     public transportPricingsUrl: string = "/SimbaSafariToursV2/Home/GetTransportPricing";
     public laguagePricingUrl: string = "/SimbaSafariToursV2/Home/GetLaguagePricing";
     public mealPricingUrl: string = "/SimbaSafariToursV2/Home/GetMealPricing";
@@ -42,7 +42,7 @@ export class SafariTourServices {
     public updateLaguagePricingUrl: string = "/SimbaSafariToursV2/api/Administration/UpdateLaguagePricing";
     public updateMealPricingUrl: string = "/SimbaSafariToursV2/api/Administration/UpdateMealPricing";
     public postCreateMealPricingUrl: string = "/SimbaSafariToursV2/api/Administration/PostMealPricing";
-    public postOrUpdateSchedulesPricingUrl: string = "/SimbaSafariToursV2/api/Administration/PostSchedulesPricing";
+    public postOrCreateSchedulesPricingUrl: string = "/SimbaSafariToursV2/api/Administration/PostSchedulesPricing";
     public updateSchedulesPricingUrl: string = "/SimbaSafariToursV2/api/Administration/UpdateSchedulesPricing";
     public postCreateHotelPricingUrl: string = "/SimbaSafariToursV2/api/Administration/PostHotelPricing";
     public postUpdateHotelPricingUrl: string = "/SimbaSafariToursV2/api/Administration/UpdateHotelPricing";
@@ -62,13 +62,40 @@ export class SafariTourServices {
     public getLogoutUrl: string = "/SimbaSafariToursV2/Account/Logout";
     public postRegisterUrl: string = "/SimbaSafariToursV2/Account/Register";
     public postForgotPasswordUrl: string = "/SimbaSafariToursV2/Account/ForgotPassword";
-    public static tourClientModel: ITourClient | any = {};
-    public static grossTotalCosts: number = 0;
+    public static tourClientModel: ITourClient;
     public static clientEmailAddress: string = "";
     public postSendEmail: string = " /SimbaSafariToursV2/Home/SendEmail";
+    public static extraCharges:number = 0.00;
 
     public constructor(httpClient: Http) {
         this.httpClient = httpClient;
+        let model: ITourClient =  {
+            tourClientId: 0,
+            mealId: 0,
+            laguageId:0,
+            clientFirstName : "",
+            clientLastName : "",
+            nationality : "",
+            hasRequiredVisaStatus : true,
+            numberOfIndividuals : 0,
+            vehicles : null,
+            hotelBookings: null,
+            costPerIndividual : 0,
+            hotel : null,
+            emailAddress : "",
+            hasFullyPaid : false,
+            paidInstallments: 0,
+            currentPayment: 0,
+            grossTotalCosts: 0,
+            dateCreated: new Date(),
+            dateUpdated: new Date(),
+            combinedLaguage: null,
+            combinedMeals: null
+        };
+        localStorage.extraCharges = 0.0;
+        SafariTourServices.tourClientModel = model;
+        SafariTourServices.extraCharges = 0;
+        SafariTourServices.tourClientModel.grossTotalCosts = 0;
     }
     public static SetUserEmail(userEmailAddress: string) {
         SafariTourServices.clientEmailAddress = userEmailAddress;
@@ -131,10 +158,8 @@ export class SafariTourServices {
     }
     public BookTour(): any {
         try {
-
-            SafariTourServices.tourClientModel.grossTotalCosts = 0;
-
-            SafariTourServices.tourClientModel.grossTotalCosts += SafariTourServices.tourClientModel.hotel.hotelPricing.price * SafariTourServices.tourClientModel.numberOfIndividuals;
+            SafariTourServices.tourClientModel.grossTotalCosts = SafariTourServices.tourClientModel.hotel.hotelPricing.price * SafariTourServices.tourClientModel.numberOfIndividuals;
+            SafariTourServices.tourClientModel.grossTotalCosts += localStorage.extraCharges
 
             let body = JSON.stringify(SafariTourServices.tourClientModel);
 
@@ -294,7 +319,7 @@ export class SafariTourServices {
     public GetSchedulesPricingById(schedulesPricingId: number): Observable<any> {
 
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        let requestUrl = this.GetSchedulesPricingById + "?schedulesPricingId=" + schedulesPricingId;
+        let requestUrl = this.schedulesPricingsUrl + "?schedulesPricingId=" + schedulesPricingId;
         let requestoptions: RequestOptions = new RequestOptions({
             url: requestUrl,
             method: RequestMethod.Get,
@@ -308,7 +333,7 @@ export class SafariTourServices {
     public GetDealsPricingById(dealPricingId: number): Observable<any> {
 
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        let requestUrl = this.GetSchedulesPricingById + "?dealPricingId=" + dealPricingId;
+        let requestUrl = this.dealsPricingsUrl + "?dealPricingId=" + dealPricingId;
         let requestoptions: RequestOptions = new RequestOptions({
             url: requestUrl,
             method: RequestMethod.Get,
@@ -527,7 +552,7 @@ export class SafariTourServices {
             return res.json();
         });
     }
-    public PostOrUpdateSchedulesPricing(schedulesPricing: ISchedulesPricing): Observable<any> {
+    public UpdateSchedulesPricing(schedulesPricing: ISchedulesPricing): Observable<any> {
 
         let body = JSON.stringify(schedulesPricing);
         var actionResult: any;
@@ -535,7 +560,7 @@ export class SafariTourServices {
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
 
         let requestoptions: RequestOptions = new RequestOptions({
-            url: this.postOrUpdateSchedulesPricingUrl,
+            url: this.updateSchedulesPricingUrl,
             method: RequestMethod.Post,
             headers: headers,
             body: body
@@ -545,7 +570,7 @@ export class SafariTourServices {
         });
     }
 
-    public PostSchedulesPricing(schedulesPricing: ISchedulesPricing): Observable<any> {
+    public PostOrCreateSchedulesPricing(schedulesPricing: ISchedulesPricing): Observable<any> {
 
         let body = JSON.stringify(schedulesPricing);
         var actionResult: any;
@@ -553,7 +578,7 @@ export class SafariTourServices {
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
 
         let requestoptions: RequestOptions = new RequestOptions({
-            url: this.updateSchedulesPricingUrl,
+            url: this.postOrCreateSchedulesPricingUrl,
             method: RequestMethod.Post,
             headers: headers,
             body: body
@@ -765,7 +790,7 @@ export class SafariTourServices {
     }
     public GetDealsPricing(): Observable<IDealsPricing[]> {
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
-        let requestUrl = this.dealsPricingUrl;
+        let requestUrl = this.dealsPricingsUrl;
         let requestoptions: RequestOptions = new RequestOptions({
             url: requestUrl,
             method: RequestMethod.Get,
@@ -880,6 +905,14 @@ export class SafariTourServices {
         SafariTourServices.tourClientModel.vehicles = vehicles;
         SafariTourServices.tourClientModel.combinedLaguage = combinedLaguage;
         SafariTourServices.tourClientModel.combinedMeals = combinedMeals;
+        SafariTourServices.tourClientModel.dateCreated = new Date();
+        SafariTourServices.tourClientModel.dateUpdated = new Date();
+        SafariTourServices.tourClientModel.hasFullyPaid = false;
+        SafariTourServices.tourClientModel.paidInstallments = 0.00;
+        SafariTourServices.tourClientModel.costPerIndividual = hotel.hotelPricing.price;
+        SafariTourServices.tourClientModel.tourClientId = 0;
+        SafariTourServices.tourClientModel.mealId = 0;
+        SafariTourServices.tourClientModel.laguageId = 0;
     }
 
     public GetItemTypeNames(): ItemType[] {
@@ -948,10 +981,12 @@ export interface IAddress {
 }
 export interface ITourClient {
     tourClientId: number;
+    mealId: number;
+    laguageId: number;
     clientFirstName: string;
     clientLastName: string;
     nationality: string;
-    hasRequiredVisaStatus: string;
+    hasRequiredVisaStatus: boolean;
     numberOfIndividuals: number;
     vehicles: IVehicle[];
     hotelBookings: IHotelBooking[];
@@ -964,6 +999,8 @@ export interface ITourClient {
     grossTotalCosts: number;
     dateCreated: Date;
     dateUpdated: Date;
+    combinedLaguage: any,
+    combinedMeals:any,
 }
 export interface IMeal {
 

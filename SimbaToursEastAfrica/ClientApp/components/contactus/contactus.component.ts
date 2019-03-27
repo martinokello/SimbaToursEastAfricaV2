@@ -26,6 +26,7 @@ export class ContactUsComponent implements OnInit {
 
         let formView = this.emailFormView;
         let form = formView.nativeElement.querySelector("form");
+        if (form.checkValidity())
         form.submit();
         /*
         let form = new FormData();

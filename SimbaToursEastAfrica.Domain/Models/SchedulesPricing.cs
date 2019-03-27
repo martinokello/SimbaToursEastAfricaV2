@@ -14,6 +14,7 @@ namespace SimbaToursEastAfrica.Domain.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int SchedulesPricingId { get; set; }
 
+        public string SchedulesPricingName { get; set; }
         public string SchedulesDescription { get; set; }
 
         public decimal Price { get; set; }

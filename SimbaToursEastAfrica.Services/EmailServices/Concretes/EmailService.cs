@@ -41,9 +41,9 @@ namespace SimbaToursEastAfrica.Services.EmailServices.Concretes
                 smtpServer.Credentials = networkCredentials;
 
                 var mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress(mail.EmailFrom);
+                mailMessage.From = new MailAddress(_businessSmtpDetails.Value.BusinessEmail);
                 mailMessage.Body = mail.EmailBody;
-                mailMessage.Subject = mail.EmailSubject;
+                mailMessage.Subject = @"From " + mail.EmailFrom + " " + mail.EmailSubject;
                 var memoryStream = new MemoryStream();
                 var fileStream = new FileInfo("/images/attachement");
 
