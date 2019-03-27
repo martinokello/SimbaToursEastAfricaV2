@@ -42,6 +42,15 @@
                 </div>
             </div>
             <input type="button" class="btn-primary" value="Add to Tour" (click)="selectSchedulesPricing()" />
+        </div>    <div>
+            <h4>Return To Booking Page</h4>
+            <span class="button">
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/book-tour']">
+                        Go To Booking Page
+                    </a>
+                </li>
+            </span>
         </div>
     </div>
 </form>

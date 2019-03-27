@@ -1,5 +1,16 @@
 ﻿<div #clientDetails class="col-lg-12" style="text-align:left !important; color:black !important;">
     <div>
+        <h4>Optionally Add Schedules For Visits In Advance</h4>
+        <span class="button">
+            <li [routerLinkActive]="['link-active']">
+                <a [routerLink]="['/schedules-pricing']">
+                    Options to add Visits Within Tour
+                </a>
+            </li>
+        </span>
+    </div>
+    <h3>Book Tour</h3>
+    <div>
         <h4>Person details</h4>
         <tourclient></tourclient>
     </div>
@@ -67,14 +78,4 @@
             <input type="button" class="btn-primary disabled" value="Book Tour" (click)="bookTour()" id="submitTourBooking" />
         </div>
     </form>
-</div>
-<div>
-    <h4>Optionally Add Schedules For Visits In Advance</h4>
-    <span class="button">
-        <li [routerLinkActive]="['link-active']">
-            <a [routerLink]="['/schedules-pricing']">
-                Options to add Visits Within Tour
-            </a>
-        </li>
-    </span>
 </div>
