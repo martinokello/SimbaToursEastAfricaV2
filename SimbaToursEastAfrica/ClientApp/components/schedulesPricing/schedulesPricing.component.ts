@@ -25,6 +25,8 @@ export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterVi
         this.safariTourService = safariTourService;
     }
     public selectSchedulesPricing() {
+        this.model.editable = false;
+        this.model.viewable = true;
         let div = this.schedulesPricingItem;
 
         let select = div.nativeElement.querySelector("select");

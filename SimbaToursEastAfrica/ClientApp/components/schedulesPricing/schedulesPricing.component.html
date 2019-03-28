@@ -6,7 +6,7 @@
             <div>
                 <div class="form-group">
                     <label>Select Schedules Pricing</label>
-                    <select id="schedulesPricingId" name="schedulesPricingId" [(ngModel)]="schedules.schedulesPricingId"></select>
+                    <select id="schedulesPricingId" name="schedulesPricingId" [(ngModel)]="schedules.schedulesPricingId" (change)="selectSchedulesPricing()"></select>
                 </div>
                 <div class="form-group">
                     <label>Or Create New Schedules Pricing</label>
