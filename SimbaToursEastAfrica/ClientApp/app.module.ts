@@ -32,6 +32,7 @@ import { TransportPricingComponent } from './components/transportPricing/transpo
 import { UserRolesComponent } from './components/userroles/userroles.component';
 import { ContactUsComponent } from './components/contactus/contactus.component';
 import { AboutUsComponent } from './components/about/aboutus.component'; 
+import { SectionsContactComponent } from './components/sectionscontact/sectionscontact.component';
 
 @NgModule({
     declarations: [
@@ -64,7 +65,8 @@ import { AboutUsComponent } from './components/about/aboutus.component';
         TransportPricingComponent,
         UserRolesComponent,
         ContactUsComponent,
-        AboutUsComponent
+        AboutUsComponent,
+        SectionsContactComponent
     ],
     imports: [
         CommonModule,
