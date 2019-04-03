@@ -11,8 +11,8 @@
                 </div>
                 <div class="field">
                     <label for="email">Email</label>
-                    <input name="emailFrom" type="text" [(ngModel)]="email.emailFrom" #emailFrom="ngModel" required placeholder="Your email address" id="email" />
-                    <div *ngIf="emailForm.submitted && emailSubject.invalid" class="text-danger">
+                    <input name="emailFrom" type="email" [(ngModel)]="email.emailFrom" #emailFrom="ngModel" required placeholder="Your email address" id="email" />
+                    <div *ngIf="emailForm.submitted && emailFrom.invalid" class="text-danger">
                         email subject field required.
                     </div>
                 </div>
