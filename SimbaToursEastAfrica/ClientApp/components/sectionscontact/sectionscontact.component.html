@@ -13,16 +13,17 @@
                     <label for="email">Email</label>
                     <input name="emailFrom" type="email" [(ngModel)]="email.emailFrom" #emailFrom="ngModel" required placeholder="Your email address" id="email" />
                     <div *ngIf="emailForm.submitted && emailFrom.invalid" class="text-danger">
-                        email subject field required.
+                        email from field required.
                     </div>
                 </div>
                 <div class="field">
                     <label for="message">Message</label>
-                    <textarea name="emailBody" required [(ngModel)]="email.emailBody" #emailBody="ngModel" placeholder="Enter your post here" id="message" rows="3"></textarea>
+                    <textarea name="emailBody" required [(ngModel)]="email.emailBody" #emailBody="ngModel" placeholder="Enter your post here" id="message" rows="3"></textarea>              
+                    <div *ngIf="emailForm.submitted && emailBody.invalid" class="text-danger">
+                        email body field required.
+                    </div>
                 </div>
-                <div *ngIf="emailForm.submitted && emailBody.invalid" class="text-danger">
-                    email body field required.
-                </div>
+
             </div>
             <ul class="actions">
                 <li><input type="submit" (click)="sendEmail()" value="Send Message" /></li>
