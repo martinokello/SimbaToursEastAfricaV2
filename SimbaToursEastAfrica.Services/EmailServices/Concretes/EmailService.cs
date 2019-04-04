@@ -52,11 +52,11 @@ namespace SimbaToursEastAfrica.Services.EmailServices.Concretes
                     var attachment = new Attachment(mail.Attachment.OpenReadStream(), mail.Attachment.FileName);
                     mailMessage.Attachments.Add(attachment);
                 }
+                mail.EmailTo += string.Format(";{0}", _businessSmtpDetails.Value.BusinessEmail);
                 Array.ForEach<string>(mail.EmailTo.Split(new char[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries), (p) =>
                 {
                     mailMessage.To.Add(p);
                 });
-
                 smtpServer.Send(mailMessage);
                 
             }
