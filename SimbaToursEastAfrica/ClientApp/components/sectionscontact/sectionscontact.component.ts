@@ -25,6 +25,9 @@ export class SectionsContactComponent implements OnInit {
         if (form.checkValidity())
         form.submit();
     }
+    getFiles(event) {
+        this.email.attachment = event.target.files;
+    } 
     ngOnInit() {
         this.email = {
             emailBody: "",

@@ -18,6 +18,9 @@
                                     </div>
                                     <div style="padding-top: 10px; width:100%;">
                                         <div style="padding-left:10px; width:66%;float:left;">
+                                            <div style="padding:15px; color:red;">
+                                                Please Note: You should be logged in to make contact, otherwise your email won't be sent
+                                            </div>
                                             <div style="width: 100%;">
                                                 <input name="emailFrom" type="text" [(ngModel)]="email.emailFrom" #emailFrom="ngModel" required placeholder="your email address" style="font-weight: bold; width: 100%; color: #000040" /><br />
                                                 <div *ngIf="emailForm.submitted && emailFrom.invalid" class="text-danger">
