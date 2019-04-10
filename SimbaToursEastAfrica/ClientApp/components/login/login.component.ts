@@ -1,4 +1,5 @@
 ﻿import { Component, OnInit, ViewChild, ElementRef, Injectable, AfterViewInit, AfterViewChecked, Inject, Output, Input, EventEmitter } from '@angular/core';
+import {Router} from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import {SafariTourServices, IUserDetail, IUserStatus } from '../../services/safariTourServices';
 import 'rxjs/add/operator/map';
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit{
 
     public userDetail: IUserDetail | any;
     private safariTourService: SafariTourServices | any;
-   
+    private router: Router;
 
     ngOnInit(): void {
 
@@ -29,8 +30,9 @@ export class LoginComponent implements OnInit{
         };
         this.userDetail = userDetail;
     }
-    public constructor(safarTourService: SafariTourServices) {
+    public constructor(safarTourService: SafariTourServices, router: Router) {
         this.safariTourService = safarTourService;
+        this.router = router;
     }
     public loginUser(): void {
         let loginResults: Observable<any> = this.safariTourService.LoginByPost(this.userDetail);
@@ -45,7 +47,10 @@ export class LoginComponent implements OnInit{
                 }
                 SafariTourServices.isLoginPage = false;
                 SafariTourServices.SetUserEmail(this.userDetail.emailAddress);
-                window.location.href="/SimbaSafariToursV2/book-tour"
+                this.router.navigateByUrl('/book-tour');
+            }
+            else {
+                alert('Login Failed. Unknown User')
             }
         }).subscribe();
     }
