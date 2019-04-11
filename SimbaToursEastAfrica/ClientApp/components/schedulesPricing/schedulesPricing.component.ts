@@ -34,8 +34,8 @@ export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterVi
         let results: Observable<ISchedulesPricing> = this.safariTourService.GetSchedulesPricingById(this.schedules.schedulesPricingId);
         results.map((q: ISchedulesPricing) => {
             this.schedules = q;
-
-            localStorage.extraCharges += this.schedules.price;
+            let extraCharges = parseFloat(localStorage.getItem('extraCharges')).toFixed(2)
+            localStorage.setItem('extraCharges', (extraCharges += this.schedules.price).toString());;
 
         }).subscribe();
     }

@@ -65,7 +65,6 @@ export class SafariTourServices {
     public static tourClientModel: ITourClient;
     public static clientEmailAddress: string = "";
     public postSendEmail: string = " /SimbaSafariToursV2/Home/SendEmail";
-    public static extraCharges:number = 0.00;
 
     public constructor(httpClient: Http) {
         this.httpClient = httpClient;
@@ -92,9 +91,7 @@ export class SafariTourServices {
             combinedLaguage: null,
             combinedMeals: null
         };
-        localStorage.extraCharges = 0.0;
         SafariTourServices.tourClientModel = model;
-        SafariTourServices.extraCharges = 0;
         SafariTourServices.tourClientModel.grossTotalCosts = 0;
     }
     public static SetUserEmail(userEmailAddress: string) {
@@ -159,7 +156,6 @@ export class SafariTourServices {
     public BookTour(): any {
         try {
             SafariTourServices.tourClientModel.grossTotalCosts = SafariTourServices.tourClientModel.hotel.hotelPricing.price * SafariTourServices.tourClientModel.numberOfIndividuals;
-            SafariTourServices.tourClientModel.grossTotalCosts += localStorage.extraCharges
 
             let body = JSON.stringify(SafariTourServices.tourClientModel);
 

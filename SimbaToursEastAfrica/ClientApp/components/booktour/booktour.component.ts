@@ -42,6 +42,7 @@ export class BookTourComponent implements OnInit {
         this.safariTourService = safarTourService;
     }
     ngOnInit(): void {
+        this.runningCost = parseFloat(localStorage.getItem('extraCharges'));
         let transportPrincingRes: Observable<ITransportPricing[]> = this.safariTourService.GetTransportPricing();
 
         transportPrincingRes.map((resp: ITransportPricing[]) => {
@@ -106,9 +107,9 @@ export class BookTourComponent implements OnInit {
     }
 
     public hotelSet(isSet: boolean) {
-        if (this.runningCost == 0) {
+        if (this.runningCost === parseFloat(localStorage.getItem('extraCharges'))) {
             let currentTotal = (this.hotel.hotelPricing.price * SafariTourServices.tourClientModel.numberOfIndividuals);
-            this.runningCost = parseFloat(Math.round(this.runningCost + currentTotal).toFixed(2));
+            this.runningCost += parseFloat(Math.round(this.runningCost + currentTotal).toFixed(2));
         }
     }
     public updateMeal(meal: IMeal) {
@@ -216,7 +217,9 @@ export class BookTourComponent implements OnInit {
             //$(this.paymentsForm.nativeElement).submit();
             console.log('Response received');
             console.log(q);
-            localStorage.extraCharges = 0;
+
+            let extraCharges: number = 0.00
+            localStorage.setItem('extraCharges', extraCharges.toString());
             let model: ITourClient = {
                 tourClientId: 0,
                 mealId: 0,
