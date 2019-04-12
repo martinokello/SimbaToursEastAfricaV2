@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map';
 export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
     isAdminUser: boolean | any;
-    public schedules: ISchedulesPricing | any;
+    public schedules: ISchedulesPricing;
     model: any;
 
     private safariTourService: SafariTourServices | any;
@@ -38,7 +38,8 @@ export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterVi
         let div = this.schedulesPricingItem;
 
         let select = div.nativeElement.querySelector("select");
-        this.schedules.schedulesPricingId = $(select).val();
+        let pricingIdStr = $(select).val().toString();
+        this.schedules.schedulesPricingId = parseInt(pricingIdStr);
         let results: Observable<ISchedulesPricing> = this.safariTourService.GetSchedulesPricingById(this.schedules.schedulesPricingId);
         results.map((q: ISchedulesPricing) => {
             this.schedules = q;
