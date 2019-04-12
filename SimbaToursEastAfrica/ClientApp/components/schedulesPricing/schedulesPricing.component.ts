@@ -24,9 +24,13 @@ export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterVi
 
         this.safariTourService = safariTourService;
     }
+
+    public addSchedule(): void {
+
+        let extraCharges = parseFloat(localStorage.getItem('extraCharges')).toFixed(2)
+        localStorage.setItem('extraCharges', (extraCharges += this.schedules.price).toString());
+    }
     public selectSchedulesPricing() {
-        this.model.editable = false;
-        this.model.viewable = true;
         let div = this.schedulesPricingItem;
 
         let select = div.nativeElement.querySelector("select");
@@ -34,8 +38,6 @@ export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterVi
         let results: Observable<ISchedulesPricing> = this.safariTourService.GetSchedulesPricingById(this.schedules.schedulesPricingId);
         results.map((q: ISchedulesPricing) => {
             this.schedules = q;
-            let extraCharges = parseFloat(localStorage.getItem('extraCharges')).toFixed(2)
-            localStorage.setItem('extraCharges', (extraCharges += this.schedules.price).toString());;
 
         }).subscribe();
     }
@@ -51,8 +53,8 @@ export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterVi
         //console.log("inside OnInit");
         this.isAdminUser = SafariTourServices.actUserStatus.isUserAdministrator;
         this.model = {};
-        this.model.editable = true;
-        this.model.viewable = false;
+        this.model.editable = false;
+        this.model.viewable = true;
         let schedulesDefault: ISchedulesPricing = {
             schedulesPricingId: 0,
             schedulesPricingName: "",
