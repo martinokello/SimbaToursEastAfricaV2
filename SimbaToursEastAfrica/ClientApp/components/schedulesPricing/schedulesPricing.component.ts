@@ -26,7 +26,7 @@ export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterVi
     }
 
     public addSchedule(): void {
-        if (localStorage.getItem('extraCharges') != 'undefined') {
+        if (localStorage.getItem('extraCharges')) {
             let extraCharges = parseFloat(localStorage.getItem('extraCharges')).toFixed(2)
             localStorage.setItem('extraCharges', (extraCharges += this.schedules.price).toString());
         }

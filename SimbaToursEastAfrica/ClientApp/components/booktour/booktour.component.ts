@@ -45,7 +45,9 @@ export class BookTourComponent implements OnInit {
         window.onbeforeunload = function () {
             localStorage.removeItem("extraCharges"); return '';
         }
-        this.runningCost = parseFloat(localStorage.getItem('extraCharges'));
+        if (localStorage.getItem('extraCharges') != 'undefined') {
+            this.runningCost = parseFloat(localStorage.getItem('extraCharges'));
+        }
         let transportPrincingRes: Observable<ITransportPricing[]> = this.safariTourService.GetTransportPricing();
 
         transportPrincingRes.map((resp: ITransportPricing[]) => {
