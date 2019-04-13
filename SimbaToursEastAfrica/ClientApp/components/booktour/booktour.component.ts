@@ -180,8 +180,8 @@ export class BookTourComponent implements OnInit {
                 currentTotal= (laguageItem.quantity * this.laguageAccessoriesPricing.unitTravelDocumentPrice);
                 break;
         }
-
-        this.runningCost = parseFloat(Math.round(this.runningCost + currentTotal).toFixed(2));
+        let runningCostStr: string = this.runningCost + currentTotal + "";
+        this.runningCost = parseFloat(parseFloat(runningCostStr).toFixed(2));
     }
     public updateLocaton(location: ILocation) {
         this.hotel.location = location;
@@ -209,7 +209,8 @@ export class BookTourComponent implements OnInit {
                 currentTotal= (vehicle.actualNumberOfPassengersAllocated * this.transportPricing.tourBusPricing);
                 break;
         }
-        this.runningCost = parseFloat(Math.round(this.runningCost + currentTotal).toFixed(2));
+        let runningCostStr: string = this.runningCost + currentTotal + "";
+        this.runningCost = parseFloat(parseFloat(runningCostStr).toFixed(2));
     }
     public bookTour(): void {
         this.hotelBookings.push(this.hotelBooking);
