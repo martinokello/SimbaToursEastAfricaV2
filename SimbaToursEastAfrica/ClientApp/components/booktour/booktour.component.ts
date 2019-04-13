@@ -18,6 +18,7 @@ export class BookTourComponent implements OnInit {
     hotelBookings: IHotelBooking[] = [];
     mealItems: IItem[] = [];
     items: IItem[] = [];
+    extraCharges: number = 0.00;
     currentPayment: number = 0.00;
     combinedMeals: any = {
         mealId: 0,
@@ -45,8 +46,9 @@ export class BookTourComponent implements OnInit {
         window.onbeforeunload = function () {
             localStorage.removeItem("extraCharges"); return '';
         }
-        if (localStorage.getItem('extraCharges') != 'undefined') {
-            this.runningCost += parseFloat(parseFloat(localStorage.getItem('extraCharges')).toFixed(2));
+        if (localStorage.getItem('extraCharges')) {
+            this.extraCharges = parseFloat(localStorage.getItem('extraCharges'));
+            this.runningCost += this.extraCharges;
         }
         let transportPrincingRes: Observable<ITransportPricing[]> = this.safariTourService.GetTransportPricing();
 
@@ -112,7 +114,7 @@ export class BookTourComponent implements OnInit {
     }
 
     public hotelSet(isSet: boolean) {
-        if (this.runningCost === parseFloat(localStorage.getItem('extraCharges'))) {
+        if (this.extraCharges === parseFloat(localStorage.getItem('extraCharges'))) {
             let currentTotal = (this.hotel.hotelPricing.price * SafariTourServices.tourClientModel.numberOfIndividuals);
             this.runningCost += parseFloat(Math.round(this.runningCost + currentTotal).toFixed(2));
         }
