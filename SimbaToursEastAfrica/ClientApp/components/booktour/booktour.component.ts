@@ -12,6 +12,7 @@ import * as $ from 'jquery';
     providers: [SafariTourServices]
 })
 export class BookTourComponent implements OnInit {
+    private isHotelSet: boolean = false;
     @ViewChild("f4") paymentsForm: HTMLElement | any;
     runningCost: number = 0.00;
     vehicles: IVehicle[] = [];
@@ -114,9 +115,10 @@ export class BookTourComponent implements OnInit {
     }
 
     public hotelSet(isSet: boolean) {
-        if (this.runningCost === this.extraCharges) {
+        if (!this.isHotelSet && this.runningCost === this.extraCharges) {
             let currentTotal = (this.hotel.hotelPricing.price * SafariTourServices.tourClientModel.numberOfIndividuals);
             this.runningCost = parseFloat(Math.round(this.runningCost + currentTotal).toFixed(2));
+            this.isHotelSet = true;
         }
     }
     public updateMeal(meal: IMeal) {
