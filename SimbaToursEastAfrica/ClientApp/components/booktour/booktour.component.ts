@@ -117,7 +117,7 @@ export class BookTourComponent implements OnInit {
     public hotelSet(isSet: boolean) {
         if (!this.isHotelSet && this.runningCost === this.extraCharges) {
             let currentTotal = (this.hotel.hotelPricing.price * SafariTourServices.tourClientModel.numberOfIndividuals);
-            this.runningCost = parseFloat(Math.round(this.runningCost + currentTotal).toFixed(2));
+            this.runningCost = this.runningCost + currentTotal;
             this.isHotelSet = true;
         }
     }
@@ -143,7 +143,7 @@ export class BookTourComponent implements OnInit {
         this.combinedMeals.mealItems.push(mealItem);
         let currentTotal = (mealItem.quantity * this.mealPricing.price);
 
-        this.runningCost = parseFloat(Math.round(this.runningCost+currentTotal).toFixed(2));
+        this.runningCost += currentTotal;
     }
 
     public updateLaguage(laguage: ILaguage) {
