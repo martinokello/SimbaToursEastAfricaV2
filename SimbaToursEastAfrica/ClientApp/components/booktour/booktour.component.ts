@@ -116,7 +116,7 @@ export class BookTourComponent implements OnInit {
     public hotelSet(isSet: boolean) {
         if (this.runningCost === this.extraCharges) {
             let currentTotal = (this.hotel.hotelPricing.price * SafariTourServices.tourClientModel.numberOfIndividuals);
-            this.runningCost += parseFloat(Math.round(this.runningCost + currentTotal).toFixed(2));
+            this.runningCost = parseFloat(Math.round(this.runningCost + currentTotal).toFixed(2));
         }
     }
     public updateMeal(meal: IMeal) {
