@@ -12,47 +12,55 @@
                         <router-outlet></router-outlet>
                     </div>
                 </div>
-                <div class="row" style="text-align: left;margin-top:0px;color:teal;background-color: whitesmoke;font-size:smaller; text-align:center;">
-                    <div id="genTweetsDiv" style="text-align:left;padding:10px;" *ngIf="twitterFeeds != null && twitterFeeds.length > 0">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <span><a href="https://twitter.com/martinokello">@martinokello</a></span><span style="margin-left: 20px;"><img width="20px" height="20px" src="/SimbaSafariToursV2/Images/twitter.png" /></span>
-                                <br />
+                <div class="row" style="border-radius:8px;">
+                    <div class="col-lg-7" style="text-align: left;margin-top:0px;color:teal;background-color:silver !important;font-size:smaller; text-align:center;">
+                        <div id="genTweetsDiv" style="text-align:left;padding:10px;" *ngIf="twitterFeeds != null && twitterFeeds.length > 0">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <span><a href="https://twitter.com/martinokello">@martinokello</a></span><span style="margin-left: 20px;"><img width="20px" height="20px" src="/SimbaSafariToursV2/Images/twitter.png" /></span>
+                                    <br />
+                                </div>
                             </div>
-                        </div>
-                        <div style="padding-top:8px;" class="row">
-                            <div *ngFor="let tweet of twitterFeeds" class="col-lg-12">
-                                <div class="row" style="padding-bottom:10px;">
-                                    <div class="col-lg-12">
-                                        <div class="row">
-                                            <div class="col-lg-2" style="text-align:right;"><a href="https://twitter.com/{{tweet.username}}"><img id="img1" style="width:80px;height:auto;" src='{{tweet.groupAvatarUrl}}' /></a></div>
-                                            <div class="col-lg-10" style="padding-top:10px;color:teal; text-align:left;" innerHTML="{{tweet.groupDescription}}"></div>
-                                        </div>
-                                        <div class="row" style="padding-top:8px;text-align:left;" *ngIf="tweet.mediaUrl != '' && tweet.mediaUrl != null">
-                                            <div class="col-lg-offset-2">
-                                                <img src="{{tweet.mediaUrl}}" alt="" style="width:50%;height:auto;" />
+                            <div style="padding-top:8px;" class="row">
+                                <div *ngFor="let tweet of twitterFeeds" class="col-lg-12">
+                                    <div class="row" style="padding-bottom:10px;">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-2" style="text-align:right;"><a href="https://twitter.com/{{tweet.username}}"><img id="img1" style="width:80px;height:auto;" src='{{tweet.groupAvatarUrl}}' /></a></div>
+                                                <div class="col-lg-10" style="padding-top:10px;color:teal; text-align:left;" innerHTML="{{tweet.groupDescription}}"></div>
+                                            </div>
+                                            <div class="row" style="padding-top:8px;text-align:left;" *ngIf="tweet.mediaUrl != '' && tweet.mediaUrl != null">
+                                                <div class="col-lg-offset-2">
+                                                    <img src="{{tweet.mediaUrl}}" alt="" style="width:50%;height:auto;" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-offset-2 col-lg-8" style="text-align:center;border-bottom:dashed thin teal;padding:10px 0px;">
-                                        <span class="duration">{{tweet.duration}}</span><br />
+                                    <div class="row">
+                                        <div class="col-lg-offset-2 col-lg-8" style="text-align:center;border-bottom:dashed thin teal;padding:10px 0px;">
+                                            <span class="duration">{{tweet.duration}}</span><br />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row" style="font-size:smaller;">
-                                    <div class="col-lg-offset-3" style="text-align:center">
-                                        <span class="vseparator">|</span> <a class="tweetResponsePads" href='https://twitter.com/share?in_reply_to_status_id={{tweet.tweetStatusId}}'>
-                                            reply
-                                        </a> <span class="vseparator">|</span><a class="tweetResponsePads" href='https://twitter.com/intent/retweet?tweet_id={{tweet.tweetStatusId}}'>
-                                            retweet
-                                        </a> <span class="vseparator">|</span> <a class="tweetResponsePads" href="https://twitter.com/share">
-                                            tweet
-                                        </a><span class="vseparator">|</span>
+                                    <div class="row" style="font-size:smaller;">
+                                        <div class="col-lg-offset-3" style="text-align:center">
+                                            <span class="vseparator">|</span> <a class="tweetResponsePads" href='https://twitter.com/share?in_reply_to_status_id={{tweet.tweetStatusId}}'>
+                                                reply
+                                            </a> <span class="vseparator">|</span><a class="tweetResponsePads" href='https://twitter.com/intent/retweet?tweet_id={{tweet.tweetStatusId}}'>
+                                                retweet
+                                            </a> <span class="vseparator">|</span> <a class="tweetResponsePads" href="https://twitter.com/share">
+                                                tweet
+                                            </a><span class="vseparator">|</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <img src="/SimbaSafariToursV2/images/rhinosPlusBaby.jpg" alt="Rhinos Baby and Mother" style="width:99% !important; height:auto;" /><br />
+                        <img src="/SimbaSafariToursV2/images/buffalo.jpg" alt="Rhinos Baby and Mother" style="width:99% !important; height:auto;" /><br />
+                        <img src="/SimbaSafariToursV2/images/giraffeCar.jpg" alt="Rhinos Baby and Mother" style="width:99% !important; height:auto;" /><br />
+                        <img src="/SimbaSafariToursV2/images/lordlion.jpg" alt="Rhinos Baby and Mother" style="width:99% !important; height:auto;" /><br />
                     </div>
                 </div>
             </div>
