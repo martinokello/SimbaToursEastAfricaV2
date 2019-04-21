@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div class="row" style="border-radius:8px;">
-                    <div class="col-lg-7" style="text-align: left;margin-top:0px;color:teal;background-color:silver !important;font-size:smaller; text-align:center;">
+                    <div class="col-lg-7" style="text-align: left;margin-top:0px;color:teal;background-color:silver !important;font-size:smaller; text-align:center;padding:5px !important;">
                         <div id="genTweetsDiv" style="text-align:left;padding:10px;" *ngIf="twitterFeeds != null && twitterFeeds.length > 0">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -23,16 +23,14 @@
                             </div>
                             <div style="padding-top:8px;" class="row">
                                 <div *ngFor="let tweet of twitterFeeds" class="col-lg-12">
-                                    <div class="row" style="padding-bottom:10px;">
-                                        <div class="col-lg-12">
-                                            <div class="row">
-                                                <div class="col-lg-2" style="text-align:right;"><a href="https://twitter.com/{{tweet.username}}"><img id="img1" style="width:80px;height:auto;" src='{{tweet.groupAvatarUrl}}' /></a></div>
-                                                <div class="col-lg-10" style="padding-top:10px;color:teal; text-align:left;" innerHTML="{{tweet.groupDescription}}"></div>
-                                            </div>
-                                            <div class="row" style="padding-top:8px;text-align:left;" *ngIf="tweet.mediaUrl != '' && tweet.mediaUrl != null">
-                                                <div class="col-lg-offset-2">
-                                                    <img src="{{tweet.mediaUrl}}" alt="" style="width:50%;height:auto;" />
-                                                </div>
+                                    <div style="padding-bottom:10px;">
+                                        <div class="row">
+                                            <div class="col-lg-2" style="text-align:right;"><a href="https://twitter.com/{{tweet.username}}"><img id="img1" style="width:80px;height:auto;" src='{{tweet.groupAvatarUrl}}' /></a></div>
+                                            <div class="col-lg-10" style="padding:10px !important;color:teal; text-align:left;" innerHTML="{{tweet.groupDescription}}"></div>
+                                        </div>
+                                        <div class="row" style="padding-top:8px;text-align:left;" *ngIf="tweet.mediaUrl != '' && tweet.mediaUrl != null">
+                                            <div class="col-lg-offset-2">
+                                                <img src="{{tweet.mediaUrl}}" alt="" style="width:50%;height:auto;" />
                                             </div>
                                         </div>
                                     </div>
