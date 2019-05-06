@@ -67,14 +67,15 @@ namespace SimbaToursEastAfrica
             services.Configure<ApplicationConstants.ApplicationConstants>(Configuration.GetSection("ApplicationConstants"));
             services.Configure<ApplicationConstants.twitterProfileFiguration>(Configuration.GetSection("twitterProfileFiguration"));
 
+            services.AddDbContext<ApplicationDbContext.ApplicationDbContext>(
+                options => {
+                    options.UseSqlServer(identityConectionString, b => b.MigrationsAssembly("SimbaToursEastAfrica"));
+                });
             services.AddDbContext<SimbaToursEastAfricaDbContext>(
-                options => { options.UseSqlServer(connectionString, b => b.MigrationsAssembly("SimbaToursEastAfrica"));
-            });
-            services.AddDbContext<IdentityDbContext>(
-                options => { options.UseSqlServer(identityConectionString, b => b.MigrationsAssembly("SimbaToursEastAfrica"));
+                options => { options.UseSqlServer(connectionString, b => b.MigrationsAssembly("SimbaToursEastAfrica.DataAccess"));
             });
             services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<IdentityDbContext>()
+                .AddEntityFrameworkStores<ApplicationDbContext.ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
@@ -135,6 +136,7 @@ namespace SimbaToursEastAfrica
             services.AddTransient<AbstractRepository<HotelPricing>, HotelPricingRepository>();
             services.AddTransient<AbstractRepository<Hotel>, HotelRepository>(); 
             services.AddTransient<AbstractRepository<TransportPricing>, TransportPricingRepository>();
+            services.AddTransient<AbstractRepository<TourClientExtraCharge>, TourClientExtraChargesRepository>();
 
             AutoMapper.Mapper.Initialize(cfg =>
             {

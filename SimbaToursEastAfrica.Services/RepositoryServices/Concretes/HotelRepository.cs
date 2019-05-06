@@ -47,6 +47,11 @@ namespace SimbaToursEastAfrica.Services.RepositoryServices.Concretes
                 return false;
             }
         }
+
+        public Hotel GetByNameAndLocation(int locationId, string hotelName)
+        {
+            return SimbaToursEastAfricaDbContext.Hotels.FirstOrDefault(p => p.LocationId == locationId && p.HotelName == hotelName);
+        }
     }
 }
 

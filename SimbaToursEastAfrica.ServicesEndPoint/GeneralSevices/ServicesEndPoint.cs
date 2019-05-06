@@ -28,26 +28,32 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
             {
                 try
                 {
-                    var tourClientModel = new TourClient {DateCreated = DateTime.Now, ClientFirstName = tourClient.ClientFirstName, ClientLastName = tourClient.ClientLastName, HotelId = tourClient.Hotel.HotelId, GrossTotalCosts = tourClient.GrossTotalCosts, HasRequiredVisaStatus = tourClient.HasRequiredVisaStatus, Nationality = tourClient.Nationality, NumberOfIndividuals = tourClient.NumberOfIndividuals, EmailAddress = tourClient.EmailAddress };
+                    var tourClientModel = new TourClient { DateCreated = DateTime.Now, ClientFirstName = tourClient.ClientFirstName, ClientLastName = tourClient.ClientLastName, GrossTotalCosts = tourClient.GrossTotalCosts, HasRequiredVisaStatus = tourClient.HasRequiredVisaStatus, Nationality = tourClient.Nationality, NumberOfIndividuals = tourClient.NumberOfIndividuals, EmailAddress = tourClient.EmailAddress, HotelId = tourClient.Hotel.HotelId };
                     _simbaToursUnitOfWork._tourClientRepository.Insert(tourClientModel);
                     _simbaToursUnitOfWork.SaveChanges();
                     tourClient.TourClientId = tourClientModel.TourClientId;
+
+                    foreach(var extraCharge in tourClient.ExtraCharges)
+                    {
+                        extraCharge.TourClientId = tourClientModel.TourClientId;
+                        _simbaToursUnitOfWork._tourClientExtraChargesRepository.Insert(extraCharge);
+                        _simbaToursUnitOfWork.SaveChanges();
+                    }
                     foreach (var vehicle in tourClient.Vehicles)
                     {
                         _simbaToursUnitOfWork._vehicleRepository.Insert(vehicle);
                         vehicle.TourClientId = tourClientModel.TourClientId;
                         _simbaToursUnitOfWork.SaveChanges();
                     }
-                    var hotel = tourClient.Hotel;
-                    var location = hotel.Location;
+                    var location = tourClient.Hotel.Location;
                     var ht = new HotelBooking
                     {
                         TourClientId = tourClientModel.TourClientId,
                         LocationId = location.LocationId,
-                        HotelName = hotel.HotelName,
+                        HotelName = tourClient.Hotel.HotelName,
                         AccomodationCost = tourClient.GrossTotalCosts,
-                        HasMealsIncluded = hotel.HasMealsIncluded,
-                        HotelPricingId = hotel.HotelPricing.HotelPricingId,
+                        HasMealsIncluded = tourClient.Hotel.HasMealsIncluded,
+                        HotelPricingId = tourClient.Hotel.HotelPricing.HotelPricingId,
                     };
                     _simbaToursUnitOfWork._hotelBookingRepository.Insert(ht);
                     _simbaToursUnitOfWork.SaveChanges();
@@ -446,6 +452,13 @@ namespace SimbaToursEastAfrica.ServicesEndPoint.GeneralSevices
         {
             _simbaToursUnitOfWork._tourClientRepository.Update(client);
             _simbaToursUnitOfWork.SaveChanges();
+        }
+
+        public Hotel GetHotelDetailsForTourClient(TourClient tourClient)
+        {
+            var hotelBooking = _simbaToursUnitOfWork._hotelBookingRepository.GetAll().FirstOrDefault(p => p.TourClientId == tourClient.TourClientId);
+            hotelBooking = _simbaToursUnitOfWork._hotelBookingRepository.GetById(hotelBooking.HotelBookingId);
+            return _simbaToursUnitOfWork._hotelRepository.GetByNameAndLocation(hotelBooking.LocationId, hotelBooking.HotelName);
         }
 
         public HotelPricing[] GetHotelPricing()

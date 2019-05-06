@@ -125,6 +125,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\20190503114132_InitialCreate.cs" />
+    <Compile Include="Migrations\20190503114132_InitialCreate.designer.cs">
+      <DependentUpon>20190503114132_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190505121542_removeHotelFromTourClient.cs" />
+    <Compile Include="Migrations\20190505121542_removeHotelFromTourClient.designer.cs">
+      <DependentUpon>20190505121542_removeHotelFromTourClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190505203520_removeTourClientFKeyToHotelBookings.cs" />
+    <Compile Include="Migrations\20190505203520_removeTourClientFKeyToHotelBookings.designer.cs">
+      <DependentUpon>20190505203520_removeTourClientFKeyToHotelBookings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190505213204_revertToOldRelations.cs" />
+    <Compile Include="Migrations\20190505213204_revertToOldRelations.designer.cs">
+      <DependentUpon>20190505213204_revertToOldRelations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\SimbaToursEastAfricaDbContextModelSnapshot.cs" />
     <Compile Include="SimbaToursEastAfricaDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

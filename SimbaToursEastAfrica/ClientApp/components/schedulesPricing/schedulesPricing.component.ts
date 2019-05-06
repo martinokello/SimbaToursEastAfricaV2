@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit, ViewChild, ElementRef, Injectable, AfterViewInit, AfterViewChecked, Inject, Input, Output, EventEmitter } from '@angular/core';
-import { ILaguage, SafariTourServices, IHotelBooking, ItemType, ISchedulesPricing } from '../../services/safariTourServices';
+import { ILaguage, SafariTourServices, IHotelBooking, ItemType, ISchedulesPricing, IExtraCharges } from '../../services/safariTourServices';
 import * as $ from "jquery";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -26,14 +26,18 @@ export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterVi
     }
 
     public addSchedule(): void {
+        let extraCharges: IExtraCharges[];
+        extraCharges = JSON.parse(localStorage.getItem('extraCharges'));
+        if (!extraCharges) extraCharges = [];
+
+        let extraCharge: IExtraCharges = { tourClientId: 0, tourClientExtraChargesId: 0, extraCharges: this.schedules.price, description: this.schedules.schedulesPricingName }
+
         if (localStorage.getItem('extraCharges')) {
-            let extraCharges:number;
-            extraCharges = parseFloat(parseFloat(localStorage.getItem('extraCharges')).toFixed(2));
-            extraCharges += this.schedules.price;
-            localStorage.setItem('extraCharges', extraCharges.toString());
+            extraCharges.push(extraCharge);
+            localStorage.setItem('extraCharges', JSON.stringify(extraCharges));
         }
         else {
-            localStorage.setItem('extraCharges', this.schedules.price.toString());
+            localStorage.setItem('extraCharges', JSON.stringify(extraCharges));
         }
     }
     public selectSchedulesPricing() {

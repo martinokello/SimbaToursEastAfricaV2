@@ -27,7 +27,7 @@ namespace SimbaToursEastAfrica.Services.RepositoryServices.Concretes
 
         public override HotelBooking GetById(int id)
         {
-            return SimbaToursEastAfricaDbContext.HotelBookings.ToList().SingleOrDefault(p => p.HotelBookingId == id);
+            return SimbaToursEastAfricaDbContext.HotelBookings.Include("Location").Include("HotelPricing").SingleOrDefault(p => p.HotelBookingId == id);
         }
 
         public override bool Update(HotelBooking toUpdate)

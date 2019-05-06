@@ -30,6 +30,8 @@ namespace SimbaToursEastAfrica.Models
         public decimal CurrentPayment { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
+
+        public TourClientExtraChargeViewModel[] ExtraCharges { get; set; }
         
     }
 }

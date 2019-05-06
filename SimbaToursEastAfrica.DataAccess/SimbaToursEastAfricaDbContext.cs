@@ -1,11 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SimbaToursEastAfrica.Domain.Models;
-using System.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimbaToursEastAfrica.DataAccess
 {
@@ -22,11 +16,12 @@ namespace SimbaToursEastAfrica.DataAccess
             modelBuilder.Entity<Schedule>().HasOne<Driver>().WithMany(e=> e.Schedules).OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Schedule>().HasOne<Itinary>().WithMany().OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Schedule>().HasOne<Location>().WithMany().OnDelete(DeleteBehavior.Restrict);
-           /* modelBuilder.Entity<Meal>().HasMany<Item>().WithOne().HasForeignKey(p => p.MealId).IsRequired(false).OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Item>().HasOne<Meal>().WithMany().OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Laguage>().HasMany<Item>().WithOne().HasForeignKey(p => p.LaguageId).IsRequired(false).OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Item>().HasOne<Laguage>().WithMany().OnDelete(DeleteBehavior.Restrict);*/
+            /* modelBuilder.Entity<Meal>().HasMany<Item>().WithOne().HasForeignKey(p => p.MealId).IsRequired(false).OnDelete(DeleteBehavior.Restrict);
+             modelBuilder.Entity<Item>().HasOne<Meal>().WithMany().OnDelete(DeleteBehavior.Restrict);
+             modelBuilder.Entity<Laguage>().HasMany<Item>().WithOne().HasForeignKey(p => p.LaguageId).IsRequired(false).OnDelete(DeleteBehavior.Restrict);
+             modelBuilder.Entity<Item>().HasOne<Laguage>().WithMany().OnDelete(DeleteBehavior.Restrict);*/
             modelBuilder.Entity<Laguage>().HasOne<TourClient>().WithMany().OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -52,5 +47,6 @@ namespace SimbaToursEastAfrica.DataAccess
         public DbSet<DealsPricing> DealsPricings { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<TransportPricing> TransportPricings { get; set; }
+        public DbSet<TourClientExtraCharge> TourClientExtraCharges { get; set; }
     }
 }

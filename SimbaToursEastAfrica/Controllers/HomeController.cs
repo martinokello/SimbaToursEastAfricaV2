@@ -80,7 +80,14 @@ namespace SimbaToursEastAfrica.Controllers
                 var unitPayment = _serviceEndPoint.GetLaguagePricing()[0];
                 var unitPaymentMeal = _serviceEndPoint.GetMealPricing()[0];
                 var vehiclePayment = _serviceEndPoint.GetTransportPricing()[0];
-                decimal runningCostItems = 0.00M;
+                decimal runningCostItems =  0.00M;
+                var listExtraCharges = new List<TourClientExtraCharge>();
+                Array.ForEach(tourClientModel.ExtraCharges, (p) =>
+                {
+                    runningCostItems += p.ExtraCharges;
+                    listExtraCharges.Add(new TourClientExtraCharge { ExtraCharges = p.ExtraCharges, Description = p.Description});
+                });
+
 
                 IterateThroughMeals(mealItems, ref runningCostItems, unitPaymentMeal, tourClientModel, tourClient);
                 IterateThroughLaguageAssortments(laguageItems, mealItems, ref runningCostItems, unitPaymentMeal, unitPayment, tourClientModel, tourClient);
@@ -90,9 +97,9 @@ namespace SimbaToursEastAfrica.Controllers
                 _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);
                 tourClient.DateCreated = DateTime.Now;
                 tourClient.DateUpdated = DateTime.Now;
+                tourClient.ExtraCharges = listExtraCharges.ToArray();
 
                 tourClient.HasFullyPaid = false;
-
                 var isBooked = _serviceEndPoint.BookSafariPackage(tourClient, mealItems.ToArray(), laguageItems.ToArray());
                 if (isBooked)
                 {
@@ -334,7 +341,6 @@ namespace SimbaToursEastAfrica.Controllers
         {
             _serviceEndPoint = new ServicesEndPoint.GeneralSevices.ServicesEndPoint(_simbaToursUnitOfWork, _emailService);
             TourClient tourClient = _serviceEndPoint.GetTourClient(userDetail.EmailAddress);
-
             var payPalRedirectUrl = ValidatePayment(tourClient, userDetail.CurrentPayment);
             payPalRedirectUrl += "&clientId=" + tourClient.TourClientId;
             //return Redirect(payPalRedirectUrl);

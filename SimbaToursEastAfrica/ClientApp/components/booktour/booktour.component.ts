@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Input,ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { NgForm } from "@angular/forms";
 import { Element } from '@angular/compiler';
-import { SafariTourServices, ITourClient, IHotelBooking, IMealPricing, ILaguagePricing, ITransportPricing, IHotel, IMeal, ILaguage, ILocation, IHotelPricing, IAddress, IVehicle, IItem, ItemType, IInvoice, VehicleType } from '../../services/safariTourServices';
+import { SafariTourServices, ITourClient, IHotelBooking, IMealPricing, ILaguagePricing, ITransportPricing, IHotel, IMeal, ILaguage, ILocation, IHotelPricing, IAddress, IVehicle, IItem, ItemType, IInvoice, VehicleType, IExtraCharges } from '../../services/safariTourServices';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import * as $ from 'jquery';
@@ -19,7 +19,8 @@ export class BookTourComponent implements OnInit {
     hotelBookings: IHotelBooking[] = [];
     mealItems: IItem[] = [];
     items: IItem[] = [];
-    extraCharges: number = 0.00;
+    extraCharges: IExtraCharges[] = [];
+    extraPayments: number = 0.00;
     currentPayment: number = 0.00;
     combinedMeals: any = {
         mealId: 0,
@@ -48,8 +49,11 @@ export class BookTourComponent implements OnInit {
             localStorage.removeItem("extraCharges"); return '';
         }
         if (localStorage.getItem('extraCharges')) {
-            this.extraCharges = parseFloat(localStorage.getItem('extraCharges'));
-            this.runningCost += this.extraCharges;
+            this.extraCharges = JSON.parse(localStorage.getItem('extraCharges'));
+            for (let i = 0; i < this.extraCharges.length; i++) {
+                this.extraPayments += this.extraCharges[i].extraCharges;
+            }
+            this.runningCost += this.extraPayments;
         }
         let transportPrincingRes: Observable<ITransportPricing[]> = this.safariTourService.GetTransportPricing();
 
@@ -115,7 +119,7 @@ export class BookTourComponent implements OnInit {
     }
 
     public hotelSet(isSet: boolean) {
-        if (!this.isHotelSet && this.runningCost === this.extraCharges) {
+        if (!this.isHotelSet && this.runningCost === this.extraPayments) {
             let currentTotal = (this.hotel.hotelPricing.price * SafariTourServices.tourClientModel.numberOfIndividuals);
             this.runningCost = this.runningCost + currentTotal;
             this.isHotelSet = true;
@@ -216,7 +220,11 @@ export class BookTourComponent implements OnInit {
     }
     public bookTour(): void {
         this.hotelBookings.push(this.hotelBooking);
-        this.safariTourService.AddItemsToTourClient(this.hotel,this.combinedMeals, this.combinedLaguage, this.vehicles, this.currentPayment)
+
+        if (localStorage.getItem('extraCharges')) {
+            this.extraCharges = JSON.parse(localStorage.getItem('extraCharges'));
+        }
+        this.safariTourService.AddItemsToTourClient(this.hotel, this.combinedMeals, this.combinedLaguage, this.vehicles, this.extraCharges, this.currentPayment)
 
         let actualRes: Observable<any> = this.safariTourService.BookTour();
         actualRes.subscribe((q: any) => {
@@ -227,9 +235,8 @@ export class BookTourComponent implements OnInit {
             //$(this.paymentsForm.nativeElement).submit();
             console.log('Response received');
             console.log(q);
-
-            let extraCharges: number = 0.00
-            localStorage.setItem('extraCharges', extraCharges.toString());
+            
+            localStorage.setItem('extraCharges', null);
             let model: ITourClient = {
                 tourClientId: 0,
                 mealId: 0,
@@ -251,7 +258,8 @@ export class BookTourComponent implements OnInit {
                 dateCreated: new Date(),
                 dateUpdated: new Date(),
                 combinedLaguage: null,
-                combinedMeals: null
+                combinedMeals: null,
+                extraCharges: null
             };
             SafariTourServices.tourClientModel = model;
             alert('Tour Booked successfully: ' + q.result + ', Message: ' + q.message);

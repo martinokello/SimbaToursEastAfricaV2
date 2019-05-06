@@ -89,7 +89,8 @@ export class SafariTourServices {
             dateCreated: new Date(),
             dateUpdated: new Date(),
             combinedLaguage: null,
-            combinedMeals: null
+            combinedMeals: null,
+            extraCharges:null
         };
         SafariTourServices.tourClientModel = model;
         SafariTourServices.tourClientModel.grossTotalCosts = 0;
@@ -894,13 +895,15 @@ export class SafariTourServices {
         SafariTourServices.tourClientModel = tourClient;
 
     }
-    public AddItemsToTourClient(hotel: IHotel, combinedMeals: any, combinedLaguage: any, vehicles: IVehicle[], currentPayment:number) {
+    public AddItemsToTourClient(hotel: IHotel, combinedMeals: any, combinedLaguage: any, vehicles: IVehicle[], extraCharges:IExtraCharges[], currentPayment:number) {
         SafariTourServices.tourClientModel.emailAddress = SafariTourServices.clientEmailAddress;
         SafariTourServices.tourClientModel.currentPayment = currentPayment;
         SafariTourServices.tourClientModel.hotel = hotel;
         SafariTourServices.tourClientModel.vehicles = vehicles;
         SafariTourServices.tourClientModel.combinedLaguage = combinedLaguage;
         SafariTourServices.tourClientModel.combinedMeals = combinedMeals;
+        SafariTourServices.tourClientModel.extraCharges = extraCharges;
+
         SafariTourServices.tourClientModel.dateCreated = new Date();
         SafariTourServices.tourClientModel.dateUpdated = new Date();
         SafariTourServices.tourClientModel.hasFullyPaid = false;
@@ -996,7 +999,15 @@ export interface ITourClient {
     dateCreated: Date;
     dateUpdated: Date;
     combinedLaguage: any,
-    combinedMeals:any,
+    combinedMeals: any,
+    extraCharges: IExtraCharges[]
+}
+
+export interface IExtraCharges {
+    tourClientId: number,
+    tourClientExtraChargesId: number,
+    extraCharges: number,
+    description:string
 }
 export interface IMeal {
 

@@ -24,12 +24,12 @@ namespace SimbaToursEastAfrica.Domain.Models
         [ForeignKey("HotelId")]
         public Hotel Hotel { get; set; }
         public int HotelId { get; set; }
-
         public string EmailAddress { get; set; }
         public bool HasFullyPaid { get; set; } = false;
         public decimal PaidInstallments { get; set; }
         public decimal CurrentPayment { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
+        public TourClientExtraCharge[] ExtraCharges { get; set; }
     }
 }
