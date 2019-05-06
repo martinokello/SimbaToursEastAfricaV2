@@ -14,7 +14,7 @@ namespace SimbaToursEastAfrica.Models
         public int VehicleId { get; set; }
         public string VehicleRegistration { get; set; }
         public int MaxNumberOfPassengers { get; set; }
-        public int AcutualNumberOfPassengersAllocated { get; set; }
+        public int ActualNumberOfPassengersAllocated { get; set; }
         public VehicleType VehicleType { get; set; }
         public TourClientViewModel TourClient { get; set; }
         public int TourClientId { get; set; }

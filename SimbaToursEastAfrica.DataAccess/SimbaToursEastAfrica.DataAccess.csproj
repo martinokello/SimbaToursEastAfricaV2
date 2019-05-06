@@ -141,6 +141,10 @@
     <Compile Include="Migrations\20190505213204_revertToOldRelations.designer.cs">
       <DependentUpon>20190505213204_revertToOldRelations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190506194649_changeColumnNameInVehicle.cs" />
+    <Compile Include="Migrations\20190506194649_changeColumnNameInVehicle.designer.cs">
+      <DependentUpon>20190506194649_changeColumnNameInVehicle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\SimbaToursEastAfricaDbContextModelSnapshot.cs" />
     <Compile Include="SimbaToursEastAfricaDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -163,19 +163,19 @@ namespace SimbaToursEastAfrica.Controllers
                 switch (vh.VehicleType)
                 {
                     case Models.VehicleType.Taxi:
-                        runningCostItems += vh.AcutualNumberOfPassengersAllocated * vehiclePayment.TaxiPricing;
+                        runningCostItems += vh.ActualNumberOfPassengersAllocated * vehiclePayment.TaxiPricing;
                         break;
                     case Models.VehicleType.TourBus:
-                        runningCostItems += vh.AcutualNumberOfPassengersAllocated * vehiclePayment.TourBusPricing;
+                        runningCostItems += vh.ActualNumberOfPassengersAllocated * vehiclePayment.TourBusPricing;
                         break;
                     case Models.VehicleType.MiniBus:
-                        runningCostItems += vh.AcutualNumberOfPassengersAllocated * vehiclePayment.MiniBusPricing;
+                        runningCostItems += vh.ActualNumberOfPassengersAllocated * vehiclePayment.MiniBusPricing;
                         break;
                     case Models.VehicleType.PickUpTrack:
-                        runningCostItems += vh.AcutualNumberOfPassengersAllocated * vehiclePayment.PickupTruckPricing;
+                        runningCostItems += vh.ActualNumberOfPassengersAllocated * vehiclePayment.PickupTruckPricing;
                         break;
                     case Models.VehicleType.FourWheelDriveCar:
-                        runningCostItems += vh.AcutualNumberOfPassengersAllocated * vehiclePayment.FourByFourPricing;
+                        runningCostItems += vh.ActualNumberOfPassengersAllocated * vehiclePayment.FourByFourPricing;
                         break;
 
                 }

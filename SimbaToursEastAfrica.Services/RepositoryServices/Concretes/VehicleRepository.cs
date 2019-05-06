@@ -34,7 +34,7 @@ namespace SimbaToursEastAfrica.Services.RepositoryServices.Concretes
             try
             {
                 var vehicle = SimbaToursEastAfricaDbContext.Vehicles.ToList().SingleOrDefault(p => p.VehicleId == toUpdate.VehicleId);
-                vehicle.AcutualNumberOfPassengersAllocated = toUpdate.AcutualNumberOfPassengersAllocated;
+                vehicle.ActualNumberOfPassengersAllocated = toUpdate.ActualNumberOfPassengersAllocated;
                 vehicle.MaxNumberOfPassengers = toUpdate.MaxNumberOfPassengers;
                 vehicle.VehicleType = toUpdate.VehicleType;
                 vehicle.VehicleRegistration = toUpdate.VehicleRegistration;
