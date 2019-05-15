@@ -219,7 +219,7 @@ export class BookTourComponent implements OnInit {
         this.runningCost = parseFloat(parseFloat(runningCostStr).toFixed(2));
     }
     public bookTour(): void {
-        if (this.currentPayment > 0) {
+        if (this.currentPayment > 0 && this.runningCost > 0) {
             this.hotelBookings.push(this.hotelBooking);
 
             if (localStorage.getItem('extraCharges')) {
