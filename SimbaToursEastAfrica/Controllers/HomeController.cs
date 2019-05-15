@@ -65,7 +65,7 @@ namespace SimbaToursEastAfrica.Controllers
         }
         [Authorize()]
         [HttpPost]
-        [EnableCors("CorsPolicy")]
+        [EnableCors(PolicyName = "CorsPolicy")]
         public IActionResult BookTour([FromBody] TourClientViewModel tourClientModel)
         {
             try
