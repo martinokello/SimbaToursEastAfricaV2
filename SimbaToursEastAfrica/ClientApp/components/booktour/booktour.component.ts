@@ -219,52 +219,57 @@ export class BookTourComponent implements OnInit {
         this.runningCost = parseFloat(parseFloat(runningCostStr).toFixed(2));
     }
     public bookTour(): void {
-        this.hotelBookings.push(this.hotelBooking);
+        if (this.currentPayment > 0) {
 
-        if (localStorage.getItem('extraCharges')) {
-            this.extraCharges = JSON.parse(localStorage.getItem('extraCharges'));
+            this.hotelBookings.push(this.hotelBooking);
+
+            if (localStorage.getItem('extraCharges')) {
+                this.extraCharges = JSON.parse(localStorage.getItem('extraCharges'));
+            }
+            this.safariTourService.AddItemsToTourClient(this.hotel, this.combinedMeals, this.combinedLaguage, this.vehicles, this.extraCharges, this.currentPayment)
+
+            let actualRes: Observable<any> = this.safariTourService.BookTour();
+            actualRes.subscribe((q: any) => {
+
+                $('iframe#payPalPayments').attr('src', q.payPalRedirectUrl);
+                $('iframe#payPalPayments').show("slow");
+                //alert(q.message);
+                console.log('Response received');
+                console.log(q);
+
+                localStorage.setItem('extraCharges', null);
+                let model: ITourClient = {
+                    tourClientId: 0,
+                    mealId: 0,
+                    laguageId: 0,
+                    clientFirstName: "",
+                    clientLastName: "",
+                    nationality: "",
+                    hasRequiredVisaStatus: true,
+                    numberOfIndividuals: 0,
+                    vehicles: null,
+                    hotelBookings: null,
+                    costPerIndividual: 0,
+                    hotel: null,
+                    emailAddress: "",
+                    hasFullyPaid: false,
+                    paidInstallments: 0,
+                    currentPayment: 0,
+                    grossTotalCosts: 0,
+                    dateCreated: new Date(),
+                    dateUpdated: new Date(),
+                    combinedLaguage: null,
+                    combinedMeals: null,
+                    extraCharges: null
+                };
+                SafariTourServices.tourClientModel = model;
+                alert('Tour Booked successfully: ' + q.result + ', Message: ' + q.message);
+                console.log(q.stackTrace);
+            });
+
         }
-        this.safariTourService.AddItemsToTourClient(this.hotel, this.combinedMeals, this.combinedLaguage, this.vehicles, this.extraCharges, this.currentPayment)
-
-        let actualRes: Observable<any> = this.safariTourService.BookTour();
-        actualRes.subscribe((q: any) => {
-            $('iframe#payPalPayments').attr('src', q.payPalRedirectUrl);
-            $('iframe#payPalPayments').show("slow");
-            //this.safariTourService.GetRequest(q.payPalRedirectUrl);
-            //$(this.paymentsForm.nativeElement).attr("action", q.payPalRedirectUrl);
-            //$(this.paymentsForm.nativeElement).submit();
-            console.log('Response received');
-            console.log(q);
-            
-            localStorage.setItem('extraCharges', null);
-            let model: ITourClient = {
-                tourClientId: 0,
-                mealId: 0,
-                laguageId: 0,
-                clientFirstName: "",
-                clientLastName: "",
-                nationality: "",
-                hasRequiredVisaStatus: true,
-                numberOfIndividuals: 0,
-                vehicles: null,
-                hotelBookings: null,
-                costPerIndividual: 0,
-                hotel: null,
-                emailAddress: "",
-                hasFullyPaid: false,
-                paidInstallments: 0,
-                currentPayment: 0,
-                grossTotalCosts: 0,
-                dateCreated: new Date(),
-                dateUpdated: new Date(),
-                combinedLaguage: null,
-                combinedMeals: null,
-                extraCharges: null
-            };
-            SafariTourServices.tourClientModel = model;
-            alert('Tour Booked successfully: ' + q.result + ', Message: ' + q.message);
-            console.log(q.stackTrace);
-        });
-        
+        else {
+            alert('Amount to Pay should be greater than zero');
+        }
     }
 }
