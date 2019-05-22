@@ -33,6 +33,8 @@ import { UserRolesComponent } from './components/userroles/userroles.component';
 import { ContactUsComponent } from './components/contactus/contactus.component';
 import { AboutUsComponent } from './components/about/aboutus.component'; 
 import { SectionsContactComponent } from './components/sectionscontact/sectionscontact.component';
+import { SuccessComponent } from './components/paypalSuccess/success.component';
+import { FailureComponent } from './components/paypalFailure/failure.component';
 
 @NgModule({
     declarations: [
@@ -66,7 +68,9 @@ import { SectionsContactComponent } from './components/sectionscontact/sectionsc
         UserRolesComponent,
         ContactUsComponent,
         AboutUsComponent,
-        SectionsContactComponent
+        SectionsContactComponent,
+        SuccessComponent,
+        FailureComponent
     ],
     imports: [
         CommonModule,
@@ -96,7 +100,9 @@ import { SectionsContactComponent } from './components/sectionscontact/sectionsc
             { path: 'logout', component: HomeComponent },
             { path: 'manage-roles', component: UserRolesComponent },
             { path: 'contactus', component: ContactUsComponent },
-            { path: 'aboutus', component: AboutUsComponent }, 
+            { path: 'aboutus', component: AboutUsComponent },
+            { path: 'success', component: SuccessComponent },
+            { path: 'failure', component: FailureComponent }, 
 
 
             { path: '**', redirectTo: 'home' }
