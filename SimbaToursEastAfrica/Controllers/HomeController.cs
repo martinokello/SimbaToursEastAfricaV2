@@ -106,9 +106,8 @@ namespace SimbaToursEastAfrica.Controllers
                     var tourClientFullView = _serviceEndPoint.GetTourClientById(tourClient.TourClientId);
                     var payPalRedirectUrl = ValidatePayment(tourClientFullView, tourClient.CurrentPayment);
                     payPalRedirectUrl += "&clientId=" + tourClient.TourClientId;
-                    //return Json(new { Result = isBooked, PayPalRedirectUrl = payPalRedirectUrl, });
-                    var result = Redirect(payPalRedirectUrl);
-                    return result;
+                    return Json(new { Result = isBooked, PayPalRedirectUrl = payPalRedirectUrl, });
+                    //return Redirect(payPalRedirectUrl);
                 }
                 else return Json(new { Result = false, Message = "Failed To Book Tour. Please contact the administrators of the site!" });
 

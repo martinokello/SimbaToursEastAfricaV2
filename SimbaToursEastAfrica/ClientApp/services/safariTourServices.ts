@@ -160,7 +160,7 @@ export class SafariTourServices {
 
             let body = JSON.stringify(SafariTourServices.tourClientModel);
 
-            let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+            let headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
 
             let requestoptions: RequestOptions = new RequestOptions({
                 url: this.bookTourUrl,

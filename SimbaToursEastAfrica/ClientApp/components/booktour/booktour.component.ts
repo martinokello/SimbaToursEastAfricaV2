@@ -1,4 +1,6 @@
-﻿import { Component, OnInit, Input,ViewChild, ElementRef, EventEmitter } from '@angular/core';
+﻿import { Component, OnInit, Input, ViewChild, ElementRef, EventEmitter } from '@angular/core';
+import { Routes, RouterModule, Router } from '@angular/router';
+import { RequestOptions, Request, Headers } from '@angular/http';
 import { NgForm } from "@angular/forms";
 import { Element } from '@angular/compiler';
 import { SafariTourServices, ITourClient, IHotelBooking, IMealPricing, ILaguagePricing, ITransportPricing, IHotel, IMeal, ILaguage, ILocation, IHotelPricing, IAddress, IVehicle, IItem, ItemType, IInvoice, VehicleType, IExtraCharges } from '../../services/safariTourServices';
@@ -13,7 +15,6 @@ import * as $ from 'jquery';
 })
 export class BookTourComponent implements OnInit {
     private isHotelSet: boolean = false;
-    @ViewChild("f4") paymentsForm: HTMLElement | any;
     runningCost: number = 0.00;
     vehicles: IVehicle[] = [];
     hotelBookings: IHotelBooking[] = [];
@@ -41,7 +42,7 @@ export class BookTourComponent implements OnInit {
     private safariTourService: SafariTourServices | any;
     public hotelBooking: IHotelBooking | any;
     public hotel: IHotel|any;
-    public constructor(safarTourService: SafariTourServices) {
+    public constructor(safarTourService: SafariTourServices, private router: Router) {
         this.safariTourService = safarTourService;
     }
     ngOnInit(): void {
@@ -228,12 +229,9 @@ export class BookTourComponent implements OnInit {
             this.safariTourService.AddItemsToTourClient(this.hotel, this.combinedMeals, this.combinedLaguage, this.vehicles, this.extraCharges, this.currentPayment)
 
             let actualRes: Observable<any> = this.safariTourService.BookTour();
+
             actualRes.subscribe((q: any) => {
-                $('iframe#payPalPayments').attr('src', q.payPalRedirectUrl);
-                $('iframe#payPalPayments').show("slow");
-                //this.safariTourService.GetRequest(q.payPalRedirectUrl);
-                //$(this.paymentsForm.nativeElement).attr("action", q.payPalRedirectUrl);
-                //$(this.paymentsForm.nativeElement).submit();
+                window.open(q.payPalRedirectUrl);
                 console.log('Response received');
                 console.log(q);
 
