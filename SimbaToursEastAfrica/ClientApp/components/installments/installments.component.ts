@@ -26,7 +26,7 @@ export class PayByInstallments implements OnInit {
         result.map((q: any) => {
             window.open(q.payPalRedirectUrl);
             console.log('Response received');
-            console.log(q);l
+            console.log(q);
             alert("Payment made. Currently being processed by paypal service");
         }).subscribe();
     }
