@@ -24,12 +24,9 @@ export class PayByInstallments implements OnInit {
         let result: Observable<any> = this.safariTourService.MakePayment(this.currentPayment, SafariTourServices.clientEmailAddress);
 
         result.map((q: any) => {
-            $('iframe#payPalPayments').attr('src', q.payPalRedirectUrl);
-            $('iframe#payPalPayments').show("slow");
-
-            //$(this.paymentsForm.nativeElement).attr("action",);
-            //$(this.paymentsForm.nativeElement).submit();
-            //this.safariTourService.GetRequest(q.payPalRedirectUrl);
+            window.open(q.payPalRedirectUrl);
+            console.log('Response received');
+            console.log(q);l
             alert("Payment made. Currently being processed by paypal service");
         }).subscribe();
     }
