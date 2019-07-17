@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "test": "karma start ClientApp/test/karma.conf.js",
-    "build": "run ng build"
+    "build": "0ng build"
   },
   "devDependencies": {
     "@angular/animations": "^4.4.7",
