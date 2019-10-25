@@ -51,14 +51,14 @@
                 </div>
             </div>
             <div *ngIf="!this.hotelPricing.model.disableUpdateOrCreateButton">
-                <div *ngIf="hotelPricing.model.editable">
+                <div *ngIf="hotelPricing.model.editable" style="margin-top:10px;">
                     <label>Hotel Pricing Operations:</label>
                     <input type="button" class="btn-primary" value="Select Hotel Pricing" (click)="SelectHotelPricing()" />
                     <input type="submit" class="btn-primary" value="Create Hotel Pricing" (click)="CreateHotelPricing()" id="UpdateOrCreate" />
                     <input type="submit" class="btn-primary" value="Update Hotel Pricing" (click)="updateHotelPricing()" id="UpdateOrCreate" />
                 </div>
             </div>
-            <div *ngIf="hotelPricing.model.viewable;">
+            <div *ngIf="hotelPricing.model.viewable;" style="margin-top:10px;">
                 <label>Hotel Pricing Operations:</label>
                 <input type="submit" class="btn-primary" value="Create  Hotel Pricing" (click)="CreateHotelPricing()" />
                 <input type="submit" class="btn-primary" value="Update  Hotel Pricing" (click)="UpdateHotelPricing()" />

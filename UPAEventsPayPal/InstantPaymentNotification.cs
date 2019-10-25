@@ -146,11 +146,11 @@ namespace UPAEventsPayPal
                 var smtpClient = new SmtpClient(System.Configuration.ConfigurationManager.AppSettings["smtpServer"]);
                 smtpClient.Credentials = new NetworkCredential { Password = emailPassword, UserName = smtpUsername };
 
-                string downloadInstructions = String.Format("http://www.martinlayooinc.co.uk/Home/DownloadPage?username={0}&status=Download&product={1}", HttpUtility.UrlEncode(Username), HttpServerUtility.UrlTokenEncode(Encoding.GetEncoding(1252).GetBytes(prodBuffer.ToString())));
+                string downloadInstructions = String.Format("http://www.martinlayooinc.net/Home/DownloadPage?username={0}&status=Download&product={1}", HttpUtility.UrlEncode(Username), HttpServerUtility.UrlTokenEncode(Encoding.GetEncoding(1252).GetBytes(prodBuffer.ToString())));
                 MailMessage message = new MailMessage(System.Configuration.ConfigurationManager.AppSettings["BusinessEmail"], clientEmail,
-                    "Download Instructions!! Transaction Verification Passed", "Dear " + Username + ",\n\nIt has been confirmed that you have fully paid for the mentioned transaction. Your downloads have been enabled as a result.\n\nBelow is a link that will direct you to the download page.\n\n" + downloadInstructions + "\n\nHave fun and don't forget to check out products being realesed at http://www.martinlayooinc.co.uk \n\nKindest regards\nMartin Okello.\nAka The Medallion");
-                message.To.Add("martin.okello@martinlayooinc.co.uk");
-                message.To.Add("martinokello@martinlayooinc.co.uk");
+                    "Download Instructions!! Transaction Verification Passed", "Dear " + Username + ",\n\nIt has been confirmed that you have fully paid for the mentioned transaction. Your downloads have been enabled as a result.\n\nBelow is a link that will direct you to the download page.\n\n" + downloadInstructions + "\n\nHave fun and don't forget to check out products being realesed at http://www.martinlayooinc.net \n\nKindest regards\nMartin Okello.\nAka The Medallion");
+                message.To.Add("martin.okello@martinlayooinc.net");
+                message.To.Add("martinokello@martinlayooinc.net");
                 message.To.Add(clientEmail);
 
                 smtpClient.Send(message);

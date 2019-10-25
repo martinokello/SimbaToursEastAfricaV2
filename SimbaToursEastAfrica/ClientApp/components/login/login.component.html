@@ -19,7 +19,7 @@
             <label style="display:inline-block !important;" class="col-lg-2">Check to Remember you</label>
             <input type="checkbox" class="col-lg-1" [(ngModel)]="userDetail.keepLoggedIn" name="keepLoggedIn"  style="display:inline-block !important;"/><br/>
         </div>
-        <input type="submit" (click)="loginUser()" class="but-primary" value="login user" />
+        <input type="submit" (click)="loginUser()" class="but-primary" value="login user" style="margin-top:10px;"/>
     </form>
 
     <div asp-validation-summary="All"></div>

@@ -27,8 +27,8 @@ namespace SimbaToursEastAfrica.Controllers
         private void CreateRoles()
         {
             var user = new IdentityUser();
-            user.UserName = "martinokello@martinlayooinc.co.uk";
-            user.Email = "martinokello@martinlayooinc.co.uk";
+            user.UserName = "martinokello@martinlayooinc.net";
+            user.Email = "martinokello@martinlayooinc.net";
 
             string userPWD = "deltaX!505";
 

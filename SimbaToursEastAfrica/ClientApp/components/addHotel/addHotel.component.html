@@ -35,7 +35,7 @@
         <label>Pricing</label>
         <hotelPricing [hotelPricing]="hotelPricing" (valueChange)="addHotelPricing($event)"></hotelPricing>
     </div>
-    <form>
+    <form style="margin-top:10px;">
         <input type="button" class="btn-primary" name="select" value="Select Hotel" (click)="selectHotel()" id="selectHotel" />
         <input type="submit" class="btn-primary"  name="create"  value="Create Hotel" (click)="createHotel()" style="display:inline-block;" id="createHotel">
         <input type="submit" class="btn-primary" name="update" value="Update Hotel" (click)="updateHotel()"  id="updateHotel" />

@@ -16,7 +16,7 @@ namespace MartinLayooInc.SocialMedia
     {
         public const string AUTHORIZE = "https://graph.facebook.com/v2.1/oauth/authorize";
         public const string ACCESS_TOKEN = "https://graph.facebook.com/v2.1/oauth/access_token";
-        public const string CALLBACK_URL = "http://martinlayooinc.co.uk/Home/AboutUs";
+        public const string CALLBACK_URL = "http://martinlayooinc.net/Home/AboutUs";
         private string _consumerKey = "992667847534750";
         private string _consumerSecret = "6b9afdd94048c2d849616cb64e607f19";
         private string _token = "";
