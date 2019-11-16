@@ -15,9 +15,9 @@
                 Role name required
             </div>
         </div>
-        <input type="submit" (click)="addUserToRole()" class="but-primary" value="Add User To Role" />
-        <input type="submit" (click)="removeUserFromRole()" class="but-primary" value="Remove User From Role" />
+        <input type="submit" (click)="addUserToRole()" class="but-primary" value="Add User To Role"  style="margin-top:10px;"/>
+        <input type="submit" (click)="removeUserFromRole()" class="but-primary" value="Remove From Role"  style="margin-top:10px;"/>
     </form>
-
-    <div asp-validation-summary="All"></div>
+    <hr style="margin: 10px 0 10px;"/>
+    <new-user-roles></new-user-roles>
 </div>

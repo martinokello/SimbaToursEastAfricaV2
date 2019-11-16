@@ -138,7 +138,7 @@ export class ContactUsComponent implements OnInit {
         }
         $(document).ready(function () {
 
-            $('div#ourContactDetails').html("<div align='center' style='width:240px;margin-top:10px;'><h2>Contact Details</h2></div><div align='center'><b>MartinLayooInc Software House,<br/> 2 St Johns Terrace<br/>Flat 3<br/>London<br/>W10 4RB<br/>email: <a href='mailto:business-enterprise@martinlayooinc.net' >MartinLayooInc.</a><br/>07809773365</div>");
+            $('div#ourContactDetails').html("<div align='center' style='width:240px;margin-top:10px;'><h2>Contact Details</h2></div><div align='center'><b>MartinLayooInc Software House,<br/> 2 St Johns Terrace<br/>Flat 3<br/>London<br/>W10 4RB<br/>email: <a href='mailto:business-enterprise@martinlayooinc.com' >MartinLayooInc.</a><br/>07809773365</div>");
 
             $('input[type="text"]').focus(function () {
                 $(this).val("");

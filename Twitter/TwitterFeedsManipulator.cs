@@ -423,7 +423,7 @@ namespace Twitter
                                    Username = "Martin Alex Okello",
                                    StatusId = tweets.Element("headline").Value,
                                    TimeCreated = tweets.Element("current-status-timestamp").Value,
-                                   GroupUrl = tweets.Descendants("api-standard-profile-request").Any() && tweets.Descendants("api-standard-profile-request").FirstOrDefault().Descendants("url").Any() ? tweets.Descendants("api-standard-profile-request").FirstOrDefault().Descendants("url").FirstOrDefault().Value : "http://www.martinlayooinc.co.uk",
+                                   GroupUrl = tweets.Descendants("api-standard-profile-request").Any() && tweets.Descendants("api-standard-profile-request").FirstOrDefault().Descendants("url").Any() ? tweets.Descendants("api-standard-profile-request").FirstOrDefault().Descendants("url").FirstOrDefault().Value : "http://www.martinlayooinc.com",
                                    MediaUrl = tweets.Descendants("member-url-resources").Any() && tweets.Descendants("member-url-resources").FirstOrDefault().Descendants("url").Any() ? tweets.Descendants("member-url-resources").FirstOrDefault().Descendants("url").FirstOrDefault().Value : "",
                                    MediaSizeX = "300px"
                                };
@@ -442,7 +442,7 @@ namespace Twitter
                         tweets.Element("user").Element("screen_name").Value,
                                    StatusId = tweets.Element("id_str").Value,
                                    TimeCreated = tweets.Element("created_at").Value,
-                                   GroupUrl = tweets.Element("entities").Element("urls") != null ? tweets.Element("entities").Element("urls").Element("url").Value : "http://www.martinlayooinc.co.uk",
+                                   GroupUrl = tweets.Element("entities").Element("urls") != null ? tweets.Element("entities").Element("urls").Element("url").Value : "http://www.martinlayooinc.com",
                                    MediaUrl = tweets.Descendants("media").Any() && tweets.Descendants("media").FirstOrDefault().Descendants("media_url").Any() ? tweets.Descendants("media").FirstOrDefault().Descendants("media_url").FirstOrDefault().Value : "",
                                    MediaType = tweets.Descendants("media").Any() && tweets.Descendants("media").FirstOrDefault().Descendants("type").Any() ? tweets.Descendants("media").FirstOrDefault().Descendants("type").FirstOrDefault().Value : "",
                                    MediaSizeX = tweets.Descendants("media").Any() && tweets.Descendants("media").FirstOrDefault().Descendants("sizes").Any() ? tweets.Descendants("media").FirstOrDefault().Descendants("sizes").FirstOrDefault().Descendants("small").FirstOrDefault().Descendants("w").FirstOrDefault().Value : "",

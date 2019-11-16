@@ -27,8 +27,8 @@ namespace SimbaToursEastAfrica.Controllers
         private void CreateRoles()
         {
             var user = new IdentityUser();
-            user.UserName = "martinokello@martinlayooinc.net";
-            user.Email = "martinokello@martinlayooinc.net";
+            user.UserName = "martinokello@martinlayooinc.com";
+            user.Email = "martinokello@martinlayooinc.com";
 
             string userPWD = "deltaX!505";
 
@@ -52,7 +52,12 @@ namespace SimbaToursEastAfrica.Controllers
                 roleStandard.Name = "StandardUser";
                 var result2 = _roleManager.CreateAsync(roleStandard).ConfigureAwait(true).GetAwaiter().GetResult();
             }
-
+            if (_roleManager.FindByNameAsync("Guest").ConfigureAwait(true).GetAwaiter().GetResult() == null)
+            {
+                var roleGuest = new IdentityRole();
+                roleGuest.Name = "Guest";
+                var result2 = _roleManager.CreateAsync(roleGuest).ConfigureAwait(true).GetAwaiter().GetResult();
+            }
         }
         [HttpGet]
         public JsonResult VerifyLoggedInUser()
@@ -212,6 +217,52 @@ namespace SimbaToursEastAfrica.Controllers
             {
                 return new Role[] { new Role { Name = ex.Message } };
             }
+        }
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public IActionResult CreateRole(string role)
+        {
+            try
+            {
+                var newRole = _roleManager.Roles.FirstOrDefault(p => p.Name.ToLower().Equals(role.ToLower().Trim()));
+
+                if(newRole is null)
+                {
+                    var result =_roleManager.CreateAsync(new IdentityRole(role)).ConfigureAwait(true).GetAwaiter().GetResult();
+                    if (result.Succeeded)
+                    {
+                        return Ok(true.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return BadRequest(false.ToString()); 
+        }
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public IActionResult DeleteRole(string role)
+        {
+            try
+            {
+                var newRole = _roleManager.Roles.FirstOrDefault(p => p.Name.ToLower().Equals(role.ToLower().Trim()));
+
+                if (!(newRole is null))
+                {
+                    var result = _roleManager.DeleteAsync(new IdentityRole(role)).ConfigureAwait(true).GetAwaiter().GetResult();
+                    if (result.Succeeded)
+                    {
+                        return Ok(true.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return BadRequest(false.ToString());
         }
     }
 

@@ -15,6 +15,8 @@ export class SafariTourServices {
     public actionResult: any;
     public httpClient: Http;
     public getAllRoles: string = "/SimbaSafariToursV2/Account/GetAllRoles";
+    public createRoleUrl: string = "/SimbaSafariToursV2/Account/CreateRole";
+    public deleteRoleUrl: string = "/SimbaSafariToursV2/Account/DeleteRole";
     public postRmoveUserFromRole: string = "/SimbaSafariToursV2/Account/RemoveUserFromRole";
     public postAddUserToRole: string = "/SimbaSafariToursV2/Account/AddUserToRole";
     public twitterFeedsUrl: string = "/SimbaSafariToursV2/Home/TwitterProfileFeeds";
@@ -109,6 +111,42 @@ export class SafariTourServices {
 
         return this.httpClient.request(new Request(requestoptions)).map((resp: Response) => {
             return resp.json();
+        });
+    }
+
+    public CreateUserRole(role: string): Observable<any>{
+        let body = JSON.stringify({role: role });
+
+        let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: this.createRoleUrl,
+            method: RequestMethod.Post,
+            headers: headers,
+            body: body
+        });
+
+        return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
+            console.log('Response received ' + res.json());
+            return res.json();
+        });
+    }
+
+    public DeleteUserRole(role: string): Observable<any> {
+        let body = JSON.stringify({ role: role });
+
+        let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
+
+        let requestoptions: RequestOptions = new RequestOptions({
+            url: this.deleteRoleUrl,
+            method: RequestMethod.Post,
+            headers: headers,
+            body: body
+        });
+
+        return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
+            console.log('Response received ' + res.json());
+            return res.json();
         });
     }
     public AddUserToRole(email:string, role:string): Observable<any>{
