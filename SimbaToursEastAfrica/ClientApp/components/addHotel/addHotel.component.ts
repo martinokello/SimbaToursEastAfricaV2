@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, Injectable, Output, EventEmitter, OnChanges } from '@angular/core';
+﻿import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, Injectable, EventEmitter, OnChanges } from '@angular/core';
 import { LocationComponent } from '../location/location.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { HotelPricingComponent } from '../hotelPricing/hotelPricing.component';

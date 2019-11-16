@@ -898,13 +898,11 @@
             },
             "minimist": {
               "version": "0.0.8",
-              "bundled": true,
-              "optional": true
+              "bundled": true
             },
             "minipass": {
               "version": "2.3.5",
               "bundled": true,
-              "optional": true,
               "requires": {
                 "safe-buffer": "^5.1.2",
                 "yallist": "^3.0.0"
@@ -921,7 +919,6 @@
             "mkdirp": {
               "version": "0.5.1",
               "bundled": true,
-              "optional": true,
               "requires": {
                 "minimist": "0.0.8"
               }
@@ -1557,7 +1554,8 @@
             },
             "minimist": {
               "version": "0.0.8",
-              "bundled": true
+              "bundled": true,
+              "optional": true
             },
             "minipass": {
               "version": "2.3.5",

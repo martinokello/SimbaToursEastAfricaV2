@@ -4,15 +4,8 @@
         <div class="form-group">
             <label>User Role</label>
             <input type="text" name="newRoleName" [(ngModel)]="newRoleName" required #newRoleNameMessage="ngModel" />
-            <div *ngIf="createUserRole() && f3.submitted && newRoleNameMessage.invalid" class="text-danger">
+            <div *ngIf="(createUserRole() || deleteUserRole()) && f3.submitted && newRoleNameMessage.invalid" class="text-danger">
                 Role Name required
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Roles</label>
-            <select required id=roleName #roleName></select>
-            <div *ngIf="deleteUserRole() && f3.submitted && roleName.invalid" class="text-danger">
-                Role name required
             </div>
         </div>
         <input type="submit" (click)="createUserRole()" class="but-primary" name="CreateRole" value="Create User Role"  style="margin-top:10px;"/>

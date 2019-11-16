@@ -1,5 +1,4 @@
-﻿import {    Component, OnInit, ViewChild, ElementRef, Injectable
-} from '@angular/core';
+﻿import {    Component, OnInit, ViewChild, ElementRef, Injectable,Input} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import {SafariTourServices, IUserRole } from '../../services/safariTourServices';
 import 'rxjs/add/operator/map';
@@ -21,17 +20,11 @@ export class NewRolesComponent implements OnInit{
     public newRoleName: string | any;
 
     ngOnInit(): void {
-        this.getAllRoles();
     }
     public constructor(safarTourService: SafariTourServices) {
         this.safariTourService = safarTourService;
     }
 
-    getSelectedRole(): string {
-
-        let select = $("select#roleName");
-        return select.val()+"";
-    }
     public createUserRole(): void {
         let role = this.newRoleName;
         let results: Observable<any> = this.safariTourService.CreateUserRole(role);
@@ -63,21 +56,6 @@ export class NewRolesComponent implements OnInit{
             }
         }).subscribe();
 
-    }
-    public getAllRoles() {
-        let results: Observable<any> = this.safariTourService.GetAllRoles();
-        results.map((q: any) => {
-            this.userRoles = q;
-
-            let select = $("select#roleName");
-            console.log(select);
-
-            select.remove('option');
-            select.append('<option value="" selected="true">Select A Role</option>');
-            for (let i = 0; i < this.userRoles.length; i++) {
-                select.append('<option value="' + this.userRoles[i].name + '">' + this.userRoles[i].name + '</option>');
-            } 
-        }).subscribe();
     }
 
 }
