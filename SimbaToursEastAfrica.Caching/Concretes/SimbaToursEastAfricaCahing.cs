@@ -14,14 +14,14 @@ namespace SimbaToursEastAfrica.Caching.Concretes
 
         public T GetOrSaveToCache<T>(T cachedObject,string key, int timeInMinutes, Func<T> ResolveCache)
         {
-            T result = CacheObject.Get(key);
+            object result = CacheObject.Get(key);
             if (object.Equals(result, default(T)))
             {
                 T fromCache = ResolveCache.Invoke();
                 CacheObject.Set(key, fromCache, DateTime.Now.AddMinutes(timeInMinutes));
                 return fromCache;
             }
-            return result; 
+            return (T) result; 
         }
     }
 }
