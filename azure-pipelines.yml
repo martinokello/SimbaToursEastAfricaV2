@@ -10,9 +10,13 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
+  workingDirectory: '.'
+  solution: './**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  solutionFolder: '$(workingDirectory)'
+  clientProjectDirectory: '$(workingDirectory)\\SimbaToursEastAfrica'
+  targetDeployDirectory: '$(build.artifactStagingDirectory)'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -24,11 +28,24 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+    msbuildArgs: '/p:DeployOnBuild=true /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
+- task: Npm@1
+  inputs:  
+    command: 'install'
+    workingDir: '$(clientProjectDirectory)'
+    customCommand: 'npm ng build'
+
+- task: CopyFiles@2
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    SourceFolder: '$(clientProjectDirectory)\\ClientApp'
+    Contents: '**/*.js'
+    TargetFolder: '$(targetDeployDirectory)\\dist'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(clientProjectDirectory)\\wwwroot'
+    Contents: '**'
+    TargetFolder: '$(targetDeployDirectory)'
