@@ -1,8 +1,8 @@
 <!-- Nav -->
 <nav class="main-nav" style="position:relative;width:100%;height:auto;">
-    <div style="text-align:center;"><a style="color:black !important;background-color:white !important; font-weight:bolder !important;font-size:larger !important;padding:5px !important;border-bottom:dashed thin gray !important;" [routerLink]="['/home']">Simba Tours East Africa</a><br/></div>  
+    <div style="text-align:center;"><a style="color:black !important;background-color:white !important; font-weight:bolder !important;font-size:larger !important;padding:5px !important;border-bottom:dashed thin gray !important;" [routerLink]="['/home']">Simba Tours East Africa</a><br /></div>
     <div style="position:relative !important;margin-bottom:5px;text-align:left;">
-        <span style="color:red;background-color:black;padding:5px;display:none;font-size:small;" class="col-lg-4" id="loginName"></span><br/>
+        <span style="color:red;background-color:black;padding:5px;display:none;font-size:small;" class="col-lg-4" id="loginName"></span><br />
     </div>
     <ul id="menubarlist" class="links" style="position:relative;">
         <li [routerLinkActive]="['link-active']">
@@ -15,14 +15,14 @@
                 Fetch data
             </a>
         </li>
-        <span *ngIf="actUserStatus.isUserLoggedIn" ngModel="actUserStatus.isUserLoggedIn" ngDefaultControl>
+        <ng-container *ngIf="actUserStatus.isUserLoggedIn" ngModel="actUserStatus.isUserLoggedIn" ngDefaultControl>
             <li [routerLinkActive]="['link-active']">
                 <a [routerLink]="['/book-tour']">
                     Book tour
                 </a>
             </li>
-        </span>
-        <span *ngIf="!actUserStatus.isUserAdministrator" ngDefaultControl ngModel="actUserStatus">
+        </ng-container>
+        <ng-container *ngIf="!actUserStatus.isUserAdministrator" ngDefaultControl ngModel="actUserStatus">
             <li [routerLinkActive]="['link-active']">
                 <a [routerLink]="['/contactus']">
                     Contact Us
@@ -33,8 +33,8 @@
                     About Us
                 </a>
             </li>
-        </span>
-        <span *ngIf="actUserStatus.isUserLoggedIn && actUserStatus.isUserAdministrator" ngDefaultControl ngModel="actUserStatus">
+        </ng-container>
+        <ng-container *ngIf="actUserStatus.isUserLoggedIn && actUserStatus.isUserAdministrator" ngDefaultControl ngModel="actUserStatus">
             <li [routerLinkActive]="['link-active']">
                 <a [routerLink]="['/add-hotel']">
                     Add Hotel
@@ -44,7 +44,7 @@
                 <a [routerLink]="['/transport-pricing']">
                     Transport
                 </a>
-            </li>           
+            </li>
             <li [routerLinkActive]="['link-active']">
                 <a [routerLink]="['/schedules-admin']">
                     Schedules
@@ -75,8 +75,8 @@
                     Roles
                 </a>
             </li>
-        </span>
-        <span *ngIf="!actUserStatus.isUserLoggedIn" ngModel="actUserStatus.isUserLoggedIn" ngDefaultControl>
+        </ng-container>
+        <ng-container *ngIf="!actUserStatus.isUserLoggedIn" ngModel="actUserStatus.isUserLoggedIn" ngDefaultControl>
             <li [routerLinkActive]="['link-active']">
                 <a (click)="setIsLogInPage()" [routerLink]="['/login']">
                     login
@@ -92,8 +92,8 @@
                     Forgot password
                 </a>
             </li>
-        </span>
-        <span *ngIf="actUserStatus.isUserLoggedIn" ngModel="actUserStatus.isUserLoggedIn" ngDefaultControl>
+        </ng-container>
+        <ng-container *ngIf="actUserStatus.isUserLoggedIn" ngModel="actUserStatus.isUserLoggedIn" ngDefaultControl>
             <li [routerLinkActive]="['link-active']">
                 <a [routerLink]="['/make-Payments']">
                     Pay Installments
@@ -104,11 +104,11 @@
                     Log out
                 </a>
             </li>
-        </span>
+        </ng-container>
     </ul>
     <ul class="icons">
         <li><a href="#" class="icon alt fa-twitter addthis_button_twitter" style="color:lightblue !important;"><span class="label">Twitter</span></a></li>
-        <li><a href="#" class="icon alt fa-facebook addthis_button_facebook"  style="color:lightblue !important;"><span class="label">Facebook</span></a></li>
+        <li><a href="#" class="icon alt fa-facebook addthis_button_facebook" style="color:lightblue !important;"><span class="label">Facebook</span></a></li>
         <li><a href="https://pdfcrowd.com/url_to_pdf/" class="icon alt fa-print" style="color:lightblue !important;"><span class="label">Print</span></a></li>
         <li><a href="#" class="addthis_counter addthis_bubble_style" style="color:lightblue !important;margin-top:10px;"></a></li>
     </ul>

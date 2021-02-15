@@ -168,7 +168,7 @@ namespace SimbaToursEastAfrica.Controllers
             return Json(new { message = "Password reset successfully" });
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Logout()
         {
              _signInManager.SignOutAsync().ConfigureAwait(true).GetAwaiter().GetResult();

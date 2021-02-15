@@ -33,6 +33,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" />
     <PackageReference Include="Microsoft.NETCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="node.js" Version="5.3.0" />
     <PackageReference Include="Webpack" Version="4.0.0" />
   </ItemGroup>
 
@@ -42,7 +43,11 @@
 
   <ItemGroup>
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
+    <Compile Remove="Views\Account\**" />
     <Content Remove="ClientApp\**" />
+    <Content Remove="Views\Account\**" />
+    <EmbeddedResource Remove="Views\Account\**" />
+    <None Remove="Views\Account\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -217,10 +222,6 @@
     <TypeScriptCompile Include="ClientApp\app.browser.module.ts" />
     <TypeScriptCompile Include="ClientApp\boot.browser.ts" />
     <TypeScriptCompile Include="ClientApp\boot.server.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Account\" />
   </ItemGroup>
 
   <ItemGroup>
