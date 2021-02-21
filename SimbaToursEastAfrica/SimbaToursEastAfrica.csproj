@@ -58,6 +58,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\guards\AuthGuard.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\assets\css\font-awesome.min.css" />
     <None Include="wwwroot\assets\css\main.css" />
     <None Include="wwwroot\assets\css\noscript.css" />
@@ -222,6 +226,7 @@
     <TypeScriptCompile Include="ClientApp\app.browser.module.ts" />
     <TypeScriptCompile Include="ClientApp\boot.browser.ts" />
     <TypeScriptCompile Include="ClientApp\boot.server.ts" />
+    <TypeScriptCompile Include="ClientApp\guards\AuthGuard.ts" />
   </ItemGroup>
 
   <ItemGroup>

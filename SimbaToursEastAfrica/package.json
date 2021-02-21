@@ -63,6 +63,7 @@
     "zone.js": "0.8.12"
   },
   "dependencies": {
+    "@types/node": "10",
     "@agm/core": "^1.0.0-beta.5",
     "@angular-devkit/build-angular": "^0.8.3",
     "@angular/cli": "6.0.0",
@@ -77,6 +78,7 @@
     "loader": "^2.1.1",
     "ngx-bootstrap": "^3.2.0",
     "ngx-editor": "^4.1.0",
+    "node": "10.15.3",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "rxjs-compat": "^6.4.0",

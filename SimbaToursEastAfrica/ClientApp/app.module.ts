@@ -36,6 +36,7 @@ import { SectionsContactComponent } from './components/sectionscontact/sectionsc
 import { SuccessComponent } from './components/paypalSuccess/success.component';
 import { FailureComponent } from './components/paypalFailure/failure.component';
 import { NewRolesComponent } from './components/newroles/newroles.component';
+import { AuthGuard } from './guards/AuthGuard';
 
 @NgModule({
     declarations: [
@@ -80,34 +81,32 @@ import { NewRolesComponent } from './components/newroles/newroles.component';
         FormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', component: HomeComponent },
+            { path: 'home', component: HomeComponent},
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
-            { path: 'book-tour', component: BookTourComponent },
-            { path: 'deal-pricing', component: DealsPricingComponent },
-            { path: 'hotel-pricing', component: HotelPricingComponent },
-            { path: 'laguage-pricing', component: LaguagePricingComponent },
-            { path: 'meal-pricing', component: MealPricingComponent },
-            { path: 'schedules-admin', component: SchedulesAdminComponent },
-            { path: 'schedules-pricing', component: SchedulesPricingComponent },
-            { path: 'add-hotel', component: AddHotelComponent },
-            { path: 'add-location', component: AddLocationComponent },
-            { path: 'add-vehicle', component: AddVehicleComponent },
+            { path: 'book-tour', component: BookTourComponent, canActivate: [AuthGuard]  },
+            { path: 'deal-pricing', component: DealsPricingComponent, canActivate: [AuthGuard] },
+            { path: 'hotel-pricing', component: HotelPricingComponent, canActivate: [AuthGuard] },
+            { path: 'laguage-pricing', component: LaguagePricingComponent, canActivate: [AuthGuard] },
+            { path: 'meal-pricing', component: MealPricingComponent, canActivate: [AuthGuard]  },
+            { path: 'schedules-admin', component: SchedulesAdminComponent, canActivate: [AuthGuard] },
+            { path: 'schedules-pricing', component: SchedulesPricingComponent, canActivate: [AuthGuard]  },
+            { path: 'add-hotel', component: AddHotelComponent, canActivate: [AuthGuard] },
+            { path: 'add-location', component: AddLocationComponent, canActivate: [AuthGuard] },
+            { path: 'add-vehicle', component: AddVehicleComponent, canActivate: [AuthGuard]  },
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
-            { path: 'forgot-password', component: ForgotPasswordComponent },
+            { path: 'forgot-password', component: ForgotPasswordComponent},
             { path: 'login', component: LoginComponent },
-            { path: 'make-Payments', component: PayByInstallments },
-            { path: 'transport-pricing', component: TransportPricingComponent },
-            { path: 'logout', component: HomeComponent },
-            { path: 'manage-roles', component: UserRolesComponent },
+            { path: 'make-Payments', component: PayByInstallments, canActivate: [AuthGuard]  },
+            { path: 'transport-pricing', component: TransportPricingComponent, canActivate: [AuthGuard]  },
+            { path: 'logout', component: HomeComponent, canActivate: [AuthGuard]  },
+            { path: 'manage-roles', component: UserRolesComponent, canActivate: [AuthGuard]  },
             { path: 'contactus', component: ContactUsComponent },
             { path: 'aboutus', component: AboutUsComponent },
             { path: 'success', component: SuccessComponent },
             { path: 'failure', component: FailureComponent },
             { path: 'new-roles', component: NewRolesComponent }, 
-
-
             { path: '**', redirectTo: 'home' }
         ])
     ],

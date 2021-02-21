@@ -66,7 +66,7 @@ export class SafariTourServices {
     public postForgotPasswordUrl: string = "/Account/ForgotPassword";
     public static tourClientModel: ITourClient;
     public static clientEmailAddress: string = "";
-    public postSendEmail: string = " /SimbaSafariToursV2/Home/SendEmail";
+    public postSendEmail: string = " /Home/SendEmail";
 
     public constructor(httpClient: Http) {
         this.httpClient = httpClient;
