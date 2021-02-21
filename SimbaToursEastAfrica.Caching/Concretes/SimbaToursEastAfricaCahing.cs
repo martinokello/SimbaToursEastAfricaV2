@@ -11,7 +11,6 @@ namespace SimbaToursEastAfrica.Caching.Concretes
     {
         public MemoryCache CacheObject { get; set; } = new MemoryCache(new MemoryCacheOptions());
 
-
         public T GetOrSaveToCache<T>(T cachedObject,string key, int timeInMinutes, Func<T> ResolveCache)
         {
             object result = CacheObject.Get(key);
