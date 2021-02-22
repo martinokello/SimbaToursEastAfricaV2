@@ -29,5 +29,7 @@ export class AppClientModule {
 }
 
 export function getBaseUrl() {
-    return document.getElementsByTagName('base')[0].href;
+    
+    let appRoot: string = "/SimbaSafariToursV2";
+    return appRoot+document.getElementsByTagName('base')[0].href;
 }

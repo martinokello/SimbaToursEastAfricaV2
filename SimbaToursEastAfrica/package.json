@@ -63,7 +63,6 @@
     "zone.js": "0.8.12"
   },
   "dependencies": {
-    "@types/node": "10",
     "@agm/core": "^1.0.0-beta.5",
     "@angular-devkit/build-angular": "^0.8.3",
     "@angular/cli": "6.0.0",
