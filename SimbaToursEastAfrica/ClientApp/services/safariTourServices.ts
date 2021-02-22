@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Injectable, Inject, ReflectiveInjector } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Binary } from '@angular/compiler';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class SafariTourServices {
@@ -11,6 +12,7 @@ export class SafariTourServices {
         isUserLoggedIn: false,
         isUserAdministrator: false
     };
+    public appUserIsLoggedIn: BehaviorSubject<boolean>;
     public static isLoginPage: boolean = false;
     public actionResult: any;
     public httpClient: Http;
@@ -97,6 +99,8 @@ export class SafariTourServices {
         };
         SafariTourServices.tourClientModel = model;
         SafariTourServices.tourClientModel.grossTotalCosts = 0;
+        SafariTourServices.actUserStatus.isUserLoggedIn = false;
+        this.appUserIsLoggedIn = new BehaviorSubject<boolean>(SafariTourServices.actUserStatus.isUserLoggedIn);
     }
     public static SetUserEmail(userEmailAddress: string) {
         SafariTourServices.clientEmailAddress = userEmailAddress;

@@ -16,7 +16,7 @@ export class NavMenuComponent implements OnInit {
         isUserLoggedIn: false,
         isUserAdministrator: false,
     };
-    private safariTourService: SafariTourServices | any;
+    public safariTourService: SafariTourServices | any;
     public constructor(safariTourService: SafariTourServices) {
 
         this.safariTourService = safariTourService;
@@ -52,8 +52,6 @@ export class NavMenuComponent implements OnInit {
     }
     logOut(): void {
         $('span#loginName').css('display', 'none');
-        this.actUserStatus.isUserLoggedIn = SafariTourServices.actUserStatus.isUserLoggedIn = false;
-        this.actUserStatus.isUserAdministrator = SafariTourServices.actUserStatus.isUserAdministrator = false;
         let logOutResult: Observable<any> = this.safariTourService.LogOut();
         logOutResult.map((p:any)=>{
             this.actUserStatus.isUserLoggedIn = SafariTourServices.actUserStatus.isUserLoggedIn = false;
