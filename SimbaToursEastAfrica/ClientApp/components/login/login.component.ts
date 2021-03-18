@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, ViewChild, ElementRef, Injectable, AfterViewInit, AfterViewChecked, Inject, Output, Input, EventEmitter } from '@angular/core';
 import {Router} from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import {SafariTourServices, IUserDetail, IUserStatus } from '../../services/safariTourServices';
+import {SafariTourServices, IUserDetail, IUserStatus, IUserLoginStatus } from '../../services/safariTourServices';
 import 'rxjs/add/operator/map';
 import * as $ from 'jquery';
 
@@ -35,15 +35,14 @@ export class LoginComponent implements OnInit{
         this.router = router;
     }
     public loginUser(): void {
-        let loginResults: Observable<any> = this.safariTourService.LoginByPost(this.userDetail);
-        loginResults.map((q: any) => {
+        let loginResults: Observable<IUserLoginStatus> = this.safariTourService.LoginByPost(this.userDetail);
+        loginResults.map((q: IUserLoginStatus) => {
             if (q.isLoggedIn) {
                 SafariTourServices.actUserStatus.isUserLoggedIn = q.isLoggedIn;
                 $('span#loginName').css('display', 'block');
                 $('span#loginName').text("logged in as: " + this.userDetail.emailAddress);
                 if (q.isAdministrator) {
                     SafariTourServices.actUserStatus.isUserAdministrator = q.isAdministrator;
-
                 }
                 SafariTourServices.isLoginPage = false;
                 SafariTourServices.SetUserEmail(this.userDetail.emailAddress);

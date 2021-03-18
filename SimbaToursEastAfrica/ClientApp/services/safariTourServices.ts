@@ -99,8 +99,6 @@ export class SafariTourServices {
         };
         SafariTourServices.tourClientModel = model;
         SafariTourServices.tourClientModel.grossTotalCosts = 0;
-        SafariTourServices.actUserStatus.isUserLoggedIn = false;
-        this.appUserIsLoggedIn = new BehaviorSubject<boolean>(SafariTourServices.actUserStatus.isUserLoggedIn);
     }
     public static SetUserEmail(userEmailAddress: string) {
         SafariTourServices.clientEmailAddress = userEmailAddress;
@@ -253,7 +251,7 @@ export class SafariTourServices {
         });
         
     }
-    public LoginByPost(userDetail: IUserDetail): Observable<any> {
+    public LoginByPost(userDetail: IUserDetail): Observable<IUserLoginStatus> {
         let body = JSON.stringify(userDetail);
 
         let headers = new Headers({ 'Content-Type': 'application/json;charset=utf-8' });
@@ -266,8 +264,20 @@ export class SafariTourServices {
         });
 
         return this.httpClient.request(new Request(requestoptions)).map((res: Response) => {
-            console.log('Response received ' + res.json());
-            return res.json();
+            let p: any = res.json();
+
+                let result: IUserLoginStatus =
+                {
+                    isLoggedIn: p.isLoggedIn,
+                    isAdministrator: p.isAdministrator,
+                    name: p.name
+                };
+
+            SafariTourServices.actUserStatus.isUserLoggedIn = result.isLoggedIn;
+            SafariTourServices.actUserStatus.isUserAdministrator = result.isAdministrator;
+            localStorage.setItem("actUserStatus", JSON.stringify(SafariTourServices.actUserStatus));
+                //console.log('Response received ' + p.toString());
+                return result;
         });
     }
 
@@ -276,6 +286,10 @@ export class SafariTourServices {
 
         return this.httpClient.get(this.getLogoutUrl).map((res: Response) => {
             console.log('Response received ' + res.json());
+
+            SafariTourServices.actUserStatus.isUserLoggedIn = false;
+            SafariTourServices.actUserStatus.isUserAdministrator = false;
+            localStorage.removeItem("actUserStatus");
             return res.json();
         });
     }
@@ -1118,7 +1132,11 @@ export interface ILaguagePricing {
     unitMealPrice: number;
 }
 
-
+export interface IUserLoginStatus {
+    name: string;
+    isLoggedIn: boolean;
+    isAdministrator: boolean;
+}
 export interface ISchedulesPricing {
     schedulesPricingId: number;
     schedulesDescription: string;

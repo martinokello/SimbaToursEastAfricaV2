@@ -37,6 +37,8 @@ import { SuccessComponent } from './components/paypalSuccess/success.component';
 import { FailureComponent } from './components/paypalFailure/failure.component';
 import { NewRolesComponent } from './components/newroles/newroles.component';
 import { AuthGuard } from './guards/AuthGuard';
+import { SafariTourServices } from './services/safariTourServices';
+import { AdminAuthGuard } from './guards/AdminAuthGuard';
 
 @NgModule({
     declarations: [
@@ -84,32 +86,33 @@ import { AuthGuard } from './guards/AuthGuard';
             { path: 'home', component: HomeComponent},
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
-            { path: 'book-tour', component: BookTourComponent/*,: [AuthGuard]*/  },
-            { path: 'deal-pricing', component: DealsPricingComponent/*,: [AuthGuard]*/  },
-            { path: 'hotel-pricing', component: HotelPricingComponent/*,: [AuthGuard]*/ },
-            { path: 'laguage-pricing', component: LaguagePricingComponent/*,: [AuthGuard]*/  },
-            { path: 'meal-pricing', component: MealPricingComponent/*,: [AuthGuard]*/  },
-            { path: 'schedules-admin', component: SchedulesAdminComponent/*,: [AuthGuard]*/  },
-            { path: 'schedules-pricing', component: SchedulesPricingComponent/*,: [AuthGuard]*/  },
-            { path: 'add-hotel', component: AddHotelComponent/*,: [AuthGuard]*/  },
-            { path: 'add-location', component: AddLocationComponent/*,: [AuthGuard]*/ },
-            { path: 'add-vehicle', component: AddVehicleComponent/*,: [AuthGuard]*/ },
+            { path: 'book-tour', component: BookTourComponent, canActivate : [AuthGuard] },
+            { path: 'deal-pricing', component: DealsPricingComponent, canActivate:[AuthGuard] },
+            { path: 'hotel-pricing', component: HotelPricingComponent, canActivate: [AuthGuard] },
+            { path: 'laguage-pricing', component: LaguagePricingComponent, canActivate: [AuthGuard] },
+            { path: 'meal-pricing', component: MealPricingComponent, canActivate : [AuthGuard] },
+            { path: 'schedules-admin', component: SchedulesAdminComponent, canActivate: [AuthGuard, AdminAuthGuard]  },
+            { path: 'schedules-pricing', component: SchedulesPricingComponent, canActivate: [AuthGuard]  },
+            { path: 'add-hotel', component: AddHotelComponent,canActivate : [AuthGuard]  },
+            { path: 'add-location', component: AddLocationComponent, canActivate:[AuthGuard] },
+            { path: 'add-vehicle', component: AddVehicleComponent, canActivate:[AuthGuard]},
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
             { path: 'forgot-password', component: ForgotPasswordComponent},
             { path: 'login', component: LoginComponent },
-            { path: 'make-Payments', component: PayByInstallments/*,: [AuthGuard]*/   },
-            { path: 'transport-pricing', component: TransportPricingComponent/*,: [AuthGuard]*/  },
+            { path: 'make-Payments', component: PayByInstallments, canActivate: [AuthGuard]   },
+            { path: 'transport-pricing', component: TransportPricingComponent, canActivate:[AuthGuard]  },
             { path: 'logout', component: HomeComponent },
-            { path: 'manage-roles', component: UserRolesComponent/*,: [AuthGuard]*/ },
+            { path: 'manage-roles', component: UserRolesComponent, canActivate:[AuthGuard] },
             { path: 'contactus', component: ContactUsComponent },
             { path: 'aboutus', component: AboutUsComponent },
             { path: 'success', component: SuccessComponent },
             { path: 'failure', component: FailureComponent },
-            { path: 'new-roles', component: NewRolesComponent/*,: [AuthGuard]*/  }, 
+            { path: 'new-roles', component: NewRolesComponent, canActivate: [AuthGuard, AdminAuthGuard] }, 
             { path: '**', redirectTo: 'home' }
         ])
     ],
+    providers: [SafariTourServices, AuthGuard, AdminAuthGuard],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -51,6 +51,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="DVTechTestSolution.cs" />
     <Compile Remove="Migrations\20180824204704_HotelTourclientAssociation2.cs" />
     <Compile Remove="Migrations\20180824204704_HotelTourclientAssociation2.Designer.cs" />
     <Compile Remove="Migrations\20180824204828_HotelTourclientAssociation3.cs" />
@@ -58,6 +59,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\guards\AdminAuthGuard.ts" />
     <None Remove="ClientApp\guards\AuthGuard.ts" />
   </ItemGroup>
 
@@ -226,6 +228,7 @@
     <TypeScriptCompile Include="ClientApp\app.browser.module.ts" />
     <TypeScriptCompile Include="ClientApp\boot.browser.ts" />
     <TypeScriptCompile Include="ClientApp\boot.server.ts" />
+    <TypeScriptCompile Include="ClientApp\guards\AdminAuthGuard.ts" />
     <TypeScriptCompile Include="ClientApp\guards\AuthGuard.ts" />
   </ItemGroup>
 

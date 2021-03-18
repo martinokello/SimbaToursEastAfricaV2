@@ -59,7 +59,7 @@ export class SchedulesAdminComponent implements OnInit, AfterViewInit, AfterView
     }
     ngOnInit() {
         //console.log("inside OnInit");
-        this.isAdminUser = SafariTourServices.actUserStatus.isUserAdministrator;
+        this.isAdminUser = this.safariTourService.actUserStatus.isUserAdministrator;
         this.model = {};
         this.model.editable = true;
         this.model.viewable = false;

@@ -21,7 +21,14 @@ export class PayByInstallments implements OnInit {
         this.safariTourService = safariTourService;
     }
     public makePayment(): void {
-        let result: Observable<any> = this.safariTourService.MakePayment(this.currentPayment, SafariTourServices.clientEmailAddress);
+        let result: Observable<any>;
+        if (this.currentPayment > 0 && this.currentPayment <= this.amountLeftToPay) {
+            result = this.safariTourService.MakePayment(this.currentPayment, SafariTourServices.clientEmailAddress);
+        }
+        else {
+            alert('Payment should be greater than 0.00 and not more than the amount to be paid!');
+            return;
+        }
 
         result.map((q: any) => {
             window.open(q.payPalRedirectUrl);

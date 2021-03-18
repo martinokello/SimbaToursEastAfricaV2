@@ -8,6 +8,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AuthGuard } from './guards/AuthGuard';
+import { SafariTourServices } from './services/safariTourServices';
+import { AdminAuthGuard } from './guards/AdminAuthGuard';
 
 
 @NgModule({
@@ -19,7 +22,7 @@ import { AppComponent } from './app.component';
         FormsModule,
         RouterModule
     ],
-    providers: [
+    providers: [SafariTourServices, AuthGuard, AdminAuthGuard,
         { provide: BrowserXhr, useClass: CustExtBrowserXhr },
         { provide: 'BASE_URL', useFactory: getBaseUrl }
     ],

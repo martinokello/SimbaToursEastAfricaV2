@@ -62,7 +62,7 @@ export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterVi
     }
     ngOnInit() {
         //console.log("inside OnInit");
-        this.isAdminUser = SafariTourServices.actUserStatus.isUserAdministrator;
+        this.isAdminUser = this.safariTourService.actUserStatus.isUserAdministrator;
         this.model = {};
         this.model.editable = false;
         this.model.viewable = true;

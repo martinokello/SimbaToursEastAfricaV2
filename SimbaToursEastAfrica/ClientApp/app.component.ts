@@ -9,16 +9,20 @@ import * as $ from 'jquery';
     providers:[SafariTourServices]
 })
 export class AppComponent implements OnInit {
-    actUserStatus: any = SafariTourServices.actUserStatus;
-    safariTourService: SafariTourServices | any;
+    safariTourService: SafariTourServices;
+    actUserStatus: IUserStatus;
     twitterFeeds: any[];
     public constructor(safariTourService: SafariTourServices) {
-
         this.safariTourService = safariTourService;
     }
     public ngOnInit(): void {
-        SafariTourServices.actUserStatus.isUserLoggedIn = false;
-        SafariTourServices.actUserStatus.isUserAdministrator = false;
+        this.actUserStatus = JSON.parse(localStorage.getItem('actUserStatus'));
+        if (!this.actUserStatus) {
+            this.actUserStatus = {
+                isUserLoggedIn : false,
+                isUserAdministrator : false
+            }
+        }
         this.GetTwitterFeeds();
     }
 
