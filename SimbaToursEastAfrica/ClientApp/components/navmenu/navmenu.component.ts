@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef, Input,Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Element } from '@angular/compiler';
 import { Observable } from 'rxjs/Observable';
-import { SafariTourServices, IUserStatus, IUserDetail } from '../../services/safariTourServices';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
+import { SafariTourServices, IUserStatus, IUserDetail } from '../../services/safariTourServices';
 import * as $ from 'jquery';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
     selector: 'nav-menu',
@@ -11,27 +13,30 @@ import * as $ from 'jquery';
     styleUrls: ['./navmenu.component.css'],
     providers: [SafariTourServices]
 })
-export class NavMenuComponent implements OnInit {
+export class NavMenuComponent {
     @Input() actUserStatus: IUserStatus = {
         isUserLoggedIn: false,
         isUserAdministrator: false,
     };
     public safariTourService: SafariTourServices | any;
-    public constructor(safariTourService: SafariTourServices) {
+    public constructor(safariTourService: SafariTourServices, private router:Router) {
 
         this.safariTourService = safariTourService;
         this.actUserStatus = JSON.parse(localStorage.getItem('actUserStatus'));
+        this.router = router;
+        this.router.events.filter(evt => evt instanceof NavigationEnd).subscribe((val:any)=>{
+            this.myInit();
+        });
     }
-    ngOnInit(): void {
+    myInit(): void {
         this.actUserStatus = SafariTourServices.actUserStatus;
         this.verifyLoggedInUser();
         if (!this.actUserStatus.isUserLoggedIn &&
         window.location.href.toLowerCase().indexOf('/book-tour') > -1 &&
-        window.location.href.toLowerCase().indexOf('/login') > -1 &&
         window.location.href.toLowerCase().indexOf('/register') > -1 &&
         window.location.href.toLowerCase().indexOf('/forgot-password') > -1)
         {
-            window.location.href = "/home";
+            this.router.navigateByUrl("/home");
         }
     }
 
