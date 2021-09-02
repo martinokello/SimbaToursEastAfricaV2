@@ -66,6 +66,7 @@ export class NavMenuComponent {
     }
     logOut(): void {
         $('span#loginName').css('display', 'none');
+        $('span#loginName').text("");
         let logOutResult: Observable<any> = this.safariTourService.LogOut();
         logOutResult.map((p:any)=>{
             this.actUserStatus.isUserLoggedIn = this.safariTourService.actUserStatus.isUserLoggedIn = false;

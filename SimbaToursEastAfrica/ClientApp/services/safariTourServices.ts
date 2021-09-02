@@ -16,7 +16,7 @@ export class SafariTourServices {
     public static isLoginPage: boolean = false;
     public actionResult: any;
     public httpClient: Http;
-    public appRoot: string = "/SimbaSafariToursV2";
+    public appRoot: string = "http://simbasafaritoursv2.martinlayooinc.com";
     public getAllRoles: string = this.appRoot + "/Account/GetAllRoles";
     public createRoleUrl: string = this.appRoot + "/Account/CreateRole";
     public deleteRoleUrl: string = this.appRoot + "/Account/DeleteRole";
