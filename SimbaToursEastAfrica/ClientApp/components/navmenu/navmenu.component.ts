@@ -1,9 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
 import { Element } from '@angular/compiler';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
-import { SafariTourServices, IUserStatus, IUserDetail } from '../../services/safariTourServices';
+import { SafariTourServices, IUserStatus, IUserDetail, IUserLoginStatus } from '../../services/safariTourServices';
 import * as $ from 'jquery';
 import { Router, NavigationEnd } from '@angular/router';
 
@@ -13,23 +13,43 @@ import { Router, NavigationEnd } from '@angular/router';
     styleUrls: ['./navmenu.component.css'],
     providers: [SafariTourServices]
 })
-export class NavMenuComponent {
-    @Input() actUserStatus: IUserStatus = {
-        isUserLoggedIn: false,
-        isUserAdministrator: false,
-    };
+export class NavMenuComponent implements AfterContentInit, OnInit {
+    @Input() actUserStatus: IUserStatus;
     public safariTourService: SafariTourServices | any;
-    public constructor(safariTourService: SafariTourServices, private router:Router) {
+    public constructor(safariTourService: SafariTourServices, private router: Router) {
 
         this.safariTourService = safariTourService;
-        this.actUserStatus = JSON.parse(localStorage.getItem('actUserStatus'));
+        this.actUserStatus = {
+            isUserLoggedIn: false,
+            isUserAdministrator: false
+        };
         this.router = router;
-        this.router.events.filter(evt => evt instanceof NavigationEnd).subscribe((val:any)=>{
+        this.router.events.filter(evt => evt instanceof NavigationEnd).subscribe((val: any) => {
             this.myInit();
         });
     }
+    ngOnInit() {
+        this.actUserStatus = {
+            isUserLoggedIn: false,
+            isUserAdministrator: false
+        };
+    }
+
+    ngAfterContentInit():void {
+
+        let actUserLoginStatus: IUserLoginStatus = JSON.parse(localStorage.getItem('actUserLoginStatus'));
+        if (actUserLoginStatus) {
+
+            this.actUserStatus.isUserLoggedIn = actUserLoginStatus.isLoggedIn;
+            this.actUserStatus.isUserAdministrator = actUserLoginStatus.isAdministrator;
+            localStorage.removeItem('actUserStatus');
+            localStorage.setItem('actUserStatus', JSON.stringify(this.actUserStatus));
+        }
+
+        if (!this.actUserStatus.isUserLoggedIn) this.logOut();
+    }
     myInit(): void {
-        this.actUserStatus = SafariTourServices.actUserStatus;
+        this.actUserStatus = JSON.parse(localStorage.getItem('actUserStatus'));
         this.verifyLoggedInUser();
         if (!this.actUserStatus.isUserLoggedIn &&
         window.location.href.toLowerCase().indexOf('/book-tour') > -1 &&
@@ -47,15 +67,12 @@ export class NavMenuComponent {
                 $('span#loginName').css('display', 'block');
                 $('span#loginName').text("logged in as: " + p.name);
                 SafariTourServices.SetUserEmail(p.name);
-                this.safariTourService.actUserStatus.isUserLoggedIn = true;
-                this.actUserStatus.isUserLoggedIn = true;
-                this.actUserStatus.isUserAdministrator = p.isAdministrator;
                 this.actUserStatus = {
                     isUserLoggedIn: true,
                     isUserAdministrator: p.isAdministrator
                 }
                 localStorage.removeItem('actUserStatus');
-                localStorage.setItem('actUserStatus', JSON.stringify(this.actUserStatus))
+                localStorage.setItem('actUserStatus', JSON.stringify(this.actUserStatus));
             }
         }).subscribe();
     }
@@ -67,13 +84,19 @@ export class NavMenuComponent {
     logOut(): void {
         $('span#loginName').css('display', 'none');
         $('span#loginName').text("");
+        let userLoggedOut: IUserStatus = {
+            isUserLoggedIn: false,
+            isUserAdministrator: false
+        };
+        localStorage.setItem('actUserLoginStatus', null);
+        this.actUserStatus = userLoggedOut;
         let logOutResult: Observable<any> = this.safariTourService.LogOut();
         logOutResult.map((p:any)=>{
-            this.actUserStatus.isUserLoggedIn = this.safariTourService.actUserStatus.isUserLoggedIn = false;
-            this.actUserStatus.isUserAdministrator = this.safariTourService.actUserStatus.isUserAdministrator = false;
+            localStorage.removeItem('actUserStatus');
+            localStorage.setItem('actUserStatus', JSON.stringify(userLoggedOut));
+            this.router.navigateByUrl("/home");
 
-            this.actUserStatus = SafariTourServices.actUserStatus;
         }).subscribe();
-
+        
     }
 }

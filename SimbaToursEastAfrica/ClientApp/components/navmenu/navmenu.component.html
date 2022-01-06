@@ -15,27 +15,36 @@
                 Fetch data
             </a>
         </li>
+        <li [routerLinkActive]="['link-active']">
+            <a [routerLink]="['/contactus']">
+                Contact Us
+            </a>
+        </li>
+        <li [routerLinkActive]="['link-active']">
+            <a [routerLink]="['/aboutus']">
+                About Us
+            </a>
+        </li>
         <ng-container *ngIf="actUserStatus.isUserLoggedIn" ngModel="actUserStatus" ngDefaultControl>
             <li [routerLinkActive]="['link-active']">
                 <a [routerLink]="['/book-tour']">
                     Book tour
                 </a>
             </li>
-        </ng-container>
-        
-        <ng-container *ngIf="!actUserStatus.isUserAdministrator" ngDefaultControl ngModel="actUserStatus">
             <li [routerLinkActive]="['link-active']">
-                <a [routerLink]="['/contactus']">
-                    Contact Us
+                <a [routerLink]="['/make-Payments']">
+                    Pay Installments
                 </a>
             </li>
-            <li [routerLinkActive]="['link-active']">
-                <a [routerLink]="['/aboutus']">
-                    About Us
-                </a>
+            <li [routerLinkActive]="['link-active']" (click)="logOut()">
+                <span>
+                    <a href="#">
+                        Log out
+                    </a>
+                </span>
             </li>
         </ng-container>
-        <ng-container *ngIf="actUserStatus.isUserLoggedIn && actUserStatus.isUserAdministrator" ngDefaultControl ngModel="actUserStatus">
+        <ng-container *ngIf="actUserStatus.isUserLoggedIn && actUserStatus.isUserAdministrator" ngModel="actUserStatus" ngDefaultControl>
             <li [routerLinkActive]="['link-active']">
                 <a [routerLink]="['/add-hotel']">
                     Add Hotel
@@ -77,7 +86,7 @@
                 </a>
             </li>
         </ng-container>
-        <ng-container *ngIf="!actUserStatus.isUserLoggedIn" ngModel="actUserStatus" ngDefaultControl>
+        <ng-container *ngIf="!(actUserStatus.isUserLoggedIn)" ngModel="actUserStatus" ngDefaultControl>
             <li [routerLinkActive]="['link-active']">
                 <a (click)="setIsLogInPage()" [routerLink]="['/login']">
                     login
@@ -93,18 +102,6 @@
                     Forgot password
                 </a>
             </li>
-        </ng-container>
-       <ng-container *ngIf="actUserStatus.isUserLoggedIn" ngModel="actUserStatus" ngDefaultControl>
-        <li [routerLinkActive]="['link-active']">
-            <a [routerLink]="['/make-Payments']">
-                Pay Installments
-            </a>
-        </li>
-        <li [routerLinkActive]="['link-active']" (click)="logOut()">
-            <a [routerLink]="['/home']">
-                Log out
-            </a>
-        </li>
         </ng-container>
     </ul>
     <ul class="icons">

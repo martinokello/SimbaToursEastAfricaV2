@@ -31,14 +31,11 @@ export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterVi
         if (!extraCharges) extraCharges = [];
 
         let extraCharge: IExtraCharges = { tourClientId: 0, tourClientExtraChargesId: 0, extraCharges: this.schedules.price, description: this.schedules.schedulesPricingName }
-
-        if (localStorage.getItem('extraCharges')) {
-            extraCharges.push(extraCharge);
-            localStorage.setItem('extraCharges', JSON.stringify(extraCharges));
-        }
-        else {
-            localStorage.setItem('extraCharges', JSON.stringify(extraCharges));
-        }
+        
+        extraCharges.push(extraCharge);
+        localStorage.setItem('extraCharges', JSON.stringify(extraCharges));
+        alert("Extra Schedule Charges added!");
+        
     }
     public selectSchedulesPricing() {
         let div = this.schedulesPricingItem;

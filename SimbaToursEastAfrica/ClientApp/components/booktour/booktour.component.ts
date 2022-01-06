@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Input, ViewChild, ElementRef, EventEmitter } from '@angular/core';
+﻿import { Component, AfterViewInit, Input, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { Routes, RouterModule, Router } from '@angular/router';
 import { RequestOptions, Request, Headers } from '@angular/http';
 import { NgForm } from "@angular/forms";
@@ -13,7 +13,7 @@ import * as $ from 'jquery';
     styleUrls: ['./booktour.component.css'],
     providers: [SafariTourServices]
 })
-export class BookTourComponent implements OnInit {
+export class BookTourComponent implements AfterViewInit{
     private isHotelSet: boolean = false;
     runningCost: number = 0.00;
     vehicles: IVehicle[] = [];
@@ -45,10 +45,7 @@ export class BookTourComponent implements OnInit {
     public constructor(safarTourService: SafariTourServices, private router: Router) {
         this.safariTourService = safarTourService;
     }
-    ngOnInit(): void {
-        window.onbeforeunload = function () {
-            localStorage.removeItem("extraCharges"); return '';
-        }
+    ngAfterViewInit(): void {
         if (localStorage.getItem('extraCharges')) {
             this.extraCharges = JSON.parse(localStorage.getItem('extraCharges'));
             for (let i = 0; i < this.extraCharges.length; i++) {

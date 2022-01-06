@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, ViewChild, ElementRef, Injectable, AfterViewInit, AfterViewChecked, Inject, Output, Input, EventEmitter } from '@angular/core';
+﻿import { Component, OnInit, ViewChild, ElementRef, Injectable, AfterViewInit, AfterViewChecked, AfterContentInit, Inject, Output, Input, EventEmitter } from '@angular/core';
 import {Router} from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import {SafariTourServices, IUserDetail, IUserStatus, IUserLoginStatus } from '../../services/safariTourServices';
@@ -12,15 +12,15 @@ import * as $ from 'jquery';
     providers: [SafariTourServices]
 })
 @Injectable()
-export class LoginComponent implements OnInit{
+export class LoginComponent implements AfterContentInit{
 
     public userDetail: IUserDetail | any;
     private safariTourService: SafariTourServices | any;
     private router: Router;
 
-    ngOnInit(): void {
+    ngAfterContentInit(): void {
 
-        let userDetail: IUserDetail = {
+        this.userDetail = {
             password: "",
             role: "",
             emailAddress: "",
@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit{
             name: "",
             keepLoggedIn: false
         };
-        this.userDetail = userDetail;
     }
     public constructor(safarTourService: SafariTourServices, router: Router) {
         this.safariTourService = safarTourService;
@@ -38,17 +37,25 @@ export class LoginComponent implements OnInit{
         let loginResults: Observable<IUserLoginStatus> = this.safariTourService.LoginByPost(this.userDetail);
         loginResults.map((q: IUserLoginStatus) => {
             if (q.isLoggedIn) {
-                SafariTourServices.actUserStatus.isUserLoggedIn = q.isLoggedIn;
                 $('span#loginName').css('display', 'block');
                 $('span#loginName').text("logged in as: " + this.userDetail.emailAddress);
-                if (q.isAdministrator) {
-                    SafariTourServices.actUserStatus.isUserAdministrator = q.isAdministrator;
-                }
                 SafariTourServices.isLoginPage = false;
                 SafariTourServices.SetUserEmail(this.userDetail.emailAddress);
+                let userLoggedIn: IUserStatus = {
+                    isUserLoggedIn: true,
+                    isUserAdministrator: q.isAdministrator
+                };
+                localStorage.removeItem('actUserStatus');
+                localStorage.setItem('actUserStatus', JSON.stringify(userLoggedIn));
                 this.router.navigateByUrl('/book-tour');
             }
             else {
+                localStorage.removeItem('actUserStatus');
+                let userLoggedOut: IUserStatus = {
+                    isUserLoggedIn: false,
+                    isUserAdministrator: false
+                };
+                localStorage.setItem('actUserStatus', JSON.stringify(userLoggedOut));
                 alert('Login Failed. Unknown User')
             }
         }).subscribe();

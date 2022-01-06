@@ -16,6 +16,7 @@
    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
    <UserSecretsId>a9a9b6ec-a0c1-42cd-b365-aae4877edaa2</UserSecretsId>
    <AssemblyName>SimbaToursEastAfrica</AssemblyName>
+   <StartupObject>SimbaToursEastAfrica.Program</StartupObject>
  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />

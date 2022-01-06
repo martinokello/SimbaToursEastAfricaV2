@@ -8,15 +8,12 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class SafariTourServices {
-    public static actUserStatus: IUserStatus = {
-        isUserLoggedIn: false,
-        isUserAdministrator: false
-    };
     public appUserIsLoggedIn: BehaviorSubject<boolean>;
     public static isLoginPage: boolean = false;
     public actionResult: any;
     public httpClient: Http;
-    public appRoot: string = "http://simbasafaritoursv2.martinlayooinc.com";
+    public appRoot: string = "https://simbasafaritoursv2.martinlayooinc.com";
+
     public getAllRoles: string = this.appRoot + "/Account/GetAllRoles";
     public createRoleUrl: string = this.appRoot + "/Account/CreateRole";
     public deleteRoleUrl: string = this.appRoot + "/Account/DeleteRole";
@@ -271,11 +268,9 @@ export class SafariTourServices {
                     isLoggedIn: p.isLoggedIn,
                     isAdministrator: p.isAdministrator,
                     name: p.name
-                };
-
-            SafariTourServices.actUserStatus.isUserLoggedIn = result.isLoggedIn;
-            SafariTourServices.actUserStatus.isUserAdministrator = result.isAdministrator;
-            localStorage.setItem("actUserStatus", JSON.stringify(SafariTourServices.actUserStatus));
+            };
+            
+            localStorage.setItem("actUserLoginStatus", JSON.stringify(result));
                 //console.log('Response received ' + p.toString());
                 return result;
         });
@@ -286,10 +281,13 @@ export class SafariTourServices {
 
         return this.httpClient.get(this.getLogoutUrl).map((res: Response) => {
             console.log('Response received ' + res.json());
-
-            SafariTourServices.actUserStatus.isUserLoggedIn = false;
-            SafariTourServices.actUserStatus.isUserAdministrator = false;
+            
             localStorage.removeItem("actUserStatus");
+            let userLoggedOut: IUserStatus = {
+                isUserLoggedIn: false,
+                isUserAdministrator: false
+            };
+            localStorage.setItem('actUserStatus', JSON.stringify(userLoggedOut));
             return res.json();
         });
     }
