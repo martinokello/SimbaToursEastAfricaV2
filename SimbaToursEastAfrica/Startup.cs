@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -45,7 +48,26 @@ namespace SimbaToursEastAfrica
                     .AllowAnyMethod()
                     .AllowAnyHeader());
             });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie("LogInCookie",options =>
+                {
+                    // Cookie settings
+                    options.Cookie.HttpOnly = true;
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                    // If the LoginPath isn't set, ASP.NET Core defaults 
+                    // the path to /Account/Login.
+                    options.LoginPath = "/Account/Login";
+                    // If the AccessDeniedPath isn't set, ASP.NET Core defaults 
+                    // the path to /Account/AccessDenied.
+                    options.AccessDeniedPath = "/Account/AccessDenied";
+                    options.SlidingExpiration = true;
+                });
 
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.MinimumSameSitePolicy = SameSiteMode.Lax;
+                options.HttpOnly = HttpOnlyPolicy.None;
+            });
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.ContractResolver =
@@ -95,20 +117,6 @@ namespace SimbaToursEastAfrica
                 */
                 // User settings
                 options.User.RequireUniqueEmail = true;
-            });
-
-            services.ConfigureApplicationCookie(options =>
-            {
-                // Cookie settings
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-                // If the LoginPath isn't set, ASP.NET Core defaults 
-                // the path to /Account/Login.
-                options.LoginPath = "/Account/Login";
-                // If the AccessDeniedPath isn't set, ASP.NET Core defaults 
-                // the path to /Account/AccessDenied.
-                options.AccessDeniedPath = "/Account/AccessDenied";
-                options.SlidingExpiration = true;
             });
 
             services.AddScoped<DbContext, SimbaToursEastAfricaDbContext>();
@@ -171,10 +179,11 @@ namespace SimbaToursEastAfrica
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
             app.UseStaticFiles();
-            app.UseAuthentication();
             app.UseCookiePolicy();
             app.UseSession();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

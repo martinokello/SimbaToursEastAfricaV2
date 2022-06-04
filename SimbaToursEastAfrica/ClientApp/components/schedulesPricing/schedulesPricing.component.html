@@ -18,19 +18,6 @@
                 <div class="form-group">
                     <label>Schedules Pricing Description</label>
                 </div>
-                <div *ngIf="model.editable">
-                    <textarea name="schedulesDescription" [(ngModel)]="schedules.schedulesDescription" #schedulesDescription="ngModel" required></textarea>
-                    <div *ngIf="f3.submitted && schedulesDescription.invalid" class="text-danger">
-                        Price required
-                    </div>
-                    <div>
-                        <label>Schedules Price</label>
-                        <input type="number" name="price" value="0.00" [(ngModel)]="schedules.price" #price="ngModel" required />
-                        <div *ngIf="f3.submitted && price.invalid" class="text-danger">
-                            Price required
-                        </div>
-                    </div>
-                </div>
                 <div *ngIf="model.viewable">
                     <div class="text-info">
                         {{schedules.schedulesDescription}}
@@ -44,13 +31,15 @@
             <input type="button" class="btn-primary" value="Add to Tour" (click)="addSchedule()"  style="margin-top:10px;"/>
         </div>    <div>
             <h4>Return To Booking Page</h4>
-            <span class="button">
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/book-tour']">
-                        Go To Booking Page
-                    </a>
-                </li>
-            </span>
+            <div class="button">
+                <ul>
+                    <li [routerLinkActive]="['link-active']">
+                        <a [routerLink]="['/book-tour']">
+                            Go To Booking Page
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </form>

@@ -12,7 +12,7 @@ export class SafariTourServices {
     public static isLoginPage: boolean = false;
     public actionResult: any;
     public httpClient: Http;
-    public appRoot: string = "https://simbasafaritoursv2.martinlayooinc.com";
+    public appRoot: string = /*"https://localhost:44333"*/ "https://simbasafaritoursv2.martinlayooinc.com";
 
     public getAllRoles: string = this.appRoot + "/Account/GetAllRoles";
     public createRoleUrl: string = this.appRoot + "/Account/CreateRole";

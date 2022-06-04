@@ -7,7 +7,7 @@
             <div>
                 <div class="form-group">
                     <label>Select Schedules Pricing</label>
-                    <select id="schedulesPricingId" name="schedulesPricingId"  [(ngModel)]="schedules.schedulesPricingId"></select>
+                    <select id="schedulesPricingId" name="schedulesPricingId" [(ngModel)]="schedules.schedulesPricingId"></select>
                 </div>
                 <div class="form-group">
                     <label>Or Create New Schedules Pricing</label>
@@ -30,15 +30,6 @@
                         <div *ngIf="f3.submitted && price.invalid" class="text-danger">
                             Price required
                         </div>
-                    </div>
-                </div>
-                <div *ngIf="model.viewable">
-                    <div class="text-info">
-                        {{schedules.schedulesDescription}}
-                    </div>
-                    <div>
-                        <label>Schedules Price</label>
-                        <div>£{{schedules.price}}</div>
                     </div>
                 </div>
             </div>

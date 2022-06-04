@@ -1,5 +1,5 @@
-﻿import { Component, OnInit, ViewChild, ElementRef, Injectable, AfterViewInit, AfterViewChecked, Inject, Input, Output, EventEmitter } from '@angular/core';
-import { ILaguage, SafariTourServices, IHotelBooking, ItemType, ISchedulesPricing, IExtraCharges } from '../../services/safariTourServices';
+﻿import { Component, OnInit, ViewChild, ElementRef, Injectable, AfterViewInit, AfterViewChecked, Inject, Input, Output, EventEmitter, AfterContentInit } from '@angular/core';
+import { ILaguage, SafariTourServices, IHotelBooking, ItemType, ISchedulesPricing, IExtraCharges, IUserDetail, IUserStatus } from '../../services/safariTourServices';
 import * as $ from "jquery";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
     providers: [SafariTourServices]
 })
 @Injectable()
-export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterViewChecked {
+export class SchedulesPricingComponent implements OnInit, AfterContentInit {
 
     isAdminUser: boolean | any;
     public schedules: ISchedulesPricing;
@@ -49,20 +49,24 @@ export class SchedulesPricingComponent implements OnInit, AfterViewInit, AfterVi
 
         }).subscribe();
     }
-    ngAfterViewChecked() {
 
-        console.log("inside After View Checked");
-
-    }
-    ngAfterViewInit() {
-        console.log("inside After View Init, " + this.schedulesPricingItem);
+    ngAfterContentInit() {
+        this.model = {};
+        let userDetails: IUserStatus = JSON.parse(localStorage.getItem("actUserStatus"));
+        this.isAdminUser = userDetails.isUserAdministrator;
+        this.model.viewable = true;
+        this.model.editable = false;
     }
     ngOnInit() {
         //console.log("inside OnInit");
-        this.isAdminUser = this.safariTourService.actUserStatus.isUserAdministrator;
         this.model = {};
-        this.model.editable = false;
+        //this.isAdminUser = this.safariTourService.actUserStatus.isUserAdministrator;
+        let userDetails: IUserStatus = JSON.parse(localStorage.getItem("actUserStatus"));
+        this.isAdminUser = userDetails.isUserAdministrator;
+
         this.model.viewable = true;
+        this.model.editable = false;
+
         let schedulesDefault: ISchedulesPricing = {
             schedulesPricingId: 0,
             schedulesPricingName: "",

@@ -19,37 +19,47 @@ export class NavMenuComponent implements AfterContentInit, OnInit {
     public constructor(safariTourService: SafariTourServices, private router: Router) {
 
         this.safariTourService = safariTourService;
-        this.actUserStatus = {
-            isUserLoggedIn: false,
-            isUserAdministrator: false
-        };
+
         this.router = router;
         this.router.events.filter(evt => evt instanceof NavigationEnd).subscribe((val: any) => {
             this.myInit();
         });
     }
     ngOnInit() {
-        this.actUserStatus = {
-            isUserLoggedIn: false,
-            isUserAdministrator: false
-        };
+        this.actUserStatus = JSON.parse(localStorage.getItem('actUserStatus'));
+        if (!this.actUserStatus)  {
+            this.actUserStatus = {
+                isUserLoggedIn: false,
+                isUserAdministrator: false
+            };
+        }
     }
 
     ngAfterContentInit():void {
 
-        let actUserLoginStatus: IUserLoginStatus = JSON.parse(localStorage.getItem('actUserLoginStatus'));
-        if (actUserLoginStatus) {
-
-            this.actUserStatus.isUserLoggedIn = actUserLoginStatus.isLoggedIn;
-            this.actUserStatus.isUserAdministrator = actUserLoginStatus.isAdministrator;
-            localStorage.removeItem('actUserStatus');
-            localStorage.setItem('actUserStatus', JSON.stringify(this.actUserStatus));
+        this.actUserStatus = JSON.parse(localStorage.getItem('actUserStatus'));
+        if (!this.actUserStatus) {
+            this.actUserStatus = {
+                isUserLoggedIn: false,
+                isUserAdministrator: false
+            };
         }
-
-        if (!this.actUserStatus.isUserLoggedIn) this.logOut();
+    }
+    loggedInEvent($event) {
+        this.actUserStatus.isUserLoggedIn = $event;
+    }
+    isAdminEvent($event) {
+        this.actUserStatus.isUserAdministrator = $event;
     }
     myInit(): void {
         this.actUserStatus = JSON.parse(localStorage.getItem('actUserStatus'));
+
+         if (!this.actUserStatus) {
+            this.actUserStatus = {
+                isUserLoggedIn: false,
+                isUserAdministrator: false
+            };
+        }
         this.verifyLoggedInUser();
         if (!this.actUserStatus.isUserLoggedIn &&
         window.location.href.toLowerCase().indexOf('/book-tour') > -1 &&
@@ -71,7 +81,6 @@ export class NavMenuComponent implements AfterContentInit, OnInit {
                     isUserLoggedIn: true,
                     isUserAdministrator: p.isAdministrator
                 }
-                localStorage.removeItem('actUserStatus');
                 localStorage.setItem('actUserStatus', JSON.stringify(this.actUserStatus));
             }
         }).subscribe();
@@ -88,12 +97,10 @@ export class NavMenuComponent implements AfterContentInit, OnInit {
             isUserLoggedIn: false,
             isUserAdministrator: false
         };
-        localStorage.setItem('actUserLoginStatus', null);
         this.actUserStatus = userLoggedOut;
+        localStorage.setItem('actUserStatus', JSON.stringify(userLoggedOut));
         let logOutResult: Observable<any> = this.safariTourService.LogOut();
         logOutResult.map((p:any)=>{
-            localStorage.removeItem('actUserStatus');
-            localStorage.setItem('actUserStatus', JSON.stringify(userLoggedOut));
             this.router.navigateByUrl("/home");
 
         }).subscribe();

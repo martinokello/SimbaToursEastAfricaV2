@@ -17,6 +17,8 @@ export class LoginComponent implements AfterContentInit{
     public userDetail: IUserDetail | any;
     private safariTourService: SafariTourServices | any;
     private router: Router;
+    @Output() loggedInEvent = new EventEmitter<boolean>();
+    @Output() isAdminEvent = new EventEmitter<boolean>();
 
     ngAfterContentInit(): void {
 
@@ -45,12 +47,13 @@ export class LoginComponent implements AfterContentInit{
                     isUserLoggedIn: true,
                     isUserAdministrator: q.isAdministrator
                 };
-                localStorage.removeItem('actUserStatus');
+                //localStorage.removeItem('actUserStatus');
                 localStorage.setItem('actUserStatus', JSON.stringify(userLoggedIn));
+                this.loggedInEvent.emit(true);
+                this.isAdminEvent.emit(q.isAdministrator);
                 this.router.navigateByUrl('/book-tour');
             }
             else {
-                localStorage.removeItem('actUserStatus');
                 let userLoggedOut: IUserStatus = {
                     isUserLoggedIn: false,
                     isUserAdministrator: false
