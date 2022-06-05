@@ -17,8 +17,7 @@ export class LoginComponent implements AfterContentInit{
     public userDetail: IUserDetail | any;
     private safariTourService: SafariTourServices | any;
     private router: Router;
-    @Output() loggedInEvent = new EventEmitter<boolean>();
-    @Output() isAdminEvent = new EventEmitter<boolean>();
+    //@Output() loggedInEvent = new EventEmitter<IUserStatus>();
 
     ngAfterContentInit(): void {
 
@@ -42,15 +41,14 @@ export class LoginComponent implements AfterContentInit{
                 $('span#loginName').css('display', 'block');
                 $('span#loginName').text("logged in as: " + this.userDetail.emailAddress);
                 SafariTourServices.isLoginPage = false;
-                SafariTourServices.SetUserEmail(this.userDetail.emailAddress);
+                SafariTourServices.clientEmailAddress = this.userDetail.emailAddress;
                 let userLoggedIn: IUserStatus = {
                     isUserLoggedIn: true,
                     isUserAdministrator: q.isAdministrator
                 };
                 //localStorage.removeItem('actUserStatus');
                 localStorage.setItem('actUserStatus', JSON.stringify(userLoggedIn));
-                this.loggedInEvent.emit(true);
-                this.isAdminEvent.emit(q.isAdministrator);
+                //this.loggedInEvent.emit(userLoggedIn);
                 this.router.navigateByUrl('/book-tour');
             }
             else {

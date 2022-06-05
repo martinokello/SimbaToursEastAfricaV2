@@ -5,8 +5,7 @@
             <!-- Main -->
             <div id="main">
                 <div style="position:relative !important;margin-top:5px;">
-                    <nav-menu style="position:relative !important;width:100%;height:auto;" name="actUserStatus" [actUserStatus]="actUserStatus" ngDefaultControl></nav-menu>
-                </div>
+                    <nav-menu style="position:relative !important;width:100%;height:auto;" name="actUserStatus"  ngDefaultControl></nav-menu>
                 <div #contentContainer style="position:relative !important;margin-top:5px;">
                     <div style="position:relative !important;margin-top:5px;">
                         <router-outlet></router-outlet>
@@ -17,7 +16,7 @@
                         <div id="genTweetsDiv" style="text-align:left;padding:10px;" *ngIf="twitterFeeds != null && twitterFeeds.length > 0">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <span><a href="https://twitter.com/{{tweet.username}}">@martinokello</a></span><span style="margin-left: 20px;"><img width="20px" height="20px" src="/images/twitter.png" /></span>
+                                    <span><a href="https://twitter.com/martinokello">@martinokello</a></span><span style="margin-left: 20px;"><img width="20px" height="20px" src="/images/twitter.png" /></span>
                                     <br />
                                 </div>
                             </div>

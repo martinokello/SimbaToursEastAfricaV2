@@ -16,15 +16,18 @@ export class AppComponent implements OnInit {
         this.safariTourService = safariTourService;
     }
     public ngOnInit(): void {
-        this.actUserStatus = JSON.parse(localStorage.getItem('actUserStatus'));
+       /* this.actUserStatus = JSON.parse(localStorage.getItem('actUserStatus'));
         if (!this.actUserStatus) {
             this.actUserStatus = {
                 isUserLoggedIn : false,
                 isUserAdministrator : false
             }
-        }
+        }*/
         this.GetTwitterFeeds();
     }
+   /* public userDetailsChanged(userLoggedIn) {
+        this.actUserStatus = userLoggedIn;
+    }*/
 
     public GetTwitterFeeds(): void {
 

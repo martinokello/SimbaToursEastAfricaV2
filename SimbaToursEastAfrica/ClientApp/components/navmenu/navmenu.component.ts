@@ -14,7 +14,7 @@ import { Router, NavigationEnd } from '@angular/router';
     providers: [SafariTourServices]
 })
 export class NavMenuComponent implements AfterContentInit, OnInit {
-    @Input() actUserStatus: IUserStatus;
+    public actUserStatus: IUserStatus;
     public safariTourService: SafariTourServices | any;
     public constructor(safariTourService: SafariTourServices, private router: Router) {
 
@@ -26,8 +26,8 @@ export class NavMenuComponent implements AfterContentInit, OnInit {
         });
     }
     ngOnInit() {
-        this.actUserStatus = JSON.parse(localStorage.getItem('actUserStatus'));
-        if (!this.actUserStatus)  {
+        this.actUserStatus = JSON.parse(localStorage.getItem("actUserStatus"));
+        if (!this.actUserStatus) {
             this.actUserStatus = {
                 isUserLoggedIn: false,
                 isUserAdministrator: false
@@ -37,7 +37,7 @@ export class NavMenuComponent implements AfterContentInit, OnInit {
 
     ngAfterContentInit():void {
 
-        this.actUserStatus = JSON.parse(localStorage.getItem('actUserStatus'));
+        this.actUserStatus = JSON.parse(localStorage.getItem("actUserStatus"));
         if (!this.actUserStatus) {
             this.actUserStatus = {
                 isUserLoggedIn: false,
@@ -45,14 +45,8 @@ export class NavMenuComponent implements AfterContentInit, OnInit {
             };
         }
     }
-    loggedInEvent($event) {
-        this.actUserStatus.isUserLoggedIn = $event;
-    }
-    isAdminEvent($event) {
-        this.actUserStatus.isUserAdministrator = $event;
-    }
     myInit(): void {
-        this.actUserStatus = JSON.parse(localStorage.getItem('actUserStatus'));
+        this.actUserStatus = JSON.parse(localStorage.getItem("actUserStatus"));
 
          if (!this.actUserStatus) {
             this.actUserStatus = {
@@ -60,7 +54,7 @@ export class NavMenuComponent implements AfterContentInit, OnInit {
                 isUserAdministrator: false
             };
         }
-        this.verifyLoggedInUser();
+        //this.verifyLoggedInUser();
         if (!this.actUserStatus.isUserLoggedIn &&
         window.location.href.toLowerCase().indexOf('/book-tour') > -1 &&
         window.location.href.toLowerCase().indexOf('/register') > -1 &&
@@ -70,7 +64,7 @@ export class NavMenuComponent implements AfterContentInit, OnInit {
         }
     }
 
-    verifyLoggedInUser(): void {
+ /*   verifyLoggedInUser(): void {
         let verifyResult: Observable<any> = this.safariTourService.VerifyLoggedInUser();
         verifyResult.map((p: any) => {
             if (p.isLoggedIn) {
@@ -85,6 +79,7 @@ export class NavMenuComponent implements AfterContentInit, OnInit {
             }
         }).subscribe();
     }
+    */
     makePayments(): void {
     }
     setIsLogInPage(): void {
@@ -98,7 +93,7 @@ export class NavMenuComponent implements AfterContentInit, OnInit {
             isUserAdministrator: false
         };
         this.actUserStatus = userLoggedOut;
-        localStorage.setItem('actUserStatus', JSON.stringify(userLoggedOut));
+        localStorage.removeItem('actUserStatus');
         let logOutResult: Observable<any> = this.safariTourService.LogOut();
         logOutResult.map((p:any)=>{
             this.router.navigateByUrl("/home");
